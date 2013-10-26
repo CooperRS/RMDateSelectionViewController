@@ -20,6 +20,15 @@
     RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
     dateSelectionVC.delegate = self;
     
+    //You can also set what the user can select (default is time)
+    dateSelectionVC.mode = UIDatePickerModeDateAndTime;
+    
+    //You can also set the minuteInterval (default is 5)
+    dateSelectionVC.minuteInterval = 5;
+    
+    //You can also set an original date (default is the current date)
+    dateSelectionVC.originalDate = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+    
     [dateSelectionVC show];
 }
 

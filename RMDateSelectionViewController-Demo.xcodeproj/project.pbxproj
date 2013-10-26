@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA8AC1E0181C1F370037B2D3 /* RMDateSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA8AC1DB181C1DEB0037B2D3 /* RMDateSelectionViewController.xib */; };
 		CAA60A3D181C1A0200198490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAA60A3F181C1A0200198490 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
 		CAA60A41181C1A0200198490 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A40181C1A0200198490 /* UIKit.framework */; };
@@ -15,11 +16,12 @@
 		CAA60A53181C1A0200198490 /* RMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A52181C1A0200198490 /* RMViewController.m */; };
 		CAA60A55181C1A0200198490 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A54181C1A0200198490 /* Images.xcassets */; };
 		CAA60A75181C1A8700198490 /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
-		CAA60A76181C1A8700198490 /* RMDateSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A74181C1A8700198490 /* RMDateSelectionViewController.xib */; };
 		CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A77181C1ACF00198490 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CA8AC1DA181C1DEB0037B2D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
+		CA8AC1DC181C1E0E0037B2D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = file; name = de; path = de.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
 		CAA60A39181C1A0200198490 /* RMDateSelectionViewController-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RMDateSelectionViewController-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA60A3C181C1A0200198490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CAA60A3E181C1A0200198490 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -35,7 +37,6 @@
 		CAA60A5B181C1A0200198490 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		CAA60A72181C1A8700198490 /* RMDateSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMDateSelectionViewController.h; path = RMDateSelectionViewController/RMDateSelectionViewController.h; sourceTree = SOURCE_ROOT; };
 		CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMDateSelectionViewController.m; path = RMDateSelectionViewController/RMDateSelectionViewController.m; sourceTree = SOURCE_ROOT; };
-		CAA60A74181C1A8700198490 /* RMDateSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RMDateSelectionViewController.xib; path = RMDateSelectionViewController/RMDateSelectionViewController.xib; sourceTree = SOURCE_ROOT; };
 		CAA60A77181C1ACF00198490 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,7 +112,7 @@
 			children = (
 				CAA60A72181C1A8700198490 /* RMDateSelectionViewController.h */,
 				CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */,
-				CAA60A74181C1A8700198490 /* RMDateSelectionViewController.xib */,
+				CA8AC1DB181C1DEB0037B2D3 /* RMDateSelectionViewController.xib */,
 			);
 			name = RMDateSelectionViewController;
 			path = "RMDateSelectionViewController-Demo";
@@ -154,6 +155,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = CAA60A30181C1A0200198490;
 			productRefGroup = CAA60A3A181C1A0200198490 /* Products */;
@@ -170,9 +172,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAA60A76181C1A8700198490 /* RMDateSelectionViewController.xib in Resources */,
 				CAA60A55181C1A0200198490 /* Images.xcassets in Resources */,
 				CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */,
+				CA8AC1E0181C1F370037B2D3 /* RMDateSelectionViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +193,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CA8AC1DB181C1DEB0037B2D3 /* RMDateSelectionViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CA8AC1DA181C1DEB0037B2D3 /* en */,
+				CA8AC1DC181C1E0E0037B2D3 /* de */,
+			);
+			name = RMDateSelectionViewController.xib;
+			path = RMDateSelectionViewController;
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CAA60A69181C1A0200198490 /* Debug */ = {
