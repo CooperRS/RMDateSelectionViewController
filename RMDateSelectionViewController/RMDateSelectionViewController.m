@@ -111,6 +111,9 @@
     [super viewDidLoad];
     
     self.datePicker.datePickerMode = self.mode;
+    if(self.minuteInterval != 0)
+        self.datePicker.minuteInterval = 5;
+    
     self.datePicker.date = self.originalDate;
 }
 
