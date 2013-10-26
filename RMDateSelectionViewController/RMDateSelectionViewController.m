@@ -107,7 +107,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.datePicker.date = self.originalDate;
+    if(self.originalDate)
+        self.datePicker.date = self.originalDate;
 }
 
 #pragma mark - Properties
