@@ -10,8 +10,6 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ### Landscape
 ![Landscape](http://cooperrs.github.com/RMDateSelectionViewController/Images/Screen-Landscape.png)
 
-=============================
-
 ##Usage
 1. Add all files in `RMDateSelectionViewController` folder to Xcode
 2. Import `RMDateSelectionViewController.h` in your view controller
@@ -46,8 +44,6 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
     	
    		[dateSelectionVC show];
 	}
-
-=============================
 
 ## Requirements
 Tested with Xcode 5 and iOS 7 SDK. May also work with previous Xcode and iOS SDK versions. But will look awful under iOS 6 ;)...
