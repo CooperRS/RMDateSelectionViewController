@@ -16,8 +16,11 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="OPW-7w-rfC">
-                    <rect key="frame" x="0.0" y="361" width="322" height="162"/>
+                    <rect key="frame" x="1" y="361" width="320" height="162"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="320" id="g2R-h3-dVB"/>
+                    </constraints>
                     <date key="date" timeIntervalSinceReferenceDate="399935919.49744803">
                         <!--2013-09-03 21:18:39 +0000-->
                     </date>
@@ -135,10 +138,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <constraint firstAttribute="bottom" secondItem="LYW-Ez-64g" secondAttribute="bottom" id="QyL-7O-Ut2"/>
                 <constraint firstAttribute="trailing" secondItem="W0C-fr-W7w" secondAttribute="trailing" id="U8f-G7-3V6"/>
                 <constraint firstItem="SOv-bt-FmS" firstAttribute="leading" secondItem="5Lp-al-asy" secondAttribute="leading" id="UBU-Zl-dyg"/>
-                <constraint firstItem="OPW-7w-rfC" firstAttribute="leading" secondItem="5Lp-al-asy" secondAttribute="leading" id="YXG-Fd-fg3"/>
                 <constraint firstItem="Sxu-z7-f8c" firstAttribute="leading" secondItem="LYW-Ez-64g" secondAttribute="trailing" id="Yvz-Pv-GM6"/>
                 <constraint firstAttribute="bottom" secondItem="Sxu-z7-f8c" secondAttribute="bottom" id="atq-cy-myf"/>
-                <constraint firstAttribute="trailing" secondItem="OPW-7w-rfC" secondAttribute="trailing" id="b0V-YH-ugE"/>
+                <constraint firstAttribute="centerX" secondItem="OPW-7w-rfC" secondAttribute="centerX" id="bKN-9r-UZe"/>
                 <constraint firstItem="OPW-7w-rfC" firstAttribute="top" secondItem="Xdc-B5-5ZG" secondAttribute="bottom" id="dtf-ee-Gf9"/>
                 <constraint firstAttribute="bottom" secondItem="OPW-7w-rfC" secondAttribute="bottom" constant="45" id="frY-kT-pMV"/>
                 <constraint firstItem="LYW-Ez-64g" firstAttribute="leading" secondItem="5Lp-al-asy" secondAttribute="leading" id="mZl-hT-Nq7"/>
