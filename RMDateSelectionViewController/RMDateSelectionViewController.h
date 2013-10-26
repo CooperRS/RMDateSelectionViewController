@@ -20,7 +20,9 @@
 @interface RMDateSelectionViewController : UIViewController
 
 @property (weak) id<RMDateSelectionViewControllerDelegate> delegate;
+
 @property (nonatomic, strong) NSDate *originalDate;
+@property (nonatomic, assign) UIDatePickerMode mode;
 
 + (instancetype)dateSelectionController;
 
