@@ -48,7 +48,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ## Requirements
 Tested with Xcode 5 and iOS 7 SDK. May also work with previous Xcode and iOS SDK versions. But will look awful under iOS 6 ;)...
 
-## License
+## License (MIT License)
 Copyright (c) 2013 Roland Moers
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
