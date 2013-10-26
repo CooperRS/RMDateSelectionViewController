@@ -11,9 +11,12 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ![Landscape](http://cooperrs.github.com/RMDateSelectionViewController/Images/Screen-Landscape.png)
 
 ##Usage
-1. Add all files in `RMDateSelectionViewController`-folder to Xcode
-2. Import `RMDateSelectionViewController.h`
-2. Implement the `RMDateSelectionViewControllerDelegate` protocol
+1. Add all files in `RMDateSelectionViewController` folder to Xcode
+2. Import `RMDateSelectionViewController.h` in your view controller
+	```objc
+	#import "RMDateSelectionViewController.h"
+	```
+3. Implement the `RMDateSelectionViewControllerDelegate` protocol
 	```objc
 	@interface YourViewController () <RMDateSelectionViewControllerDelegate>
 	@end
