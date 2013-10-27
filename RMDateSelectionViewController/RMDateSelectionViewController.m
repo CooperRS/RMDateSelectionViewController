@@ -24,9 +24,12 @@
 //  THE SOFTWARE.
 //
 
-#define RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT 303
-#define RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE 248
-#define RM_DATE_SELECTION_VIEW_WIDTH 300
+#define RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT 330
+#define RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE 275
+
+#define RM_DATE_SELECTION_VIEW_WIDTH_PORTRAIT 300
+#define RM_DATE_SELECTION_VIEW_WIDTH_LANDSCAPE 548
+
 #define RM_DATE_SELECTION_VIEW_MARGIN 10
 
 #define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
@@ -43,8 +46,15 @@
 @property (nonatomic, weak) NSLayoutConstraint *widthConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *heightConstraint;
 
+@property (weak) IBOutlet UIButton *nowButton;
+
+@property (weak) IBOutlet UIView *datePickerContainer;
 @property (weak, readwrite) IBOutlet UIDatePicker *datePicker;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *pickerHeightConstraint;
+
+@property (weak) IBOutlet UIView *cancelAndSelectButtonContainer;
+@property (weak) IBOutlet UIButton *cancelButton;
+@property (weak) IBOutlet UIButton *selectButton;
 
 @property (nonatomic, strong) UIView *backgroundView;
 
@@ -66,9 +76,6 @@
     [rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
     [rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     
-    aViewController.view.layer.cornerRadius = 5;
-    aViewController.view.translatesAutoresizingMaskIntoConstraints = NO;
-    
     [aViewController willMoveToParentViewController:rootViewController];
     [aViewController viewWillAppear:YES];
     
@@ -79,19 +86,25 @@
     [aViewController didMoveToParentViewController:rootViewController];
     
     CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
+    //CGFloat width = aViewController.view.frame.size.width-20;
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         if(UIInterfaceOrientationIsLandscape(rootViewController.interfaceOrientation)) {
             height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
+            //width = RM_DATE_SELECTION_VIEW_WIDTH_LANDSCAPE;
+            
             aViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
             height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
+            //width = RM_DATE_SELECTION_VIEW_WIDTH_PORTRAIT;
+            
             aViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
         }
     }
     
     aViewController.xConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:height];
-    aViewController.widthConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:RM_DATE_SELECTION_VIEW_WIDTH];
+    //aViewController.widthConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:width];
+    aViewController.widthConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:-20];
     aViewController.heightConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:height];
     
     [rootViewController.view addConstraint:aViewController.xConstraint];
@@ -138,8 +151,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.clipsToBounds = YES;
+    self.view.translatesAutoresizingMaskIntoConstraints = NO;
+    self.view.backgroundColor = [UIColor clearColor];
+    
     self.view.layer.masksToBounds = YES;
+    
+    self.nowButton.layer.cornerRadius = 5;
+    
+    self.datePickerContainer.layer.cornerRadius = 5;
+    self.datePicker.layer.cornerRadius = 5;
+    
+    self.cancelAndSelectButtonContainer.layer.cornerRadius = 5;
+    self.cancelButton.layer.cornerRadius = 5;
+    self.selectButton.layer.cornerRadius = 5;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -159,22 +183,26 @@
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
             self.heightConstraint.constant = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
+            //self.widthConstraint.constant = RM_DATE_SELECTION_VIEW_WIDTH_LANDSCAPE;
+            
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
             self.heightConstraint.constant = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
+            //self.widthConstraint.constant = RM_DATE_SELECTION_VIEW_WIDTH_PORTRAIT;
+            
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
         }
+        
+        [self.datePicker setNeedsUpdateConstraints];
+        [self.datePicker layoutIfNeeded];
+        
+        [self.rootViewController.view setNeedsUpdateConstraints];
+        __weak RMDateSelectionViewController *blockself = self;
+        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            [blockself.rootViewController.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+        }];
     }
-    
-    [self.datePicker setNeedsUpdateConstraints];
-    [self.datePicker layoutIfNeeded];
-    
-    [self.rootViewController.view setNeedsUpdateConstraints];
-    __weak RMDateSelectionViewController *blockself = self;
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        [blockself.rootViewController.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-    }];
 }
 
 #pragma mark - Properties
