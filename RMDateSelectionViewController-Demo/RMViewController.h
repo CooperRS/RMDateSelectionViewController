@@ -26,6 +26,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RMViewController : UIViewController
+@interface RMViewController : UITableViewController
 
 @end

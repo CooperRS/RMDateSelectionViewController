@@ -33,6 +33,7 @@
 
 @implementation RMViewController
 
+#pragma mark - Actions
 - (IBAction)openDateSelectionController:(id)sender {
     RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
     dateSelectionVC.delegate = self;
@@ -42,6 +43,15 @@
     dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     dateSelectionVC.datePicker.minuteInterval = 5;
     dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+}
+
+#pragma mark - UITableView Delegates
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(indexPath.section == 0 && indexPath.row == 0) {
+        [self openDateSelectionController:self];
+    }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - RMDAteSelectionViewController Delegates
