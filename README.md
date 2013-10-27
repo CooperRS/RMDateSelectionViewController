@@ -1,7 +1,7 @@
 RMDateSelectionViewController
 =============================
 
-This is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like style
+This is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashion
 
 ## Screenshots
 ### Portrait
@@ -46,7 +46,13 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 	}
 
 ## Requirements
-Tested with Xcode 5 and iOS 7 SDK. May also work with previous Xcode and iOS SDK versions. But will look awful under iOS 6 ;)...
+Tested with:
+
+* Xcode 5
+* iOS 7 SDK
+* ARC (You can turn it on and off on a per file basis)
+
+May also work with previous Xcode and iOS SDK versions. But it will at least need a system capable of Autolayout (and I think it will look awful under iOS 6 ;)...)
 
 ## License (MIT License)
 Copyright (c) 2013 Roland Moers
