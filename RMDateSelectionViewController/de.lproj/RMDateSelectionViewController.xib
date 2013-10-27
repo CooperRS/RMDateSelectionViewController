@@ -7,6 +7,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RMDateSelectionViewController">
             <connections>
                 <outlet property="datePicker" destination="OPW-7w-rfC" id="EgA-tp-pN6"/>
+                <outlet property="pickerHeightConstraint" destination="oRW-0r-rUY" id="Sod-77-f9y"/>
                 <outlet property="view" destination="5Lp-al-asy" id="o9e-sA-YkH"/>
             </connections>
         </placeholder>
@@ -20,6 +21,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="320" id="g2R-h3-dVB"/>
+                        <constraint firstAttribute="height" constant="162" id="oRW-0r-rUY"/>
                     </constraints>
                     <date key="date" timeIntervalSinceReferenceDate="399935919.49744803">
                         <!--2013-09-03 21:18:39 +0000-->
