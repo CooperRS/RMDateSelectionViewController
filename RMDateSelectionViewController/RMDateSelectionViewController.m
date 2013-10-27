@@ -35,7 +35,7 @@
 
 @property (nonatomic, weak) UIViewController *rootViewController;
 
-@property (weak) IBOutlet UIDatePicker *datePicker;
+@property (weak, readwrite) IBOutlet UIDatePicker *datePicker;
 
 @property (nonatomic, weak) NSLayoutConstraint *xConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *yConstraint;
@@ -122,18 +122,6 @@
         
         [aViewController.backgroundView removeFromSuperview];
     }];
-}
-
-#pragma mark - Init and Dealloc
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    self.datePicker.datePickerMode = self.mode;
-    if(self.minuteInterval != 0)
-        self.datePicker.minuteInterval = 5;
-    
-	if(self.originalDate)
-    	self.datePicker.date = self.originalDate;
 }
 
 #pragma mark - Properties
