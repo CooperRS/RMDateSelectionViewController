@@ -170,8 +170,9 @@
     [self.datePicker layoutIfNeeded];
     
     [self.rootViewController.view setNeedsUpdateConstraints];
+    __weak RMDateSelectionViewController *blockself = self;
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        [self.rootViewController.view layoutIfNeeded];
+        [blockself.rootViewController.view layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
 }
