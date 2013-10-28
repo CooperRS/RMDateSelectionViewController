@@ -47,12 +47,12 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 	}
 
 ###Advanced
-Every RMDateSelectionViewController has a property datePicker. It is available after -[RMDateSelectionViewController show] has been called. With this property you have total control over the UIDatePicker that is shown in the screen.
+Every RMDateSelectionViewController has a property datePicker. It is available after `show` has been called. With this property you have total control over the UIDatePicker that is shown in the screen.
 
-Furthermore there is a method called -[RMDateSelectionViewController showFromViewController:]. With this method you can control where the your date picker is shown. For example on an iPad this method can be used to Show the date picker in a popover.
+Additionally, there is a method called `showFromViewController:`. With this method you can control where the your date picker is shown. For example on an iPad this method can be used to show the date picker in a popover.
 
 ## Requirements
-Tested with:
+Works with:
 
 * Xcode 5
 * iOS 7 SDK
