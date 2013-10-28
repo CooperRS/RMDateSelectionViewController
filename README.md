@@ -11,6 +11,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ![Landscape](http://cooperrs.github.com/RMDateSelectionViewController/Images/Screen-Landscape.png)
 
 ##Usage
+###Basic
 1. Add all files in `RMDateSelectionViewController` folder to Xcode
 2. Import `RMDateSelectionViewController.h` in your view controller
 	
@@ -44,6 +45,11 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
     	
    		[dateSelectionVC show];
 	}
+
+###Advanced
+Every RMDateSelectionViewController has a property datePicker. It is available after -[RMDateSelectionViewController show] has been called. With this property you have total control over the UIDatePicker that is shown in the screen.
+
+Furthermore there is a method called -[RMDateSelectionViewController showFromViewController:]. With this method you can control where the your date picker is shown. For example on an iPad this method can be used to Show the date picker in a popover.
 
 ## Requirements
 Tested with:
