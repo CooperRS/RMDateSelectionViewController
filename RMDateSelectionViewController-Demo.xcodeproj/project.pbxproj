@@ -20,8 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CA8AC1DA181C1DEB0037B2D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
-		CA8AC1DC181C1E0E0037B2D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = file; name = de; path = de.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
+		93A3ADBB1823E11E0004FE44 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
+		93A3ADBC1823E1A90004FE44 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
+		CA8AC1DA181C1DEB0037B2D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
+		CA8AC1DC181C1E0E0037B2D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
 		CAA60A39181C1A0200198490 /* RMDateSelectionViewController-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RMDateSelectionViewController-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA60A3C181C1A0200198490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CAA60A3E181C1A0200198490 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -156,6 +158,8 @@
 				en,
 				Base,
 				de,
+				"zh-Hans",
+				"zh-Hant",
 			);
 			mainGroup = CAA60A30181C1A0200198490;
 			productRefGroup = CAA60A3A181C1A0200198490 /* Products */;
@@ -200,6 +204,8 @@
 			children = (
 				CA8AC1DA181C1DEB0037B2D3 /* en */,
 				CA8AC1DC181C1E0E0037B2D3 /* de */,
+				93A3ADBB1823E11E0004FE44 /* zh-Hans */,
+				93A3ADBC1823E1A90004FE44 /* zh-Hant */,
 			);
 			name = RMDateSelectionViewController.xib;
 			path = RMDateSelectionViewController;
