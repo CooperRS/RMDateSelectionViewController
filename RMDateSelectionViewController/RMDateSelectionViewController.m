@@ -218,7 +218,14 @@
 
 #pragma mark - Presenting
 - (void)show {
-    [self showFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    UIViewController *currentViewController = keyWindow.rootViewController;
+    
+    while (currentViewController.presentedViewController) {
+        currentViewController = currentViewController.presentedViewController;
+    }
+    
+    [self showFromViewController:currentViewController];
 }
 
 - (void)showFromViewController:(UIViewController *)aViewController {
