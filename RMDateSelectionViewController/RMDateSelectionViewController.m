@@ -153,7 +153,6 @@
     
     self.view.translatesAutoresizingMaskIntoConstraints = NO;
     self.view.backgroundColor = [UIColor clearColor];
-    
     self.view.layer.masksToBounds = YES;
     
     self.nowButton.layer.cornerRadius = 5;
@@ -164,6 +163,18 @@
     self.cancelAndSelectButtonContainer.layer.cornerRadius = 5;
     self.cancelButton.layer.cornerRadius = 5;
     self.selectButton.layer.cornerRadius = 5;
+    
+    if(self.tintColor) {
+        self.nowButton.tintColor = self.tintColor;
+        self.cancelButton.tintColor = self.tintColor;
+        self.selectButton.tintColor = self.tintColor;
+    }
+    
+    if(self.backgroundColor) {
+        self.nowButton.backgroundColor = self.backgroundColor;
+        self.datePickerContainer.backgroundColor = self.backgroundColor;
+        self.cancelAndSelectButtonContainer.backgroundColor = self.backgroundColor;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
