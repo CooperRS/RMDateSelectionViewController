@@ -42,6 +42,10 @@
     dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     dateSelectionVC.datePicker.minuteInterval = 5;
     dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+    
+    //You can also adjust colors (enabling example will result in a black version)
+    //dateSelectionVC.tintColor = [UIColor whiteColor];
+    //dateSelectionVC.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
 }
 
 #pragma mark - UITableView Delegates

@@ -68,6 +68,16 @@
  */
 @property (weak) id<RMDateSelectionViewControllerDelegate> delegate;
 
+/**
+ Used to set the text color of the buttons but not the date picker.
+ */
+@property (strong, nonatomic) UIColor *tintColor;
+
+/**
+ Used to set the background color.
+ */
+@property (strong, nonatomic) UIColor *backgroundColor;
+
 /// @name Class Methods
 
 /**

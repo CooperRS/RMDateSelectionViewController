@@ -216,6 +216,26 @@
     return _backgroundView;
 }
 
+- (void)setTintColor:(UIColor *)newTintColor {
+    if(_tintColor != newTintColor) {
+        _tintColor = newTintColor;
+        
+        self.nowButton.tintColor = newTintColor;
+        self.cancelButton.tintColor = newTintColor;
+        self.selectButton.tintColor = newTintColor;
+    }
+}
+
+- (void)setBackgroundColor:(UIColor *)newBackgroundColor {
+    if(_backgroundColor != newBackgroundColor) {
+        _backgroundColor = newBackgroundColor;
+        
+        self.nowButton.backgroundColor = newBackgroundColor;
+        self.datePickerContainer.backgroundColor = newBackgroundColor;
+        self.cancelAndSelectButtonContainer.backgroundColor = newBackgroundColor;
+    }
+}
+
 #pragma mark - Presenting
 - (void)show {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
