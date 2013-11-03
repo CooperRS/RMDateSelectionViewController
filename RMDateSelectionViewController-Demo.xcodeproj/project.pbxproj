@@ -21,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		660D9E4A1826D36200E204D3 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
 		93A3ADBB1823E11E0004FE44 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
 		93A3ADBC1823E1A90004FE44 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
 		CA18466F1826C04A002822C5 /* RMModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMModalViewController.h; sourceTree = "<group>"; };
@@ -165,6 +166,7 @@
 				de,
 				"zh-Hans",
 				"zh-Hant",
+				es,
 			);
 			mainGroup = CAA60A30181C1A0200198490;
 			productRefGroup = CAA60A3A181C1A0200198490 /* Products */;
@@ -212,6 +214,7 @@
 				CA8AC1DC181C1E0E0037B2D3 /* de */,
 				93A3ADBB1823E11E0004FE44 /* zh-Hans */,
 				93A3ADBC1823E1A90004FE44 /* zh-Hant */,
+				660D9E4A1826D36200E204D3 /* es */,
 			);
 			name = RMDateSelectionViewController.xib;
 			path = RMDateSelectionViewController;
