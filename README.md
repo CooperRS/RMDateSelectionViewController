@@ -51,6 +51,9 @@ Every RMDateSelectionViewController has a property datePicker. It is available a
 
 Additionally, there is a method called `showFromViewController:`. With this method you can control where the your date picker is shown. For example on an iPad this method can be used to show the date picker in a popover.
 
+###Limitations
+Due to some UIKit internals, it is not possible to show a date selection view controller from an instance of UITableViewController. If the UITableViewController instance is wrapped into an UINavigationController instance the date selection view controller will be shown from the UINavigationController instance. If no UINavigationController can be used instead, an error will be logged and showing the date selection view controller will be canceled (to prevent your app from crashing).
+
 ## Requirements
 Works with:
 
