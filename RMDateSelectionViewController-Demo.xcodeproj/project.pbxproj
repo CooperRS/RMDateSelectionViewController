@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA1846711826C04A002822C5 /* RMModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1846701826C04A002822C5 /* RMModalViewController.m */; };
 		CA8AC1E0181C1F370037B2D3 /* RMDateSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA8AC1DB181C1DEB0037B2D3 /* RMDateSelectionViewController.xib */; };
 		CAA60A3D181C1A0200198490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAA60A3F181C1A0200198490 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
@@ -22,6 +23,8 @@
 /* Begin PBXFileReference section */
 		93A3ADBB1823E11E0004FE44 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
 		93A3ADBC1823E1A90004FE44 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
+		CA18466F1826C04A002822C5 /* RMModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMModalViewController.h; sourceTree = "<group>"; };
+		CA1846701826C04A002822C5 /* RMModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMModalViewController.m; sourceTree = "<group>"; };
 		CA8AC1DA181C1DEB0037B2D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
 		CA8AC1DC181C1E0E0037B2D3 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = de.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
 		CAA60A39181C1A0200198490 /* RMDateSelectionViewController-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RMDateSelectionViewController-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +96,8 @@
 				CAA60A77181C1ACF00198490 /* Main.storyboard */,
 				CAA60A51181C1A0200198490 /* RMViewController.h */,
 				CAA60A52181C1A0200198490 /* RMViewController.m */,
+				CA18466F1826C04A002822C5 /* RMModalViewController.h */,
+				CA1846701826C04A002822C5 /* RMModalViewController.m */,
 				CAA60A54181C1A0200198490 /* Images.xcassets */,
 				CAA60A43181C1A0200198490 /* Supporting Files */,
 			);
@@ -192,6 +197,7 @@
 				CAA60A75181C1A8700198490 /* RMDateSelectionViewController.m in Sources */,
 				CAA60A49181C1A0200198490 /* main.m in Sources */,
 				CAA60A4D181C1A0200198490 /* RMAppDelegate.m in Sources */,
+				CA1846711826C04A002822C5 /* RMModalViewController.m in Sources */,
 				CAA60A53181C1A0200198490 /* RMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

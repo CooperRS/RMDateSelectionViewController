@@ -23,9 +23,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
-#import "RMViewController.h"
 
-#import "RMDateSelectionViewController.h"
+#import "RMViewController.h"
 
 @interface RMViewController () <RMDateSelectionViewControllerDelegate>
 
