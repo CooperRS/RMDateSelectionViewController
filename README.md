@@ -60,6 +60,13 @@ Works with:
 
 May also work with previous Xcode and iOS SDK versions. But it will at least need a system capable of Autolayout (and I think it will look awful on iOS 6 ;)...)
 
+##Credits
+Localizations:
+* Pedro Ventura (Spanish)
+* Vincent Xue (Chinese)
+
+I want to thank everyone who has contributed code and/or time to this project!
+
 ## License (MIT License)
 Copyright (c) 2013 Roland Moers
 
