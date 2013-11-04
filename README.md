@@ -13,7 +13,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ### Different colors
 ![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Screen-Portrait-Black.png)
 
-The labels of the UIDatePicker are still black because Apple does not allow to change the appearance of an UIDatePicker. (But there are hacks around...)
+The labels of the UIDatePicker are still black because Apple does not allow to change the appearance of UIDatePickers. (But there are hacks around...)
 
 ##Usage
 ###Basic
