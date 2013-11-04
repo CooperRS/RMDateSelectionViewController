@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA153F5518279AC000428F05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA153F5418279AC000428F05 /* QuartzCore.framework */; };
 		CA1846711826C04A002822C5 /* RMModalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1846701826C04A002822C5 /* RMModalViewController.m */; };
 		CA8AC1E0181C1F370037B2D3 /* RMDateSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA8AC1DB181C1DEB0037B2D3 /* RMDateSelectionViewController.xib */; };
 		CAA60A3D181C1A0200198490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
@@ -24,6 +25,7 @@
 		660D9E4A1826D36200E204D3 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
 		93A3ADBB1823E11E0004FE44 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
 		93A3ADBC1823E1A90004FE44 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
+		CA153F5418279AC000428F05 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CA18466F1826C04A002822C5 /* RMModalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RMModalViewController.h; sourceTree = "<group>"; };
 		CA1846701826C04A002822C5 /* RMModalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMModalViewController.m; sourceTree = "<group>"; };
 		CA8AC1DA181C1DEB0037B2D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
@@ -51,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA153F5518279AC000428F05 /* QuartzCore.framework in Frameworks */,
 				CAA60A3F181C1A0200198490 /* CoreGraphics.framework in Frameworks */,
 				CAA60A41181C1A0200198490 /* UIKit.framework in Frameworks */,
 				CAA60A3D181C1A0200198490 /* Foundation.framework in Frameworks */,
@@ -81,6 +84,7 @@
 		CAA60A3B181C1A0200198490 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CA153F5418279AC000428F05 /* QuartzCore.framework */,
 				CAA60A3C181C1A0200198490 /* Foundation.framework */,
 				CAA60A3E181C1A0200198490 /* CoreGraphics.framework */,
 				CAA60A40181C1A0200198490 /* UIKit.framework */,
