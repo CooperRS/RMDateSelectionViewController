@@ -7,7 +7,8 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "CooperRS" => "CooperRS@yasit.net" }
   s.source       = { :git => "https://github.com/CooperRS/RMDateSelectionViewController.git", :tag => "0.9.1" }
-  s.source_files = 'RMDateSelectionViewController', 'RMDateSelectionViewController/*'
+  s.source_files = 'RMDateSelectionViewController/*'
+  s.resources    = 'RMDateSelectionViewController/*.lproj'
   s.platform     = :ios, '7.0'
   s.requires_arc = true
   s.framework    = 'CoreGraphics', 'QuartzCore'
