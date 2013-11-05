@@ -15,15 +15,25 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 
 The labels of the UIDatePicker are still black because Apple does not allow to change the appearance of UIDatePickers. (But there are hacks around...)
 
+##Installation
+###CocoaPods
+```ruby
+platform :ios, '7.0'
+pod "RMDateSelectionViewController", "~> 0.9.1"
+```
+
+###Manual
+1. Check out the project
+2. Add all files in `RMDateSelectionViewController` folder to Xcode
+
 ##Usage
 ###Basic
-1. Add all files in `RMDateSelectionViewController` folder to Xcode
-2. Import `RMDateSelectionViewController.h` in your view controller
+1. Import `RMDateSelectionViewController.h` in your view controller
 	
 	```objc
 	#import "RMDateSelectionViewController.h"
 	```
-3. Implement the `RMDateSelectionViewControllerDelegate` protocol
+2. Implement the `RMDateSelectionViewControllerDelegate` protocol
 	
 	```objc
 	@interface YourViewController () <RMDateSelectionViewControllerDelegate>
@@ -41,7 +51,7 @@ The labels of the UIDatePicker are still black because Apple does not allow to c
 	}
 	```
 	
-4. Open date selection view controller
+3. Open date selection view controller
 	
 	```objc
 	- (IBAction)openDateSelectionController:(id)sender {
