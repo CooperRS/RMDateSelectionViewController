@@ -140,7 +140,7 @@
     aViewController.yConstraint.constant = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
     [rootViewController.view setNeedsUpdateConstraints];
     
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         aViewController.backgroundView.alpha = 0;
         
         [rootViewController.view layoutIfNeeded];
