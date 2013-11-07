@@ -78,6 +78,11 @@
  */
 @property (strong, nonatomic) UIColor *backgroundColor;
 
+/**
+ Used to enable or disable motion effects. Default value is NO.
+ */
+@property (assign, nonatomic) BOOL disableMotionEffects;
+
 /// @name Class Methods
 
 /**

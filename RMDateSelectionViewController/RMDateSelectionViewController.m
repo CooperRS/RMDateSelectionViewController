@@ -59,6 +59,8 @@
 
 @property (nonatomic, strong) UIView *backgroundView;
 
+@property (nonatomic, strong) UIMotionEffectGroup *motionEffectGroup;
+
 @end
 
 @implementation RMDateSelectionViewController
@@ -177,17 +179,8 @@
         self.cancelAndSelectButtonContainer.backgroundColor = self.backgroundColor;
     }
     
-    UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
-    verticalMotionEffect.minimumRelativeValue = @(-10);
-    verticalMotionEffect.maximumRelativeValue = @(10);
-    
-    UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
-    horizontalMotionEffect.minimumRelativeValue = @(-10);
-    horizontalMotionEffect.maximumRelativeValue = @(10);
-    
-    UIMotionEffectGroup *group = [UIMotionEffectGroup new];
-    group.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
-    [self.view addMotionEffect:group];
+    if(!self.disableMotionEffects)
+        [self addMotionEffects];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -229,7 +222,45 @@
     }
 }
 
+#pragma mark - Helper
+- (void)addMotionEffects {
+    [self.view addMotionEffect:self.motionEffectGroup];
+}
+
+- (void)removeMotionEffects {
+    [self.view removeMotionEffect:self.motionEffectGroup];
+}
+
 #pragma mark - Properties
+- (void)setDisableMotionEffects:(BOOL)newDisableMotionEffects {
+    if(_disableMotionEffects != newDisableMotionEffects) {
+        _disableMotionEffects = newDisableMotionEffects;
+        
+        if(newDisableMotionEffects) {
+            [self removeMotionEffects];
+        } else {
+            [self addMotionEffects];
+        }
+    }
+}
+
+- (UIMotionEffectGroup *)motionEffectGroup {
+    if(!_motionEffectGroup) {
+        UIInterpolatingMotionEffect *verticalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.y" type:UIInterpolatingMotionEffectTypeTiltAlongVerticalAxis];
+        verticalMotionEffect.minimumRelativeValue = @(-10);
+        verticalMotionEffect.maximumRelativeValue = @(10);
+        
+        UIInterpolatingMotionEffect *horizontalMotionEffect = [[UIInterpolatingMotionEffect alloc] initWithKeyPath:@"center.x" type:UIInterpolatingMotionEffectTypeTiltAlongHorizontalAxis];
+        horizontalMotionEffect.minimumRelativeValue = @(-10);
+        horizontalMotionEffect.maximumRelativeValue = @(10);
+        
+        _motionEffectGroup = [UIMotionEffectGroup new];
+        _motionEffectGroup.motionEffects = @[horizontalMotionEffect, verticalMotionEffect];
+    }
+    
+    return _motionEffectGroup;
+}
+
 - (UIView *)backgroundView {
     if(!_backgroundView) {
         self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
