@@ -83,6 +83,11 @@
  */
 @property (assign, nonatomic) BOOL disableMotionEffects;
 
+/**
+ Used to enable or disable bouncing effects when sliding in the date selection view. Default value is NO.
+ */
+@property (assign, nonatomic) BOOL disableBouncingWhenShowing;
+
 /// @name Class Methods
 
 /**

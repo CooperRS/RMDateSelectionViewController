@@ -121,10 +121,18 @@
     aViewController.yConstraint.constant = -10;
     [rootViewController.view setNeedsUpdateConstraints];
     
-    [UIView animateWithDuration:0.3 animations:^{
+    CGFloat damping = 1.0f;
+    CGFloat duration = 0.3f;
+    if(!aViewController.disableBouncingWhenShowing) {
+        damping = 0.6f;
+        duration = 1.0f;
+    }
+    
+    [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         aViewController.backgroundView.alpha = 1;
         
         [rootViewController.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
     }];
 }
 

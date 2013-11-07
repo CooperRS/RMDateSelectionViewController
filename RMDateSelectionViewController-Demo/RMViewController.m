@@ -36,6 +36,11 @@
 - (IBAction)openDateSelectionController:(id)sender {
     RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
     dateSelectionVC.delegate = self;
+    
+    //You can enable or disable bouncing and motion effects
+    //dateSelectionVC.disableBouncingWhenShowing = YES;
+    //dateSelectionVC.disableMotionEffects = YES;
+    
     [dateSelectionVC show];
     
     //After -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] has been called you can access the actual UIDatePicker via the datePicker property
@@ -46,9 +51,6 @@
     //You can also adjust colors (enabling example will result in a black version)
     //dateSelectionVC.tintColor = [UIColor whiteColor];
     //dateSelectionVC.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
-    
-    //You can also enable or disable motion effects
-    //dateSelectionVC.disableMotionEffects = YES;
 }
 
 #pragma mark - UITableView Delegates
