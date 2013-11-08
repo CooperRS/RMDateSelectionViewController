@@ -342,7 +342,18 @@
 }
 
 - (IBAction)nowButtonPressed:(id)sender {
-    [self.datePicker setDate:[NSDate date] animated:YES];
+    NSTimeInterval absoluteTime = floor([NSDate timeIntervalSinceReferenceDate]);
+    NSTimeInterval minuteInterval = self.datePicker.minuteInterval*60;
+    
+    NSTimeInterval remainder = (absoluteTime - (floor(absoluteTime/minuteInterval)*minuteInterval));
+    if(remainder < 60) {
+        [self.datePicker setDate:[NSDate date] animated:YES];
+    } else {
+        NSTimeInterval remainingSeconds = minuteInterval - remainder;
+        
+        NSDate *finalDate = [NSDate dateWithTimeIntervalSinceNow:remainingSeconds];
+        [self.datePicker setDate:finalDate animated:YES];
+    }
 }
 
 @end
