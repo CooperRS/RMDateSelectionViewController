@@ -1,6 +1,6 @@
 //
 //  RMDateSelectionViewController.m
-//  Transrapid
+//  RMDateSelectionViewController
 //
 //  Created by Roland Moers on 26.10.13.
 //  Copyright (c) 2013 Roland Moers
@@ -23,6 +23,29 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+
+@interface NSDate (Rounding)
+
+- (NSDate *)dateByRoundingToMinutes:(NSInteger)minutes;
+
+@end
+
+@implementation NSDate (Rounding)
+
+- (NSDate *)dateByRoundingToMinutes:(NSInteger)minutes {
+    NSTimeInterval absoluteTime = floor([self timeIntervalSinceReferenceDate]);
+    NSTimeInterval minuteInterval = minutes*60;
+    
+    NSTimeInterval remainder = (absoluteTime - (floor(absoluteTime/minuteInterval)*minuteInterval));
+    if(remainder < 60) {
+        return self;
+    } else {
+        NSTimeInterval remainingSeconds = minuteInterval - remainder;
+        return [self dateByAddingTimeInterval:remainingSeconds];
+    }
+}
+
+@end
 
 #define RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT 330
 #define RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE 275
@@ -342,18 +365,7 @@
 }
 
 - (IBAction)nowButtonPressed:(id)sender {
-    NSTimeInterval absoluteTime = floor([NSDate timeIntervalSinceReferenceDate]);
-    NSTimeInterval minuteInterval = self.datePicker.minuteInterval*60;
-    
-    NSTimeInterval remainder = (absoluteTime - (floor(absoluteTime/minuteInterval)*minuteInterval));
-    if(remainder < 60) {
-        [self.datePicker setDate:[NSDate date] animated:YES];
-    } else {
-        NSTimeInterval remainingSeconds = minuteInterval - remainder;
-        
-        NSDate *finalDate = [NSDate dateWithTimeIntervalSinceNow:remainingSeconds];
-        [self.datePicker setDate:finalDate animated:YES];
-    }
+    [self.datePicker setDate:[[NSDate date] dateByRoundingToMinutes:self.datePicker.minuteInterval]];
 }
 
 @end
