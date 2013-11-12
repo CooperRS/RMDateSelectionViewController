@@ -80,6 +80,7 @@ May also work with previous Xcode and iOS SDK versions. But it will at least nee
 
 ##Credits
 Localizations:
+* Robin Franssen (Dutch)
 * Pedro Ventura (Spanish)
 * Vincent Xue (Chinese)
 
