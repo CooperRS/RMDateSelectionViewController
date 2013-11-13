@@ -25,7 +25,6 @@
 		CAE2906E182E287500272C55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAE2906C182E287500272C55 /* InfoPlist.strings */; };
 		CAE29078182E2A2F00272C55 /* NSDate+Rounding-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */; };
 		CAE29079182E2BD500272C55 /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
-		CAE2907B182E307A00272C55 /* UI-Tests.js in Sources */ = {isa = PBXBuildFile; fileRef = CAE2907A182E307A00272C55 /* UI-Tests.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +68,6 @@
 		CAE2906D182E287500272C55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CAE29071182E287500272C55 /* RMDateSelectionViewController-Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RMDateSelectionViewController-Tests-Prefix.pch"; sourceTree = "<group>"; };
 		CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Rounding-Tests.m"; sourceTree = "<group>"; };
-		CAE2907A182E307A00272C55 /* UI-Tests.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "UI-Tests.js"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +169,6 @@
 			children = (
 				CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */,
 				CAE2906A182E287500272C55 /* Supporting Files */,
-				CAE2907A182E307A00272C55 /* UI-Tests.js */,
 			);
 			path = "RMDateSelectionViewController-Tests";
 			sourceTree = "<group>";
@@ -302,7 +299,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAE29079182E2BD500272C55 /* RMDateSelectionViewController.m in Sources */,
-				CAE2907B182E307A00272C55 /* UI-Tests.js in Sources */,
 				CAE29078182E2A2F00272C55 /* NSDate+Rounding-Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +343,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -386,7 +385,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = (
+					armv7s,
+					armv7,
+				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -444,7 +446,6 @@
 		CAE29074182E287500272C55 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RMDateSelectionViewController-Demo.app/RMDateSelectionViewController-Demo";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -467,7 +468,6 @@
 		CAE29075182E287500272C55 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/RMDateSelectionViewController-Demo.app/RMDateSelectionViewController-Demo";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
