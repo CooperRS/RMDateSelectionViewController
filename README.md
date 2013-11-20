@@ -81,6 +81,7 @@ May also work with previous Xcode and iOS SDK versions. But it will at least nee
 ##Credits
 Localizations:
 * Robin Franssen (Dutch)
+* Anton Rusanov (Russian)
 * Pedro Ventura (Spanish)
 * Vincent Xue (Chinese)
 
