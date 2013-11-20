@@ -1,3 +1,4 @@
 language: objective-c
+xcode_sdk: iphonesimulator
 xcode_project: RMDateSelectionViewController-Demo.xcodeproj
 xcode_scheme: RMDateSelectionViewController-Demo
