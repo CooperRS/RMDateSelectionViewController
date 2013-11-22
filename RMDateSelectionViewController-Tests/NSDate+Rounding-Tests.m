@@ -60,7 +60,7 @@
     XCTAssertEqual(roundedComponents.minute, 0, @"");
 }
 
-- (void)testUpperRoundingBorder {
+- (void)testUpperBorder {
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.year = 2013;
     components.month = 11;
