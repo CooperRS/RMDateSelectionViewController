@@ -32,6 +32,23 @@
 
 @class RMDateSelectionViewController;
 
+/**
+ This block is called when the user selects a certain date if blocks are used.
+ 
+ @param vc The date selection view controller that just finished selecting a date.
+ 
+ @param aDate The selected date.
+ */
+
+typedef void (^RMDateSelectionBlock)(RMDateSelectionViewController *vc, NSDate *aDate);
+
+/**
+ This block is called when the user cancels if blocks are used.
+ 
+ @param vc The date selection view controller that just got canceled.
+  */
+typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
+
 @protocol RMDateSelectionViewControllerDelegate <NSObject>
 
 /**
@@ -67,6 +84,15 @@
  The delegate must conform to the `RMDateSelectionViewControllerDelegate` protocol.
  */
 @property (weak) id<RMDateSelectionViewControllerDelegate> delegate;
+/**
+ Used to set the block which will be used when a date is selected (when set).
+ */
+@property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
+
+/**
+ Used to set the block which will be used when a date is selected (when set).
+ */
+@property (nonatomic, copy) RMDateCancelBlock cancelBlock;
 
 /**
  Used to set the text color of the buttons but not the date picker.
@@ -96,6 +122,22 @@
  @return Returns a new instance of `RMDateSelectionViewController`
  */
 + (instancetype)dateSelectionController;
+
+/**
+ This returns a new instance of `RMDateSelectionViewController`. Always use this class method to get an instance. Do not initialize an instance yourself.
+ This is an optional method to insert the handler block when a date is selected.
+ 
+ @return Returns a new instance of `RMDateSelectionViewController`
+ */
++ (instancetype) dateSelectionControllerWithHandlerBlock:(RMDateSelectionBlock)dateSelectionBlock;
+
+/**
+ This returns a new instance of `RMDateSelectionViewController`. Always use this class method to get an instance. Do not initialize an instance yourself.
+ This is an optional method to insert the handler (when the date is selected) and cancel block.
+ 
+ @return Returns a new instance of `RMDateSelectionViewController`
+ */
++ (instancetype) dateSelectionControllerWithHandlerBlock:(RMDateSelectionBlock)dateSelectionBlock cancelBlock:(RMDateCancelBlock)cancelBlock;
 
 /// @name Instance Methods
 

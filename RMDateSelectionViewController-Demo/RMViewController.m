@@ -53,10 +53,32 @@
     //dateSelectionVC.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
 }
 
+- (IBAction)openDateSelectionControllerWithBlock:(id)sender {
+    RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionControllerWithHandlerBlock:^(RMDateSelectionViewController *vc, NSDate *aDate) {
+        NSLog(@"Successfully selected date: %@ (With block)", aDate);
+    } cancelBlock:^(RMDateSelectionViewController *vc) {
+        NSLog(@"Date selection was canceled");
+    }];
+    
+    
+    //You can enable or disable bouncing and motion effects
+    //dateSelectionVC.disableBouncingWhenShowing = YES;
+    //dateSelectionVC.disableMotionEffects = YES;
+    
+    [dateSelectionVC show];
+    
+    //After -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] has been called you can access the actual UIDatePicker via the datePicker property
+    dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    dateSelectionVC.datePicker.minuteInterval = 5;
+    dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+}
+
 #pragma mark - UITableView Delegates
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0 && indexPath.row == 0) {
         [self openDateSelectionController:self];
+    } else if (indexPath.section == 0 && indexPath.row == 1) {
+        [self openDateSelectionControllerWithBlock:self];
     }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];

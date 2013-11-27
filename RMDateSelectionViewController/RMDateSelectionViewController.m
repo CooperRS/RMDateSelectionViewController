@@ -92,7 +92,17 @@
 + (instancetype)dateSelectionController {
     return [[RMDateSelectionViewController alloc] initWithNibName:@"RMDateSelectionViewController" bundle:nil];
 }
-
++ (instancetype) dateSelectionControllerWithHandlerBlock:(RMDateSelectionBlock)dateSelectionBlock {
+    id dateSelectionController = [self dateSelectionController];
+    [dateSelectionController setSelectedDateBlock:dateSelectionBlock];
+    return dateSelectionController;
+}
++ (instancetype) dateSelectionControllerWithHandlerBlock:(RMDateSelectionBlock)dateSelectionBlock cancelBlock:(RMDateCancelBlock)cancelBlock {
+    id dateSelectionController = [self dateSelectionController];
+    [dateSelectionController setSelectedDateBlock:dateSelectionBlock];
+    [dateSelectionController setCancelBlock:cancelBlock];
+    return dateSelectionController;
+}
 + (void)showDateSelectionViewController:(RMDateSelectionViewController *)aViewController fromViewController:(UIViewController *)rootViewController {
     aViewController.backgroundView.alpha = 0;
     [rootViewController.view addSubview:aViewController.backgroundView];
@@ -356,11 +366,17 @@
 #pragma mark - Actions
 - (IBAction)doneButtonPressed:(id)sender {
     [self.delegate dateSelectionViewController:self didSelectDate:self.datePicker.date];
+    if (self.selectedDateBlock) {
+        self.selectedDateBlock(self, self.datePicker.date);
+    }
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self.delegate dateSelectionViewControllerDidCancel:self];
+    if (self.cancelBlock) {
+        self.cancelBlock(self);
+    }
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
 }
 
