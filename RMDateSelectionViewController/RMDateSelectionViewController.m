@@ -84,6 +84,9 @@
 
 @property (nonatomic, strong) UIMotionEffectGroup *motionEffectGroup;
 
+@property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
+@property (nonatomic, copy) RMDateCancelBlock cancelBlock;
+
 @end
 
 @implementation RMDateSelectionViewController

@@ -84,15 +84,6 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  The delegate must conform to the `RMDateSelectionViewControllerDelegate` protocol.
  */
 @property (weak) id<RMDateSelectionViewControllerDelegate> delegate;
-/**
- Used to set the block which will be used when a date is selected (when set).
- */
-@property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
-
-/**
- Used to set the block which will be used when a date is selected (when set).
- */
-@property (nonatomic, copy) RMDateCancelBlock cancelBlock;
 
 /**
  Used to set the text color of the buttons but not the date picker.
@@ -129,6 +120,8 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  This shows the date selection view controller as child view controller of the root view controller of the current key window.
  
  The content of the rootview controller will be darkened and the date selection view controller will be shown on top.
+ 
+ Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
  */
 - (void)show;
 
@@ -136,15 +129,25 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  This shows the date selection view controller as child view controller of the root view controller of the current key window.
  
  The content of the rootview controller will be darkened and the date selection view controller will be shown on top.
+ 
+ After a date has been selected the selectionBlock will be called. If you assigned a delegate the corresponding delegate method will be called, too. Keep in mind that when the user cancels selection you will only get calls if you assigned a delegate.
+ 
+ @param selectionBlock The block to call when the user selects a date.
  */
 - (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock;
+
 /**
  This shows the date selection view controller as child view controller of the root view controller of the current key window.
  
  The content of the rootview controller will be darkened and the date selection view controller will be shown on top.
+ 
+ After a date has been selected the selectionBlock will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding delegate methods will be called, too.
+ 
+ @param selectionBlock The block to call when the user selects a date.
+ @param cancelBlock The block to call when the user cancels the selection.
  */
-
 - (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
+
 /**
  This shows the date selection view controller as child view controller of aViewController.
  
