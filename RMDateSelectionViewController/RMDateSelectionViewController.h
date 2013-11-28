@@ -32,6 +32,23 @@
 
 @class RMDateSelectionViewController;
 
+/**
+ This block is called when the user selects a certain date if blocks are used.
+ 
+ @param vc The date selection view controller that just finished selecting a date.
+ 
+ @param aDate The selected date.
+ */
+
+typedef void (^RMDateSelectionBlock)(RMDateSelectionViewController *vc, NSDate *aDate);
+
+/**
+ This block is called when the user cancels if blocks are used.
+ 
+ @param vc The date selection view controller that just got canceled.
+  */
+typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
+
 @protocol RMDateSelectionViewControllerDelegate <NSObject>
 
 /**
@@ -67,6 +84,15 @@
  The delegate must conform to the `RMDateSelectionViewControllerDelegate` protocol.
  */
 @property (weak) id<RMDateSelectionViewControllerDelegate> delegate;
+/**
+ Used to set the block which will be used when a date is selected (when set).
+ */
+@property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
+
+/**
+ Used to set the block which will be used when a date is selected (when set).
+ */
+@property (nonatomic, copy) RMDateCancelBlock cancelBlock;
 
 /**
  Used to set the text color of the buttons but not the date picker.
@@ -106,6 +132,19 @@
  */
 - (void)show;
 
+/**
+ This shows the date selection view controller as child view controller of the root view controller of the current key window.
+ 
+ The content of the rootview controller will be darkened and the date selection view controller will be shown on top.
+ */
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock;
+/**
+ This shows the date selection view controller as child view controller of the root view controller of the current key window.
+ 
+ The content of the rootview controller will be darkened and the date selection view controller will be shown on top.
+ */
+
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
 /**
  This shows the date selection view controller as child view controller of aViewController.
  

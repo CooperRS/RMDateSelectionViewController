@@ -323,7 +323,19 @@
 }
 
 #pragma mark - Presenting
+
 - (void)show {
+    [self showWithSelectionHandler:nil];
+}
+
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock {
+    [self showWithSelectionHandler:selectionBlock andCancelHandler:nil];
+}
+
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
+    self.selectedDateBlock = selectionBlock;
+    self.cancelBlock = cancelBlock;
+    
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     UIViewController *currentViewController = keyWindow.rootViewController;
     
@@ -356,11 +368,17 @@
 #pragma mark - Actions
 - (IBAction)doneButtonPressed:(id)sender {
     [self.delegate dateSelectionViewController:self didSelectDate:self.datePicker.date];
+    if (self.selectedDateBlock) {
+        self.selectedDateBlock(self, self.datePicker.date);
+    }
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
     [self.delegate dateSelectionViewControllerDidCancel:self];
+    if (self.cancelBlock) {
+        self.cancelBlock(self);
+    }
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
 }
 
