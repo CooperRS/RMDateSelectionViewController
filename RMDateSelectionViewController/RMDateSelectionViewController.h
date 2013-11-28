@@ -123,22 +123,6 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 + (instancetype)dateSelectionController;
 
-/**
- This returns a new instance of `RMDateSelectionViewController`. Always use this class method to get an instance. Do not initialize an instance yourself.
- This is an optional method to insert the handler block when a date is selected.
- 
- @return Returns a new instance of `RMDateSelectionViewController`
- */
-+ (instancetype) dateSelectionControllerWithHandlerBlock:(RMDateSelectionBlock)dateSelectionBlock;
-
-/**
- This returns a new instance of `RMDateSelectionViewController`. Always use this class method to get an instance. Do not initialize an instance yourself.
- This is an optional method to insert the handler (when the date is selected) and cancel block.
- 
- @return Returns a new instance of `RMDateSelectionViewController`
- */
-+ (instancetype) dateSelectionControllerWithHandlerBlock:(RMDateSelectionBlock)dateSelectionBlock cancelBlock:(RMDateCancelBlock)cancelBlock;
-
 /// @name Instance Methods
 
 /**
@@ -148,6 +132,19 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 - (void)show;
 
+/**
+ This shows the date selection view controller as child view controller of the root view controller of the current key window.
+ 
+ The content of the rootview controller will be darkened and the date selection view controller will be shown on top.
+ */
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock;
+/**
+ This shows the date selection view controller as child view controller of the root view controller of the current key window.
+ 
+ The content of the rootview controller will be darkened and the date selection view controller will be shown on top.
+ */
+
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
 /**
  This shows the date selection view controller as child view controller of aViewController.
  

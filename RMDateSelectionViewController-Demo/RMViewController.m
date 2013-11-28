@@ -54,18 +54,16 @@
 }
 
 - (IBAction)openDateSelectionControllerWithBlock:(id)sender {
-    RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionControllerWithHandlerBlock:^(RMDateSelectionViewController *vc, NSDate *aDate) {
-        NSLog(@"Successfully selected date: %@ (With block)", aDate);
-    } cancelBlock:^(RMDateSelectionViewController *vc) {
-        NSLog(@"Date selection was canceled");
-    }];
-    
+    RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
     
     //You can enable or disable bouncing and motion effects
     //dateSelectionVC.disableBouncingWhenShowing = YES;
     //dateSelectionVC.disableMotionEffects = YES;
-    
-    [dateSelectionVC show];
+    [dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
+        NSLog(@"Successfully selected date: %@ (With block)", aDate);
+    } andCancelHandler:^(RMDateSelectionViewController *vc) {
+        NSLog(@"Date selection was canceled (with block)");
+    }];
     
     //After -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] has been called you can access the actual UIDatePicker via the datePicker property
     dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;

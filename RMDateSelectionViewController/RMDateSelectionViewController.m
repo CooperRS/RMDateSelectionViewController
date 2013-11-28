@@ -92,17 +92,7 @@
 + (instancetype)dateSelectionController {
     return [[RMDateSelectionViewController alloc] initWithNibName:@"RMDateSelectionViewController" bundle:nil];
 }
-+ (instancetype) dateSelectionControllerWithHandlerBlock:(RMDateSelectionBlock)dateSelectionBlock {
-    id dateSelectionController = [self dateSelectionController];
-    [dateSelectionController setSelectedDateBlock:dateSelectionBlock];
-    return dateSelectionController;
-}
-+ (instancetype) dateSelectionControllerWithHandlerBlock:(RMDateSelectionBlock)dateSelectionBlock cancelBlock:(RMDateCancelBlock)cancelBlock {
-    id dateSelectionController = [self dateSelectionController];
-    [dateSelectionController setSelectedDateBlock:dateSelectionBlock];
-    [dateSelectionController setCancelBlock:cancelBlock];
-    return dateSelectionController;
-}
+
 + (void)showDateSelectionViewController:(RMDateSelectionViewController *)aViewController fromViewController:(UIViewController *)rootViewController {
     aViewController.backgroundView.alpha = 0;
     [rootViewController.view addSubview:aViewController.backgroundView];
@@ -333,7 +323,19 @@
 }
 
 #pragma mark - Presenting
+
 - (void)show {
+    [self showWithSelectionHandler:nil];
+}
+
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock {
+    [self showWithSelectionHandler:selectionBlock andCancelHandler:nil];
+}
+
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
+    self.selectedDateBlock = selectionBlock;
+    self.cancelBlock = cancelBlock;
+    
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     UIViewController *currentViewController = keyWindow.rootViewController;
     
