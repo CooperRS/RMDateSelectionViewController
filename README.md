@@ -85,6 +85,9 @@ Localizations:
 * Pedro Ventura (Spanish)
 * Vincent Xue (Chinese)
 
+Code contributions:
+* Robin Franssen (Block support)
+
 I want to thank everyone who has contributed code and/or time to this project!
 
 ## License (MIT License)
