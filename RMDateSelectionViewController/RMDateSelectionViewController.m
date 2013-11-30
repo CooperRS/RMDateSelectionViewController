@@ -154,7 +154,7 @@
         duration = 1.0f;
     }
     
-    [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:1 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+    [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:1 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
         aViewController.backgroundView.alpha = 1;
         
         [rootViewController.view layoutIfNeeded];
