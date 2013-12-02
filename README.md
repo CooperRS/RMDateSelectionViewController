@@ -84,6 +84,7 @@ Localizations:
 * Anton Rusanov (Russian)
 * Pedro Ventura (Spanish)
 * Vincent Xue (Chinese)
+* Vinh Nguyen (Vietnamese)
 
 Code contributions:
 * Robin Franssen (Block support)

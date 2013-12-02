@@ -39,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		00E48AF3183196B4009B7089 /* nl */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = nl; path = nl.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
+		1FBAA536184C13780021A380 /* vi */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = vi; path = vi.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
 		660D9E4A1826D36200E204D3 /* es */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = es; path = es.lproj/RMDateSelectionViewController.xib; sourceTree = "<group>"; };
 		93A3ADBB1823E11E0004FE44 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hans"; path = "zh-Hans.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
 		93A3ADBC1823E1A90004FE44 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "zh-Hant"; path = "zh-Hant.lproj/RMDateSelectionViewController.xib"; sourceTree = "<group>"; };
@@ -250,6 +251,7 @@
 				es,
 				nl,
 				ru,
+				vi,
 			);
 			mainGroup = CAA60A30181C1A0200198490;
 			productRefGroup = CAA60A3A181C1A0200198490 /* Products */;
@@ -326,6 +328,7 @@
 				660D9E4A1826D36200E204D3 /* es */,
 				00E48AF3183196B4009B7089 /* nl */,
 				AF631D84183CEB400082AED6 /* ru */,
+				1FBAA536184C13780021A380 /* vi */,
 			);
 			name = RMDateSelectionViewController.xib;
 			path = RMDateSelectionViewController;
