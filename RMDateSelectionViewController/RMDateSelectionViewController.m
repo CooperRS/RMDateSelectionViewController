@@ -204,7 +204,11 @@
     [self.cancelAndSelectButtonContainer addSubview:self.selectButton];
     
     //Setup properties of elements
-    [self.nowButton setTitle:@"Now" forState:UIControlStateNormal];
+    if(self.delegate && [self.delegate respondsToSelector:@selector(localizedTitleForNowButton)])
+        [self.nowButton setTitle:[self.delegate localizedTitleForNowButton] forState:UIControlStateNormal];
+    else
+        [self.nowButton setTitle:@"Now" forState:UIControlStateNormal];
+    
     [self.nowButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.nowButton.backgroundColor = [UIColor whiteColor];
@@ -225,14 +229,22 @@
     self.cancelAndSelectButtonSeperator.backgroundColor = [UIColor lightGrayColor];
     self.cancelAndSelectButtonSeperator.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    if(self.delegate && [self.delegate respondsToSelector:@selector(localizedTitleForCancelButton)])
+        [self.cancelButton setTitle:[self.delegate localizedTitleForCancelButton] forState:UIControlStateNormal];
+    else
+        [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    
     [self.cancelButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.cancelButton.layer.cornerRadius = 5;
     self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.cancelButton setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     
-    [self.selectButton setTitle:@"Select" forState:UIControlStateNormal];
+    if(self.delegate && [self.delegate respondsToSelector:@selector(localizedTitleForSelectButton)])
+        [self.selectButton setTitle:[self.delegate localizedTitleForSelectButton] forState:UIControlStateNormal];
+    else
+        [self.selectButton setTitle:@"Select" forState:UIControlStateNormal];
+    
     [self.selectButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.selectButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.selectButton.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];

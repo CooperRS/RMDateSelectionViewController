@@ -67,6 +67,28 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 - (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc;
 
+@optional
+/**
+ Return a localized title for the now button. Default is 'Now'.
+ 
+ This method is called after -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called.
+ */
+- (NSString *)localizedTitleForNowButton;
+
+/**
+ Return a localized title for the cancel button. Default is 'Cancel'.
+ 
+ This method is called after -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called.
+ */
+- (NSString *)localizedTitleForCancelButton;
+
+/**
+ Return a localized title for the select button. Default is 'Select'.
+ 
+ This method is called after -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called.
+ */
+- (NSString *)localizedTitleForSelectButton;
+
 @end
 
 @interface RMDateSelectionViewController : UIViewController
