@@ -97,6 +97,34 @@
     return [[RMDateSelectionViewController alloc] init];
 }
 
+static NSString *_localizedNowTitle = @"Now";
+static NSString *_localizedCancelTitle = @"Cancel";
+static NSString *_localizedSelectTitle = @"Select";
+
++ (NSString *)localizedTitleForNowButton {
+    return _localizedNowTitle;
+}
+
++ (NSString *)localizedTitleForCancelButton {
+    return _localizedCancelTitle;
+}
+
++ (NSString *)localizedTitleForSelectButton {
+    return _localizedSelectTitle;
+}
+
++ (void)setLocalizedTitleForNowButton:(NSString *)newLocalizedTitle {
+    _localizedNowTitle = newLocalizedTitle;
+}
+
++ (void)setLocalizedTitleForCancelButton:(NSString *)newLocalizedTitle {
+    _localizedCancelTitle = newLocalizedTitle;
+}
+
++ (void)setLocalizedTitleForSelectButton:(NSString *)newLocalizedTitle {
+    _localizedSelectTitle = newLocalizedTitle;
+}
+
 + (void)showDateSelectionViewController:(RMDateSelectionViewController *)aViewController fromViewController:(UIViewController *)rootViewController {
     aViewController.backgroundView.alpha = 0;
     [rootViewController.view addSubview:aViewController.backgroundView];
@@ -204,11 +232,7 @@
     [self.cancelAndSelectButtonContainer addSubview:self.selectButton];
     
     //Setup properties of elements
-    if(self.delegate && [self.delegate respondsToSelector:@selector(localizedTitleForNowButton)])
-        [self.nowButton setTitle:[self.delegate localizedTitleForNowButton] forState:UIControlStateNormal];
-    else
-        [self.nowButton setTitle:@"Now" forState:UIControlStateNormal];
-    
+    [self.nowButton setTitle:[RMDateSelectionViewController localizedTitleForNowButton] forState:UIControlStateNormal];
     [self.nowButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.nowButton.backgroundColor = [UIColor whiteColor];
@@ -229,22 +253,14 @@
     self.cancelAndSelectButtonSeperator.backgroundColor = [UIColor lightGrayColor];
     self.cancelAndSelectButtonSeperator.translatesAutoresizingMaskIntoConstraints = NO;
     
-    if(self.delegate && [self.delegate respondsToSelector:@selector(localizedTitleForCancelButton)])
-        [self.cancelButton setTitle:[self.delegate localizedTitleForCancelButton] forState:UIControlStateNormal];
-    else
-        [self.cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
-    
+    [self.cancelButton setTitle:[RMDateSelectionViewController localizedTitleForCancelButton] forState:UIControlStateNormal];
     [self.cancelButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.cancelButton.layer.cornerRadius = 5;
     self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.cancelButton setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     
-    if(self.delegate && [self.delegate respondsToSelector:@selector(localizedTitleForSelectButton)])
-        [self.selectButton setTitle:[self.delegate localizedTitleForSelectButton] forState:UIControlStateNormal];
-    else
-        [self.selectButton setTitle:@"Select" forState:UIControlStateNormal];
-    
+    [self.selectButton setTitle:[RMDateSelectionViewController localizedTitleForSelectButton] forState:UIControlStateNormal];
     [self.selectButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.selectButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.selectButton.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
