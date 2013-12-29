@@ -76,7 +76,7 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 /**
  Will return the instance of UIDatePicker that is used. This property will be nil until -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called.
  */
-@property (weak, readonly) UIDatePicker *datePicker;
+@property (nonatomic, readonly) UIDatePicker *datePicker;
 
 /**
  Used to set the delegate.
