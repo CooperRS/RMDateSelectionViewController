@@ -309,9 +309,9 @@ static NSString *_localizedSelectTitle = @"Select";
     [self setupConstraints];
     
     if(self.tintColor) {
-        self.nowButton.tintColor = self.tintColor;
-        self.cancelButton.tintColor = self.tintColor;
-        self.selectButton.tintColor = self.tintColor;
+        [self.nowButton setTitleColor:self.tintColor forState:UIControlStateNormal];
+        [self.cancelButton setTitleColor:self.tintColor forState:UIControlStateNormal];
+        [self.selectButton setTitleColor:self.tintColor forState:UIControlStateNormal];
     }
     
     if(self.backgroundColor) {
@@ -412,9 +412,9 @@ static NSString *_localizedSelectTitle = @"Select";
     if(_tintColor != newTintColor) {
         _tintColor = newTintColor;
         
-        self.nowButton.tintColor = newTintColor;
-        self.cancelButton.tintColor = newTintColor;
-        self.selectButton.tintColor = newTintColor;
+        [self.nowButton setTitleColor:newTintColor forState:UIControlStateNormal];
+        [self.cancelButton setTitleColor:newTintColor forState:UIControlStateNormal];
+        [self.selectButton setTitleColor:newTintColor forState:UIControlStateNormal];
     }
 }
 
