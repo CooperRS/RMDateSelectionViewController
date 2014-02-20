@@ -210,7 +210,8 @@ static NSString *_localizedSelectTitle = @"Select";
 #pragma mark - Init and Dealloc
 - (void)setupUIElements {
     //Instantiate elements
-    self.nowButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    if(!self.hideNowButton)
+        self.nowButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     self.datePickerContainer = [[UIView alloc] initWithFrame:CGRectZero];
     self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
@@ -221,7 +222,8 @@ static NSString *_localizedSelectTitle = @"Select";
     self.selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     //Add elements to their subviews
-    [self.view addSubview:self.nowButton];
+    if(!self.hideNowButton)
+        [self.view addSubview:self.nowButton];
     [self.view addSubview:self.datePickerContainer];
     [self.view addSubview:self.cancelAndSelectButtonContainer];
     
@@ -232,12 +234,14 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.cancelAndSelectButtonContainer addSubview:self.selectButton];
     
     //Setup properties of elements
-    [self.nowButton setTitle:[RMDateSelectionViewController localizedTitleForNowButton] forState:UIControlStateNormal];
-    [self.nowButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
-    [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.nowButton.backgroundColor = [UIColor whiteColor];
-    self.nowButton.layer.cornerRadius = 5;
-    self.nowButton.translatesAutoresizingMaskIntoConstraints = NO;
+    if(!self.hideNowButton) {
+        [self.nowButton setTitle:[RMDateSelectionViewController localizedTitleForNowButton] forState:UIControlStateNormal];
+        [self.nowButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
+        [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        self.nowButton.backgroundColor = [UIColor whiteColor];
+        self.nowButton.layer.cornerRadius = 5;
+        self.nowButton.translatesAutoresizingMaskIntoConstraints = NO;
+    }
     
     self.datePickerContainer.backgroundColor = [UIColor whiteColor];
     self.datePickerContainer.layer.cornerRadius = 5;
@@ -273,18 +277,16 @@ static NSString *_localizedSelectTitle = @"Select";
     UIView *pickerContainer = self.datePickerContainer;
     UIView *cancelSelectContainer = self.cancelAndSelectButtonContainer;
     UIView *seperator = self.cancelAndSelectButtonSeperator;
-    UIButton *now = self.nowButton;
     UIButton *cancel = self.cancelButton;
     UIButton *select = self.selectButton;
     UIDatePicker *picker = self.datePicker;
     
-    NSDictionary *bindingsDict = NSDictionaryOfVariableBindings(cancelSelectContainer, seperator, pickerContainer, now, cancel, select, picker);
+    NSDictionary *bindingsDict = NSDictionaryOfVariableBindings(cancelSelectContainer, seperator, pickerContainer, cancel, select, picker);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[now]-(10)-|" options:0 metrics:nil views:bindingsDict]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[pickerContainer]-(10)-|" options:0 metrics:nil views:bindingsDict]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[cancelSelectContainer]-(10)-|" options:0 metrics:nil views:bindingsDict]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[now(44)]-(10)-[pickerContainer]-(10)-[cancelSelectContainer(44)]-(0)-|" options:0 metrics:nil views:bindingsDict]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[pickerContainer]-(10)-[cancelSelectContainer(44)]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     self.pickerHeightConstraint = [NSLayoutConstraint constraintWithItem:self.datePickerContainer attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:RM_DATE_PICKER_HEIGHT_PORTRAIT];
     [self.view addConstraint:self.pickerHeightConstraint];
     
@@ -296,6 +298,14 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[cancel]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[seperator]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[select]-(0)-|" options:0 metrics:nil views:bindingsDict]];
+    
+    if(!self.hideNowButton) {
+        UIButton *now = self.nowButton;
+        bindingsDict = NSDictionaryOfVariableBindings(now, pickerContainer);
+        
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[now]-(10)-|" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+    }
 }
 
 - (void)viewDidLoad {

@@ -105,6 +105,13 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 @property (assign, nonatomic) BOOL disableBouncingWhenShowing;
 
+/**
+ When YES the now button is hidden. Default value is NO.
+ 
+ Must be set before -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called or otherwise this property has no effect.
+ */
+@property (assign, nonatomic) BOOL hideNowButton;
+
 /// @name Class Methods
 
 /**
