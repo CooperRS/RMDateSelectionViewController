@@ -46,7 +46,7 @@ typedef void (^RMDateSelectionBlock)(RMDateSelectionViewController *vc, NSDate *
  This block is called when the user cancels if blocks are used.
  
  @param vc The date selection view controller that just got canceled.
-  */
+ */
 typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 
 @protocol RMDateSelectionViewControllerDelegate <NSObject>
@@ -77,6 +77,21 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  Will return the instance of UIDatePicker that is used. This property will be nil until -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called.
  */
 @property (nonatomic, readonly) UIDatePicker *datePicker;
+
+/**
+ Used to set the datePicker mode.
+ */
+@property (nonatomic) UIDatePickerMode datePickerMode;
+
+/**
+ Used to set minute interval.
+ */
+@property (assign, nonatomic) NSInteger minuteInterval;
+
+/**
+ Used to set an initial date.
+ */
+@property (strong, nonatomic) NSDate *initialDate;
 
 /**
  Used to set the delegate.

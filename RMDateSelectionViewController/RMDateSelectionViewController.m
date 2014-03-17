@@ -216,6 +216,17 @@ static NSString *_localizedSelectTitle = @"Select";
     self.datePickerContainer = [[UIView alloc] initWithFrame:CGRectZero];
     self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     
+    // Set Picker mode
+    self.datePicker.datePickerMode = self.datePickerMode;
+    
+    // Set minute interval
+    if (self.minuteInterval)
+        self.datePicker.minuteInterval = self.minuteInterval;
+    
+    // Set initial date
+    if (self.initialDate)
+        self.datePicker.date = self.initialDate;
+    
     self.cancelAndSelectButtonContainer = [[UIView alloc] initWithFrame:CGRectZero];
     self.cancelAndSelectButtonSeperator = [[UIView alloc] initWithFrame:CGRectZero];
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -482,7 +493,7 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 #pragma mark - Actions
-- (IBAction)doneButtonPressed:(id)sender {
+- (void)doneButtonPressed:(id)sender {
     [self.delegate dateSelectionViewController:self didSelectDate:self.datePicker.date];
     if (self.selectedDateBlock) {
         self.selectedDateBlock(self, self.datePicker.date);
@@ -490,7 +501,7 @@ static NSString *_localizedSelectTitle = @"Select";
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
 }
 
-- (IBAction)cancelButtonPressed:(id)sender {
+- (void)cancelButtonPressed:(id)sender {
     [self.delegate dateSelectionViewControllerDidCancel:self];
     if (self.cancelBlock) {
         self.cancelBlock(self);
@@ -498,7 +509,7 @@ static NSString *_localizedSelectTitle = @"Select";
     [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
 }
 
-- (IBAction)nowButtonPressed:(id)sender {
+- (void)nowButtonPressed:(id)sender {
     [self.datePicker setDate:[[NSDate date] dateByRoundingToMinutes:self.datePicker.minuteInterval]];
 }
 
