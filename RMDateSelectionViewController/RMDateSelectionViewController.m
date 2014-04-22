@@ -70,6 +70,9 @@
 @property (nonatomic, weak) NSLayoutConstraint *widthConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *heightConstraint;
 
+@property (nonatomic, strong) UIView *titleLabelContainer;
+@property (nonatomic, strong, readwrite) UILabel *titleLabel;
+
 @property (nonatomic, strong) UIButton *nowButton;
 
 @property (nonatomic, strong) UIView *datePickerContainer;
@@ -157,7 +160,7 @@ static NSString *_localizedSelectTitle = @"Select";
     aViewController.xConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
     aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:height];
     aViewController.widthConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    aViewController.heightConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:height];
+    aViewController.heightConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
     
     [rootViewController.view addConstraint:aViewController.xConstraint];
     [rootViewController.view addConstraint:aViewController.yConstraint];
@@ -208,10 +211,20 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 #pragma mark - Init and Dealloc
+- (id)init {
+    self = [super init];
+    if(self) {
+        [self setupUIElements];
+    }
+    return self;
+}
+
 - (void)setupUIElements {
     //Instantiate elements
-    if(!self.hideNowButton)
-        self.nowButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.titleLabelContainer = [[UIView alloc] initWithFrame:CGRectZero];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    
+    self.nowButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     self.datePickerContainer = [[UIView alloc] initWithFrame:CGRectZero];
     self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
@@ -222,10 +235,7 @@ static NSString *_localizedSelectTitle = @"Select";
     self.selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     //Add elements to their subviews
-    if(!self.hideNowButton)
-        [self.view addSubview:self.nowButton];
-    [self.view addSubview:self.datePickerContainer];
-    [self.view addSubview:self.cancelAndSelectButtonContainer];
+    [self.titleLabelContainer addSubview:self.titleLabel];
     
     [self.datePickerContainer addSubview:self.datePicker];
     
@@ -234,14 +244,23 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.cancelAndSelectButtonContainer addSubview:self.selectButton];
     
     //Setup properties of elements
-    if(!self.hideNowButton) {
-        [self.nowButton setTitle:[RMDateSelectionViewController localizedTitleForNowButton] forState:UIControlStateNormal];
-        [self.nowButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
-        [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        self.nowButton.backgroundColor = [UIColor whiteColor];
-        self.nowButton.layer.cornerRadius = 5;
-        self.nowButton.translatesAutoresizingMaskIntoConstraints = NO;
-    }
+    self.titleLabelContainer.backgroundColor = [UIColor whiteColor];
+    self.titleLabelContainer.layer.cornerRadius = 5;
+    self.titleLabelContainer.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.textColor = [UIColor grayColor];
+    self.titleLabel.font = [UIFont systemFontOfSize:12];
+    self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.numberOfLines = 0;
+    
+    [self.nowButton setTitle:[RMDateSelectionViewController localizedTitleForNowButton] forState:UIControlStateNormal];
+    [self.nowButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
+    [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.nowButton.backgroundColor = [UIColor whiteColor];
+    self.nowButton.layer.cornerRadius = 5;
+    self.nowButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.datePickerContainer.backgroundColor = [UIColor whiteColor];
     self.datePickerContainer.layer.cornerRadius = 5;
@@ -280,8 +299,11 @@ static NSString *_localizedSelectTitle = @"Select";
     UIButton *cancel = self.cancelButton;
     UIButton *select = self.selectButton;
     UIDatePicker *picker = self.datePicker;
+    UIView *labelContainer = self.titleLabelContainer;
+    UILabel *label = self.titleLabel;
+    UIButton *now = self.nowButton;
     
-    NSDictionary *bindingsDict = NSDictionaryOfVariableBindings(cancelSelectContainer, seperator, pickerContainer, cancel, select, picker);
+    NSDictionary *bindingsDict = NSDictionaryOfVariableBindings(cancelSelectContainer, seperator, pickerContainer, cancel, select, picker, labelContainer, label, now);
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[pickerContainer]-(10)-|" options:0 metrics:nil views:bindingsDict]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[cancelSelectContainer]-(10)-|" options:0 metrics:nil views:bindingsDict]];
@@ -300,11 +322,21 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[select]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     
     if(!self.hideNowButton) {
-        UIButton *now = self.nowButton;
-        bindingsDict = NSDictionaryOfVariableBindings(now, pickerContainer);
-        
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[now]-(10)-|" options:0 metrics:nil views:bindingsDict]];
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+    }
+    
+    if(self.titleLabel.text && self.titleLabel.text.length != 0) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[labelContainer]-(10)-|" options:0 metrics:nil views:bindingsDict]];
+        
+        if(self.hideNowButton) {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[labelContainer]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        } else {
+            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[labelContainer]-(10)-[now]" options:0 metrics:nil views:bindingsDict]];
+        }
+        
+        [self.titleLabelContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[label]-(10)-|" options:0 metrics:nil views:bindingsDict]];
+        [self.titleLabelContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(10)-[label]-(10)-|" options:0 metrics:nil views:bindingsDict]];
     }
 }
 
@@ -315,7 +347,15 @@ static NSString *_localizedSelectTitle = @"Select";
     self.view.backgroundColor = [UIColor clearColor];
     self.view.layer.masksToBounds = YES;
     
-    [self setupUIElements];
+    if(self.titleLabel.text && self.titleLabel.text.length != 0)
+        [self.view addSubview:self.titleLabelContainer];
+    
+    if(!self.hideNowButton)
+        [self.view addSubview:self.nowButton];
+    
+    [self.view addSubview:self.datePickerContainer];
+    [self.view addSubview:self.cancelAndSelectButtonContainer];
+    
     [self setupConstraints];
     
     if(self.tintColor) {

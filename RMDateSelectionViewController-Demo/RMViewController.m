@@ -36,6 +36,7 @@
 - (IBAction)openDateSelectionController:(id)sender {
     RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
     dateSelectionVC.delegate = self;
+    dateSelectionVC.titleLabel.text = @"This is an example title.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
     
     //You can enable or disable bouncing and motion effects
     //dateSelectionVC.disableBouncingWhenShowing = YES;

@@ -74,9 +74,16 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 /// @name Properties
 
 /**
- Will return the instance of UIDatePicker that is used. This property will be nil until -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called.
+ Will return the instance of UIDatePicker that is used.
  */
 @property (nonatomic, readonly) UIDatePicker *datePicker;
+
+/**
+ Will return the label that is used as a title for the picker. You can use this property to set a title and to customize the appearance of the title.
+ 
+ If you want to set a title, be sure to set it before showing the picker view controller as otherwise the title will not be shown.
+ */
+@property (nonatomic, strong, readonly) UILabel *titleLabel;
 
 /**
  Used to set the delegate.
