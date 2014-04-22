@@ -47,14 +47,6 @@
 
 @end
 
-#define RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT 330
-#define RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE 275
-
-#define RM_DATE_SELECTION_VIEW_WIDTH_PORTRAIT 300
-#define RM_DATE_SELECTION_VIEW_WIDTH_LANDSCAPE 548
-
-#define RM_DATE_SELECTION_VIEW_MARGIN 10
-
 #define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
 #define RM_DATE_PICKER_HEIGHT_LANDSCAPE 162
 
@@ -68,7 +60,6 @@
 @property (nonatomic, weak) NSLayoutConstraint *xConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *yConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *widthConstraint;
-@property (nonatomic, weak) NSLayoutConstraint *heightConstraint;
 
 @property (nonatomic, strong) UIView *titleLabelContainer;
 @property (nonatomic, strong, readwrite) UILabel *titleLabel;
@@ -146,31 +137,32 @@ static NSString *_localizedSelectTitle = @"Select";
     [aViewController viewDidAppear:YES];
     [aViewController didMoveToParentViewController:rootViewController];
     
-    CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
+    //CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         if(UIInterfaceOrientationIsLandscape(rootViewController.interfaceOrientation)) {
-            height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
+            //height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
             aViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
-            height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
+            //height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
             aViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
         }
     }
     
     aViewController.xConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:height];
+    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
     aViewController.widthConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    aViewController.heightConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0];
     
     [rootViewController.view addConstraint:aViewController.xConstraint];
     [rootViewController.view addConstraint:aViewController.yConstraint];
     [rootViewController.view addConstraint:aViewController.widthConstraint];
-    [rootViewController.view addConstraint:aViewController.heightConstraint];
     
     [rootViewController.view setNeedsUpdateConstraints];
     [rootViewController.view layoutIfNeeded];
     
-    aViewController.yConstraint.constant = -10;
+    [rootViewController.view removeConstraint:aViewController.yConstraint];
+    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-10];
+    [rootViewController.view addConstraint:aViewController.yConstraint];
+    
     [rootViewController.view setNeedsUpdateConstraints];
     
     CGFloat damping = 1.0f;
@@ -189,7 +181,10 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 + (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aViewController fromViewController:(UIViewController *)rootViewController {
-    aViewController.yConstraint.constant = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
+    [rootViewController.view removeConstraint:aViewController.yConstraint];
+    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    [rootViewController.view addConstraint:aViewController.yConstraint];
+    
     [rootViewController.view setNeedsUpdateConstraints];
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
@@ -321,22 +316,28 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[seperator]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[select]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     
-    if(!self.hideNowButton) {
+    BOOL showTitle = self.titleLabel.text && self.titleLabel.text.length != 0;
+    BOOL showNowButton = !self.hideNowButton;
+    
+    if(showNowButton) {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[now]-(10)-|" options:0 metrics:nil views:bindingsDict]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
     }
     
-    if(self.titleLabel.text && self.titleLabel.text.length != 0) {
+    if(showTitle) {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[labelContainer]-(10)-|" options:0 metrics:nil views:bindingsDict]];
-        
-        if(self.hideNowButton) {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[labelContainer]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
-        } else {
-            [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[labelContainer]-(10)-[now]" options:0 metrics:nil views:bindingsDict]];
-        }
         
         [self.titleLabelContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(10)-[label]-(10)-|" options:0 metrics:nil views:bindingsDict]];
         [self.titleLabelContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(10)-[label]-(10)-|" options:0 metrics:nil views:bindingsDict]];
+    }
+    
+    if(showNowButton && showTitle) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[labelContainer]-(10)-[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+    } else if(showNowButton && !showTitle) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+    } else if(!showNowButton && showTitle) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[labelContainer]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+    } else if(!showNowButton && !showTitle) {
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
     }
 }
 
@@ -365,6 +366,7 @@ static NSString *_localizedSelectTitle = @"Select";
     }
     
     if(self.backgroundColor) {
+        self.titleLabelContainer.backgroundColor = self.backgroundColor;
         self.nowButton.backgroundColor = self.backgroundColor;
         self.datePickerContainer.backgroundColor = self.backgroundColor;
         self.cancelAndSelectButtonContainer.backgroundColor = self.backgroundColor;
@@ -390,10 +392,8 @@ static NSString *_localizedSelectTitle = @"Select";
 - (void)didRotate {
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            self.heightConstraint.constant = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
-            self.heightConstraint.constant = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
         }
         
@@ -472,6 +472,7 @@ static NSString *_localizedSelectTitle = @"Select";
     if(_backgroundColor != newBackgroundColor) {
         _backgroundColor = newBackgroundColor;
         
+        self.titleLabelContainer.backgroundColor = newBackgroundColor;
         self.nowButton.backgroundColor = newBackgroundColor;
         self.datePickerContainer.backgroundColor = newBackgroundColor;
         self.cancelAndSelectButtonContainer.backgroundColor = newBackgroundColor;
@@ -479,7 +480,6 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 #pragma mark - Presenting
-
 - (void)show {
     [self showWithSelectionHandler:nil];
 }
