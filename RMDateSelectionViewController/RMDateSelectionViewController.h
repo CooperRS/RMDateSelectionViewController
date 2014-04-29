@@ -125,6 +125,12 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 @property (assign, nonatomic) BOOL hideNowButton;
 
+/**
+ The backgroundView
+ */
+
+@property (nonatomic, strong) UIView *backgroundView;
+
 /// @name Class Methods
 
 /**

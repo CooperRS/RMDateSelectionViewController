@@ -75,8 +75,6 @@
 @property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UIButton *selectButton;
 
-@property (nonatomic, strong) UIView *backgroundView;
-
 @property (nonatomic, strong) UIMotionEffectGroup *motionEffectGroup;
 
 @property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
