@@ -67,6 +67,12 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 - (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc;
 
+/**
+ This delegate method is called when the user selects the now button.
+ 
+ @param vc The date selection view controller that just canceled.
+ */
+- (void)dateSelectionViewControllerDidNow:(RMDateSelectionViewController *)vc;
 @end
 
 @interface RMDateSelectionViewController : UIViewController
@@ -118,6 +124,12 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  Must be set before -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called or otherwise this property has no effect.
  */
 @property (assign, nonatomic) BOOL hideNowButton;
+
+/**
+ The backgroundView
+ */
+
+@property (nonatomic, strong) UIView *backgroundView;
 
 /// @name Class Methods
 

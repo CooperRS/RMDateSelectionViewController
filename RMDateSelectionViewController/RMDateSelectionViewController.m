@@ -75,8 +75,6 @@
 @property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UIButton *selectButton;
 
-@property (nonatomic, strong) UIView *backgroundView;
-
 @property (nonatomic, strong) UIMotionEffectGroup *motionEffectGroup;
 
 @property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
@@ -540,6 +538,7 @@ static NSString *_localizedSelectTitle = @"Select";
 
 - (IBAction)nowButtonPressed:(id)sender {
     [self.datePicker setDate:[[NSDate date] dateByRoundingToMinutes:self.datePicker.minuteInterval]];
+    [self.delegate dateSelectionViewControllerDidNow:self];
 }
 
 @end
