@@ -67,6 +67,17 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 - (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc;
 
+@optional
+
+/**
+ *  This delegate is called when the now button of the date selection view controller has been pressed.
+ *  
+ *  Implementation of this delegate is optional. If you choose to implement it, you are responsible to do whatever should be done when the now button has been pressed. If you do not choose to implement it, the default behavior is to set the date selection control to the current date.
+ *
+ *  @param vc The date selection view controller whose now button has been pressed.
+ */
+- (void)dateSelectionViewControllerNowButtonPressed:(RMDateSelectionViewController *)vc;
+
 @end
 
 @interface RMDateSelectionViewController : UIViewController
