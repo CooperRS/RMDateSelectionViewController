@@ -67,6 +67,12 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 - (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc;
 
+/**
+ This delegate method is called when the user selects the now button.
+ 
+ @param vc The date selection view controller that just canceled.
+ */
+- (void)dateSelectionViewControllerDidNow:(RMDateSelectionViewController *)vc;
 @end
 
 @interface RMDateSelectionViewController : UIViewController

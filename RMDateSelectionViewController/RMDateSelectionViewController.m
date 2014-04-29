@@ -540,6 +540,7 @@ static NSString *_localizedSelectTitle = @"Select";
 
 - (IBAction)nowButtonPressed:(id)sender {
     [self.datePicker setDate:[[NSDate date] dateByRoundingToMinutes:self.datePicker.minuteInterval]];
+    [self.delegate dateSelectionViewControllerDidNow:self];
 }
 
 @end
