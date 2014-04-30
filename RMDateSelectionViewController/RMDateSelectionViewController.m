@@ -453,6 +453,9 @@ static NSString *_localizedSelectTitle = @"Select";
         self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
         _backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
         _backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundViewTapped:)];
+        [_backgroundView addGestureRecognizer:tapRecognizer];
     }
     
     return _backgroundView;
@@ -543,6 +546,16 @@ static NSString *_localizedSelectTitle = @"Select";
         [self.delegate dateSelectionViewControllerNowButtonPressed:self];
     } else {
         [self.datePicker setDate:[[NSDate date] dateByRoundingToMinutes:self.datePicker.minuteInterval]];
+    }
+}
+
+- (IBAction)backgroundViewTapped:(UIGestureRecognizer *)sender {
+    if(!self.backgroundTapsDisabled) {
+        [self.delegate dateSelectionViewControllerDidCancel:self];
+        if (self.cancelBlock) {
+            self.cancelBlock(self);
+        }
+        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
     }
 }
 

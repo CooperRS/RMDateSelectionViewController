@@ -61,7 +61,7 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 - (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate;
 
 /**
- This delegate method is called when the user selects the cancel button.
+ This delegate method is called when the user selects the cancel button or taps the darkened background (if `backgroundTapsDisabled` is set to NO).
  
  @param vc The date selection view controller that just canceled.
  */
@@ -129,6 +129,11 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  Must be set before -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called or otherwise this property has no effect.
  */
 @property (assign, nonatomic) BOOL hideNowButton;
+
+/**
+ *  When YES taps on the background view are ignored. Default value is NO.
+ */
+@property (assign, nonatomic) BOOL backgroundTapsDisabled;
 
 /// @name Class Methods
 
