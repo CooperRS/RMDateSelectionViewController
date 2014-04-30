@@ -331,13 +331,13 @@ static NSString *_localizedSelectTitle = @"Select";
     }
     
     if(showNowButton && showTitle) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[labelContainer]-(10)-[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[labelContainer]-(10)-[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
     } else if(showNowButton && !showTitle) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
     } else if(!showNowButton && showTitle) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[labelContainer]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[labelContainer]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
     } else if(!showNowButton && !showTitle) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
     }
 }
 
