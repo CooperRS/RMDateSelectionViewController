@@ -86,6 +86,8 @@
 
 @implementation RMDateSelectionViewController
 
+@synthesize selectedBackgroundColor = _selectedBackgroundColor;
+
 #pragma mark - Class
 + (instancetype)dateSelectionController {
     return [[RMDateSelectionViewController alloc] init];
@@ -255,6 +257,7 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.nowButton.backgroundColor = [UIColor whiteColor];
     self.nowButton.layer.cornerRadius = 5;
+    self.nowButton.clipsToBounds = YES;
     self.nowButton.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.datePickerContainer.backgroundColor = [UIColor whiteColor];
@@ -266,6 +269,7 @@ static NSString *_localizedSelectTitle = @"Select";
     
     self.cancelAndSelectButtonContainer.backgroundColor = [UIColor whiteColor];
     self.cancelAndSelectButtonContainer.layer.cornerRadius = 5;
+    self.cancelAndSelectButtonContainer.clipsToBounds = YES;
     self.cancelAndSelectButtonContainer.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.cancelAndSelectButtonSeperator.backgroundColor = [UIColor lightGrayColor];
@@ -372,6 +376,12 @@ static NSString *_localizedSelectTitle = @"Select";
         self.cancelAndSelectButtonContainer.backgroundColor = self.backgroundColor;
     }
     
+    if(self.selectedBackgroundColor) {
+        [self.nowButton setBackgroundImage:[self imageWithColor:self.selectedBackgroundColor] forState:UIControlStateHighlighted];
+        [self.cancelButton setBackgroundImage:[self imageWithColor:self.selectedBackgroundColor] forState:UIControlStateHighlighted];
+        [self.selectButton setBackgroundImage:[self imageWithColor:self.selectedBackgroundColor] forState:UIControlStateHighlighted];
+    }
+    
     if(!self.disableMotionEffects)
         [self addMotionEffects];
 }
@@ -416,6 +426,18 @@ static NSString *_localizedSelectTitle = @"Select";
 
 - (void)removeMotionEffects {
     [self.view removeMotionEffect:self.motionEffectGroup];
+}
+
+- (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    [color setFill];
+    UIRectFill(rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
 }
 
 #pragma mark - Properties
@@ -479,6 +501,24 @@ static NSString *_localizedSelectTitle = @"Select";
         self.nowButton.backgroundColor = newBackgroundColor;
         self.datePickerContainer.backgroundColor = newBackgroundColor;
         self.cancelAndSelectButtonContainer.backgroundColor = newBackgroundColor;
+    }
+}
+
+- (UIColor *)selectedBackgroundColor {
+    if(!_selectedBackgroundColor) {
+        self.selectedBackgroundColor = [UIColor colorWithWhite:230./255. alpha:1];
+    }
+    
+    return _selectedBackgroundColor;
+}
+
+- (void)setSelectedBackgroundColor:(UIColor *)newSelectedBackgroundColor {
+    if(_selectedBackgroundColor != newSelectedBackgroundColor) {
+        _selectedBackgroundColor = newSelectedBackgroundColor;
+        
+        [self.nowButton setBackgroundImage:[self imageWithColor:newSelectedBackgroundColor] forState:UIControlStateHighlighted];
+        [self.cancelButton setBackgroundImage:[self imageWithColor:newSelectedBackgroundColor] forState:UIControlStateHighlighted];
+        [self.selectButton setBackgroundImage:[self imageWithColor:newSelectedBackgroundColor] forState:UIControlStateHighlighted];
     }
 }
 

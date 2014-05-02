@@ -114,6 +114,11 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 @property (strong, nonatomic) UIColor *backgroundColor;
 
 /**
+ *  Used to set the background color when the user selets a button.
+ */
+@property (strong, nonatomic) UIColor *selectedBackgroundColor;
+
+/**
  Used to enable or disable motion effects. Default value is NO.
  */
 @property (assign, nonatomic) BOOL disableMotionEffects;
