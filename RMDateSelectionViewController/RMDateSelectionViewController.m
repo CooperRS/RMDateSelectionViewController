@@ -572,6 +572,7 @@ static NSString *_localizedSelectTitle = @"Select";
 - (IBAction)doneButtonPressed:(id)sender {
     if(!self.hasBeenDismissed) {
         self.hasBeenDismissed = YES;
+        
         [self.delegate dateSelectionViewController:self didSelectDate:self.datePicker.date];
         if (self.selectedDateBlock) {
             self.selectedDateBlock(self, self.datePicker.date);
