@@ -100,6 +100,8 @@ Code contributions:
 * Digeon Benjamin 
 	* Delegate method when now button is pressed
 	* Cancel delegate method is called when background view is tapped
+* Denis Andrasec
+	* Bugfixes
 
 I want to thank everyone who has contributed code and/or time to this project!
 
