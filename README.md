@@ -19,7 +19,7 @@ The labels of the UIDatePicker are still black because Apple does not allow to c
 ###CocoaPods
 ```ruby
 platform :ios, '7.0'
-pod "RMDateSelectionViewController", "~> 1.2.0"
+pod "RMDateSelectionViewController", "~> 1.2.1"
 ```
 
 ###Manual
