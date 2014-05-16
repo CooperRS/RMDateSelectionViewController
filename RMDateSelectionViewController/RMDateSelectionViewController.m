@@ -82,6 +82,8 @@
 @property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
 @property (nonatomic, copy) RMDateCancelBlock cancelBlock;
 
+@property (nonatomic, assign) BOOL isDismissing;
+
 @end
 
 @implementation RMDateSelectionViewController
@@ -396,6 +398,8 @@ static NSString *_localizedSelectTitle = @"Select";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
     [super viewDidDisappear:animated];
+    
+    self.isDismissing = NO;
 }
 
 #pragma mark - Orientation
@@ -561,7 +565,10 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 - (void)dismiss {
-    [RMDateSelectionViewController dismissDateSelectionViewController:self fromViewController:self.rootViewController];
+    if (!self.isDismissing) {
+        self.isDismissing = YES;
+        [RMDateSelectionViewController dismissDateSelectionViewController:self fromViewController:self.rootViewController];
+    }
 }
 
 #pragma mark - Actions
