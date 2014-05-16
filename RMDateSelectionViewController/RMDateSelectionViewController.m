@@ -82,7 +82,7 @@
 @property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
 @property (nonatomic, copy) RMDateCancelBlock cancelBlock;
 
-@property (nonatomic, assign) BOOL isDismissing;
+@property (nonatomic, assign) BOOL hasBeenDismissed;
 
 @end
 
@@ -399,7 +399,7 @@ static NSString *_localizedSelectTitle = @"Select";
     
     [super viewDidDisappear:animated];
     
-    self.isDismissing = NO;
+    self.hasBeenDismissed = NO;
 }
 
 #pragma mark - Orientation
@@ -565,27 +565,31 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 - (void)dismiss {
-    if (!self.isDismissing) {
-        self.isDismissing = YES;
-        [RMDateSelectionViewController dismissDateSelectionViewController:self fromViewController:self.rootViewController];
-    }
+    [RMDateSelectionViewController dismissDateSelectionViewController:self fromViewController:self.rootViewController];
 }
 
 #pragma mark - Actions
 - (IBAction)doneButtonPressed:(id)sender {
-    [self.delegate dateSelectionViewController:self didSelectDate:self.datePicker.date];
-    if (self.selectedDateBlock) {
-        self.selectedDateBlock(self, self.datePicker.date);
+    if(!self.hasBeenDismissed) {
+        self.hasBeenDismissed = YES;
+        [self.delegate dateSelectionViewController:self didSelectDate:self.datePicker.date];
+        if (self.selectedDateBlock) {
+            self.selectedDateBlock(self, self.datePicker.date);
+        }
+        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
     }
-    [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
-    [self.delegate dateSelectionViewControllerDidCancel:self];
-    if (self.cancelBlock) {
-        self.cancelBlock(self);
+    if(!self.hasBeenDismissed) {
+        self.hasBeenDismissed = YES;
+        
+        [self.delegate dateSelectionViewControllerDidCancel:self];
+        if (self.cancelBlock) {
+            self.cancelBlock(self);
+        }
+        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
     }
-    [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
 }
 
 - (IBAction)nowButtonPressed:(id)sender {
@@ -597,7 +601,9 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 - (IBAction)backgroundViewTapped:(UIGestureRecognizer *)sender {
-    if(!self.backgroundTapsDisabled) {
+    if(!self.backgroundTapsDisabled && !self.hasBeenDismissed) {
+        self.hasBeenDismissed = YES;
+        
         [self.delegate dateSelectionViewControllerDidCancel:self];
         if (self.cancelBlock) {
             self.cancelBlock(self);
