@@ -129,6 +129,11 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 @property (assign, nonatomic) BOOL disableBouncingWhenShowing;
 
 /**
+ Used to enable or disable blurring the date selection view. Default value is NO.
+ */
+@property (assign, nonatomic) BOOL disableBlurEffects;
+
+/**
  When YES the now button is hidden. Default value is NO.
  
  Must be set before -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called or otherwise this property has no effect.

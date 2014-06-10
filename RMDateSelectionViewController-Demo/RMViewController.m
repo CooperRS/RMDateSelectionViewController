@@ -38,9 +38,10 @@
     dateSelectionVC.delegate = self;
     dateSelectionVC.titleLabel.text = @"This is an example title.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
     
-    //You can enable or disable bouncing and motion effects
+    //You can enable or disable blur, bouncing and motion effects
     //dateSelectionVC.disableBouncingWhenShowing = YES;
     //dateSelectionVC.disableMotionEffects = YES;
+    //dateSelectionVC.disableBlurEffects = YES;
     
     [dateSelectionVC show];
     
@@ -60,6 +61,7 @@
     //You can enable or disable bouncing and motion effects
     //dateSelectionVC.disableBouncingWhenShowing = YES;
     //dateSelectionVC.disableMotionEffects = YES;
+    //dateSelectionVC.disableBlurEffects = YES;
     
     [dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
         NSLog(@"Successfully selected date: %@ (With block)", aDate);
