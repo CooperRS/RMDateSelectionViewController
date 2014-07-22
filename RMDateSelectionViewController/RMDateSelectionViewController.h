@@ -204,15 +204,6 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 - (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
 
 /**
- This shows the date selection view controller as child view controller of aViewController.
- 
- The content of aViewController will be darkened and the date selection view controller will be shown on top.
- 
- @param aViewController The date selection view controller will be displayed as a child view controller of this view controller.
- */
-- (void)showFromViewController:(UIViewController *)aViewController;
-
-/**
  This will remove the date selection view controller from whatever view controller it is currently shown in.
  */
 - (void)dismiss;

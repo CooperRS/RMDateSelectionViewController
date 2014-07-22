@@ -47,6 +47,87 @@
 
 @end
 
+/*
+ * We need RMNonRotatingDateSelectionViewController because Apple decided that a UIWindow adds a black background while rotating.
+ * ( http://stackoverflow.com/questions/19782944/blacked-out-interface-rotation-when-using-second-uiwindow-with-rootviewcontrolle )
+ *
+ * To work around this problem, the root view controller of our window is a RMNonRotatingDateSelectionViewController which cannot rotate.
+ * In this case, UIWindow does not add a black background (as it is not rotating any more) and we handle the rotation
+ * ourselves.
+ */
+@interface RMNonRotatingDateSelectionViewController : UIViewController
+
+@property (nonatomic, assign) UIInterfaceOrientation mutableInterfaceOrientation;
+
+@end
+
+@implementation RMNonRotatingDateSelectionViewController
+
+#pragma mark - Init and Dealloc
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    [super viewDidDisappear:animated];
+}
+
+#pragma mark - Orientation
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
+- (void)didRotate {
+    [self updateUIForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation animated:YES];
+}
+
+- (void)updateUIForInterfaceOrientation:(UIInterfaceOrientation)newOrientation animated:(BOOL)animated {
+    CGFloat duration = 0.3f;
+    CGFloat angle = 0.f;
+    CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    if(newOrientation == UIInterfaceOrientationPortrait) {
+        angle = 0;
+        if(self.mutableInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
+            duration = 0.6f;
+    } else if(newOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+        angle = M_PI;
+        if(self.mutableInterfaceOrientation == UIInterfaceOrientationPortrait)
+            duration = 0.6f;
+    } else if(newOrientation == UIInterfaceOrientationLandscapeLeft) {
+        angle = -M_PI_2;
+        if(self.mutableInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
+            duration = 0.6f;
+    } else if(newOrientation == UIInterfaceOrientationLandscapeRight) {
+        angle = M_PI_2;
+        if(self.mutableInterfaceOrientation == UIInterfaceOrientationLandscapeLeft)
+            duration = 0.6f;
+    }
+    
+    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && UIInterfaceOrientationIsLandscape(newOrientation) && animated) {
+        screenBounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
+    }
+    
+    if(animated) {
+        [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+            self.view.transform = CGAffineTransformMakeRotation(angle);
+            self.view.frame = screenBounds;
+        } completion:^(BOOL finished) {
+        }];
+    } else {
+        self.view.transform = CGAffineTransformMakeRotation(angle);
+        self.view.frame = screenBounds;
+    }
+    
+    self.mutableInterfaceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+}
+
+@end
+
 #define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
 #define RM_DATE_PICKER_HEIGHT_LANDSCAPE 162
 
@@ -55,7 +136,8 @@
 
 @interface RMDateSelectionViewController ()
 
-@property (nonatomic, weak) UIViewController *rootViewController;
+@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, strong) UIView *backgroundView;
 
 @property (nonatomic, weak) NSLayoutConstraint *xConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *yConstraint;
@@ -75,8 +157,6 @@
 @property (nonatomic, strong) UIView *cancelAndSelectButtonSeperator;
 @property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UIButton *selectButton;
-
-@property (nonatomic, strong) UIView *backgroundView;
 
 @property (nonatomic, strong) UIMotionEffectGroup *motionEffectGroup;
 
@@ -124,27 +204,30 @@ static NSString *_localizedSelectTitle = @"Select";
     _localizedSelectTitle = newLocalizedTitle;
 }
 
-+ (void)showDateSelectionViewController:(RMDateSelectionViewController *)aViewController fromViewController:(UIViewController *)rootViewController {
++ (void)showDateSelectionViewController:(RMDateSelectionViewController *)aViewController {
+    [(RMNonRotatingDateSelectionViewController *)aViewController.window.rootViewController updateUIForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation animated:NO];
+    [aViewController.window makeKeyAndVisible];
+    
     aViewController.backgroundView.alpha = 0;
-    [rootViewController.view addSubview:aViewController.backgroundView];
+    [aViewController.window.rootViewController.view addSubview:aViewController.backgroundView];
     
-    [rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeTop multiplier:0 constant:0]];
-    [rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeLeading multiplier:0 constant:0]];
-    [rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-    [rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+    [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeTop multiplier:0 constant:0]];
+    [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeLeading multiplier:0 constant:0]];
+    [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
+    [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     
-    [aViewController willMoveToParentViewController:rootViewController];
+    [aViewController willMoveToParentViewController:aViewController.window.rootViewController];
     [aViewController viewWillAppear:YES];
     
-    [rootViewController addChildViewController:aViewController];
-    [rootViewController.view addSubview:aViewController.view];
+    [aViewController.window.rootViewController addChildViewController:aViewController];
+    [aViewController.window.rootViewController.view addSubview:aViewController.view];
     
     [aViewController viewDidAppear:YES];
-    [aViewController didMoveToParentViewController:rootViewController];
+    [aViewController didMoveToParentViewController:aViewController.window.rootViewController];
     
     //CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        if(UIInterfaceOrientationIsLandscape(rootViewController.interfaceOrientation)) {
+        if(UIInterfaceOrientationIsLandscape(aViewController.window.rootViewController.interfaceOrientation)) {
             //height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
             aViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
@@ -153,22 +236,22 @@ static NSString *_localizedSelectTitle = @"Select";
         }
     }
     
-    aViewController.xConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    aViewController.widthConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+    aViewController.xConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    aViewController.widthConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
     
-    [rootViewController.view addConstraint:aViewController.xConstraint];
-    [rootViewController.view addConstraint:aViewController.yConstraint];
-    [rootViewController.view addConstraint:aViewController.widthConstraint];
+    [aViewController.window.rootViewController.view addConstraint:aViewController.xConstraint];
+    [aViewController.window.rootViewController.view addConstraint:aViewController.yConstraint];
+    [aViewController.window.rootViewController.view addConstraint:aViewController.widthConstraint];
     
-    [rootViewController.view setNeedsUpdateConstraints];
-    [rootViewController.view layoutIfNeeded];
+    [aViewController.window.rootViewController.view setNeedsUpdateConstraints];
+    [aViewController.window.rootViewController.view layoutIfNeeded];
     
-    [rootViewController.view removeConstraint:aViewController.yConstraint];
-    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-10];
-    [rootViewController.view addConstraint:aViewController.yConstraint];
+    [aViewController.window.rootViewController.view removeConstraint:aViewController.yConstraint];
+    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-10];
+    [aViewController.window.rootViewController.view addConstraint:aViewController.yConstraint];
     
-    [rootViewController.view setNeedsUpdateConstraints];
+    [aViewController.window.rootViewController.view setNeedsUpdateConstraints];
     
     CGFloat damping = 1.0f;
     CGFloat duration = 0.3f;
@@ -180,22 +263,22 @@ static NSString *_localizedSelectTitle = @"Select";
     [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:1 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
         aViewController.backgroundView.alpha = 1;
         
-        [rootViewController.view layoutIfNeeded];
+        [aViewController.window.rootViewController.view layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
 }
 
-+ (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aViewController fromViewController:(UIViewController *)rootViewController {
-    [rootViewController.view removeConstraint:aViewController.yConstraint];
-    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    [rootViewController.view addConstraint:aViewController.yConstraint];
++ (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aViewController {
+    [aViewController.window.rootViewController.view removeConstraint:aViewController.yConstraint];
+    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    [aViewController.window.rootViewController.view addConstraint:aViewController.yConstraint];
     
-    [rootViewController.view setNeedsUpdateConstraints];
+    [aViewController.window.rootViewController.view setNeedsUpdateConstraints];
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         aViewController.backgroundView.alpha = 0;
         
-        [rootViewController.view layoutIfNeeded];
+        [aViewController.window.rootViewController.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         [aViewController willMoveToParentViewController:nil];
         [aViewController viewWillDisappear:YES];
@@ -207,6 +290,7 @@ static NSString *_localizedSelectTitle = @"Select";
         [aViewController viewDidDisappear:YES];
         
         [aViewController.backgroundView removeFromSuperview];
+        aViewController.hasBeenDismissed = NO;
     }];
 }
 
@@ -436,8 +520,6 @@ static NSString *_localizedSelectTitle = @"Select";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
     [super viewDidDisappear:animated];
-    
-    self.hasBeenDismissed = NO;
 }
 
 #pragma mark - Orientation
@@ -452,10 +534,10 @@ static NSString *_localizedSelectTitle = @"Select";
         [self.datePicker setNeedsUpdateConstraints];
         [self.datePicker layoutIfNeeded];
         
-        [self.rootViewController.view setNeedsUpdateConstraints];
+        [self.window.rootViewController.view setNeedsUpdateConstraints];
         __weak RMDateSelectionViewController *blockself = self;
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            [blockself.rootViewController.view layoutIfNeeded];
+            [blockself.window.rootViewController.view layoutIfNeeded];
         } completion:^(BOOL finished) {
         }];
     }
@@ -510,6 +592,16 @@ static NSString *_localizedSelectTitle = @"Select";
     }
     
     return _motionEffectGroup;
+}
+
+- (UIWindow *)window {
+    if(!_window) {
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        _window.windowLevel = UIWindowLevelStatusBar;
+        _window.rootViewController = [[RMNonRotatingDateSelectionViewController alloc] init];
+    }
+    
+    return _window;
 }
 
 - (UIView *)backgroundView {
@@ -577,33 +669,11 @@ static NSString *_localizedSelectTitle = @"Select";
     self.selectedDateBlock = selectionBlock;
     self.cancelBlock = cancelBlock;
     
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-    UIViewController *currentViewController = keyWindow.rootViewController;
-    
-    while (currentViewController.presentedViewController) {
-        currentViewController = currentViewController.presentedViewController;
-    }
-    
-    [self showFromViewController:currentViewController];
-}
-
-- (void)showFromViewController:(UIViewController *)aViewController {
-    if([aViewController isKindOfClass:[UITableViewController class]]) {
-        if(aViewController.navigationController) {
-            NSLog(@"Warning: -[RMDateSelectionViewController showFromViewController:] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.");
-            aViewController = aViewController.navigationController;
-        } else {
-            NSLog(@"Error: -[RMDateSelectionViewController showFromViewController:] has been called with an instance of UITableViewController as argument. Showing the date selection view controller from an instance of UITableViewController is not possible due to some internals of UIKit. To prevent your app from crashing, showing the date selection view controller will be canceled.");
-            return;
-        }
-    }
-    
-    self.rootViewController = aViewController;
-    [RMDateSelectionViewController showDateSelectionViewController:self fromViewController:aViewController];
+    [RMDateSelectionViewController showDateSelectionViewController:self];
 }
 
 - (void)dismiss {
-    [RMDateSelectionViewController dismissDateSelectionViewController:self fromViewController:self.rootViewController];
+    [RMDateSelectionViewController dismissDateSelectionViewController:self];
 }
 
 #pragma mark - Actions
