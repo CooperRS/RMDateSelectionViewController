@@ -206,6 +206,7 @@ static NSString *_localizedSelectTitle = @"Select";
         [aViewController viewDidDisappear:YES];
         
         [aViewController.backgroundView removeFromSuperview];
+        aViewController.hasBeenDismissed = NO;
     }];
 }
 
@@ -398,8 +399,6 @@ static NSString *_localizedSelectTitle = @"Select";
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     
     [super viewDidDisappear:animated];
-    
-    self.hasBeenDismissed = NO;
 }
 
 #pragma mark - Orientation
