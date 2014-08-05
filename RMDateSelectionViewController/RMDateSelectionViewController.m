@@ -272,31 +272,31 @@ static NSString *_localizedSelectTitle = @"Select";
     }];
 }
 
-+ (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aViewController {
-    [aViewController.rootViewController.view removeConstraint:aViewController.yConstraint];
-    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aViewController.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    [aViewController.rootViewController.view addConstraint:aViewController.yConstraint];
++ (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController {
+    [aDateSelectionViewController.rootViewController.view removeConstraint:aDateSelectionViewController.yConstraint];
+    aDateSelectionViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aDateSelectionViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    [aDateSelectionViewController.rootViewController.view addConstraint:aDateSelectionViewController.yConstraint];
     
-    [aViewController.rootViewController.view setNeedsUpdateConstraints];
+    [aDateSelectionViewController.rootViewController.view setNeedsUpdateConstraints];
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        aViewController.backgroundView.alpha = 0;
+        aDateSelectionViewController.backgroundView.alpha = 0;
         
-        [aViewController.rootViewController.view layoutIfNeeded];
+        [aDateSelectionViewController.rootViewController.view layoutIfNeeded];
     } completion:^(BOOL finished) {
-        [aViewController willMoveToParentViewController:nil];
-        [aViewController viewWillDisappear:YES];
+        [aDateSelectionViewController willMoveToParentViewController:nil];
+        [aDateSelectionViewController viewWillDisappear:YES];
         
-        [aViewController.view removeFromSuperview];
-        [aViewController removeFromParentViewController];
+        [aDateSelectionViewController.view removeFromSuperview];
+        [aDateSelectionViewController removeFromParentViewController];
         
-        [aViewController didMoveToParentViewController:nil];
-        [aViewController viewDidDisappear:YES];
+        [aDateSelectionViewController didMoveToParentViewController:nil];
+        [aDateSelectionViewController viewDidDisappear:YES];
         
-        [aViewController.backgroundView removeFromSuperview];
-        aViewController.hasBeenDismissed = NO;
+        [aDateSelectionViewController.backgroundView removeFromSuperview];
+        aDateSelectionViewController.hasBeenDismissed = NO;
         
-        aViewController.window = nil;
+        aDateSelectionViewController.window = nil;
     }];
 }
 
