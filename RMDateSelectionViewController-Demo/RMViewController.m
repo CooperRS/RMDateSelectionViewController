@@ -42,7 +42,7 @@
     //dateSelectionVC.disableBouncingWhenShowing = YES;
     //dateSelectionVC.disableMotionEffects = YES;
     
-    [dateSelectionVC showFromViewController:self.navigationController];
+    [dateSelectionVC show];
     
     //You can access the actual UIDatePicker via the datePicker property
     dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
