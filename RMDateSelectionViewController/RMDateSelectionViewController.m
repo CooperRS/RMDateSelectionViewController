@@ -273,16 +273,16 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 + (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aViewController {
-    [aViewController.window.rootViewController.view removeConstraint:aViewController.yConstraint];
-    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    [aViewController.window.rootViewController.view addConstraint:aViewController.yConstraint];
+    [aViewController.rootViewController.view removeConstraint:aViewController.yConstraint];
+    aViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aViewController.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+    [aViewController.rootViewController.view addConstraint:aViewController.yConstraint];
     
-    [aViewController.window.rootViewController.view setNeedsUpdateConstraints];
+    [aViewController.rootViewController.view setNeedsUpdateConstraints];
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         aViewController.backgroundView.alpha = 0;
         
-        [aViewController.window.rootViewController.view layoutIfNeeded];
+        [aViewController.rootViewController.view layoutIfNeeded];
     } completion:^(BOOL finished) {
         [aViewController willMoveToParentViewController:nil];
         [aViewController viewWillDisappear:YES];
@@ -295,6 +295,8 @@ static NSString *_localizedSelectTitle = @"Select";
         
         [aViewController.backgroundView removeFromSuperview];
         aViewController.hasBeenDismissed = NO;
+        
+        aViewController.window = nil;
     }];
 }
 
