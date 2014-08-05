@@ -210,8 +210,8 @@ static NSString *_localizedSelectTitle = @"Select";
     aViewController.backgroundView.alpha = 0;
     [aViewController.window.rootViewController.view addSubview:aViewController.backgroundView];
     
-    [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeTop multiplier:0 constant:0]];
-    [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeLeading multiplier:0 constant:0]];
+    [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+    [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
     [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
     [aViewController.window.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aViewController.backgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:aViewController.window.rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
     
