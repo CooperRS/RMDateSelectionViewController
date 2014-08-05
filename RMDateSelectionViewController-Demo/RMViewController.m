@@ -43,7 +43,7 @@
     //dateSelectionVC.disableMotionEffects = YES;
     //dateSelectionVC.disableBlurEffects = YES;
     
-    [dateSelectionVC show];
+    [dateSelectionVC showFromViewController:self.navigationController];
     
     //You can access the actual UIDatePicker via the datePicker property
     dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
