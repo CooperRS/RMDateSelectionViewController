@@ -178,7 +178,7 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 /**
  *  This shows the date selection view controller on top of every other view controller using a new UIWindow. The RMDateSelectionViewController will be added as a child view controller of the UIWindows root view controller. The background of the root view controller is used to darken the views behind the RMDateSelectionViewController.
  *
- *  This method is the preferred method for showing a RMDateSelectionViewController on iPhones and iPads and a block based API is preferred. Nevertheless, there are situations where this method is not sufficient on iPads. An example for this is that the RMDateSelectionViewController shall be shown within an UIPopover. This can be achieved by using -[RMDateSelectionViewController showFromViewController:withSelectionHandler:andCancelHandler:].
+ *  This method is the preferred method for showing a RMDateSelectionViewController on iPhones and iPads when a block based API is preferred. Nevertheless, there are situations where this method is not sufficient on iPads. An example for this is that the RMDateSelectionViewController shall be shown within an UIPopover. This can be achieved by using -[RMDateSelectionViewController showFromViewController:withSelectionHandler:andCancelHandler:].
  *
  *  After a date has been selected the selectionBlock will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding delegate methods will be called, too.
  *

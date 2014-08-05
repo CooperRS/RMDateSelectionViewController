@@ -206,8 +206,6 @@ static NSString *_localizedSelectTitle = @"Select";
 
 + (void)showDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController usingWindow:(BOOL)extraWindow {
     if(extraWindow) {
-        aDateSelectionViewController.rootViewController = aDateSelectionViewController.window.rootViewController;
-        
         [(RMNonRotatingDateSelectionViewController *)aDateSelectionViewController.rootViewController updateUIForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation animated:NO];
         [aDateSelectionViewController.window makeKeyAndVisible];
     }
@@ -294,9 +292,8 @@ static NSString *_localizedSelectTitle = @"Select";
         [aDateSelectionViewController viewDidDisappear:YES];
         
         [aDateSelectionViewController.backgroundView removeFromSuperview];
-        aDateSelectionViewController.hasBeenDismissed = NO;
-        
         aDateSelectionViewController.window = nil;
+        aDateSelectionViewController.hasBeenDismissed = NO;
     }];
 }
 
