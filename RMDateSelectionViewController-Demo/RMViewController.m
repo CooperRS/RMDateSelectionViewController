@@ -43,16 +43,19 @@
     //dateSelectionVC.disableMotionEffects = YES;
     //dateSelectionVC.disableBlurEffects = YES;
     
-    [dateSelectionVC show];
+    //You can also adjust colors (enabling the following 2 lines of code will result in a black version of RMDateSelectionViewController)
+    //dateSelectionVC.tintColor = [UIColor whiteColor];
+    //dateSelectionVC.blurEffectStyle = UIBlurEffectStyleDark;
+    
+    //Enable the following line of code if you enabled the black version of RMDateSelectionViewController but also disabled blur effects (or run on iOS 7)
+    //dateSelectionVC.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
     
     //You can access the actual UIDatePicker via the datePicker property
     dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     dateSelectionVC.datePicker.minuteInterval = 5;
     dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     
-    //You can also adjust colors (enabling example will result in a black version)
-    //dateSelectionVC.tintColor = [UIColor whiteColor];
-    //dateSelectionVC.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
+    [dateSelectionVC show];
 }
 
 - (IBAction)openDateSelectionControllerWithBlock:(id)sender {
@@ -63,16 +66,16 @@
     //dateSelectionVC.disableMotionEffects = YES;
     //dateSelectionVC.disableBlurEffects = YES;
     
+    //You can access the actual UIDatePicker via the datePicker property
+    dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    dateSelectionVC.datePicker.minuteInterval = 5;
+    dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+    
     [dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
         NSLog(@"Successfully selected date: %@ (With block)", aDate);
     } andCancelHandler:^(RMDateSelectionViewController *vc) {
         NSLog(@"Date selection was canceled (with block)");
     }];
-    
-    //You can access the actual UIDatePicker via the datePicker property
-    dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    dateSelectionVC.datePicker.minuteInterval = 5;
-    dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
 }
 
 #pragma mark - UITableView Delegates
