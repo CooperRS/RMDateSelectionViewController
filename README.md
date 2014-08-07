@@ -78,11 +78,11 @@ There is an additional documentation available provided by the CocoaPods team. T
 ## Requirements
 Works with:
 
-* Xcode 5
-* iOS 7 SDK
+* Xcode 6
+* iOS 8 SDK
 * ARC (You can turn it on and off on a per file basis)
 
-May also work with previous Xcode and iOS SDK versions. But it will at least need a system capable of Autolayout (and I think it will look awful on iOS 6 ;)...)
+iOS 8 SDK is only needed for compiling (as it uses the blur feature provided by iOS 8 SDK). At runtime the control only needs iOS 7 or later.
 
 ## Apps using this control
 Using this control in your app or know anyone who does?
