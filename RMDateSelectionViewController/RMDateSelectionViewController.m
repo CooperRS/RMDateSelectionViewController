@@ -381,31 +381,42 @@ static NSString *_localizedSelectTitle = @"Select";
         self.cancelAndSelectButtonContainer = [[UIView alloc] initWithFrame:CGRectZero];
     }
     
-    [self.titleLabelContainer addSubview:self.titleLabel];
-    [self.nowButtonContainer addSubview:self.nowButton];
-    [self.datePickerContainer addSubview:self.datePicker];
+    if(NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
+        [[(UIVisualEffectView *)self.titleLabelContainer contentView] addSubview:self.titleLabel];
+        [[(UIVisualEffectView *)self.nowButtonContainer contentView] addSubview:self.nowButton];
+        [[(UIVisualEffectView *)self.datePickerContainer contentView] addSubview:self.datePicker];
+        
+        self.titleLabelContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+        self.nowButtonContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+        self.datePickerContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+    } else {
+        [self.titleLabelContainer addSubview:self.titleLabel];
+        [self.nowButtonContainer addSubview:self.nowButton];
+        [self.datePickerContainer addSubview:self.datePicker];
+        
+        self.titleLabelContainer.backgroundColor = [UIColor whiteColor];
+        self.nowButtonContainer.backgroundColor = [UIColor whiteColor];
+        self.datePickerContainer.backgroundColor = [UIColor whiteColor];
+    }
     
     [self.cancelAndSelectButtonContainer addSubview:self.cancelAndSelectButtonSeperator];
     [self.cancelAndSelectButtonContainer addSubview:self.cancelButton];
     [self.cancelAndSelectButtonContainer addSubview:self.selectButton];
     
-    self.titleLabelContainer.backgroundColor = [UIColor whiteColor];
-    self.titleLabelContainer.layer.cornerRadius = 5;
+    self.titleLabelContainer.layer.cornerRadius = 4;
     self.titleLabelContainer.clipsToBounds = YES;
     self.titleLabelContainer.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.nowButtonContainer.backgroundColor = [UIColor whiteColor];
-    self.nowButtonContainer.layer.cornerRadius = 5;
+    self.nowButtonContainer.layer.cornerRadius = 4;
     self.nowButtonContainer.clipsToBounds = YES;
     self.nowButtonContainer.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.datePickerContainer.backgroundColor = [UIColor whiteColor];
-    self.datePickerContainer.layer.cornerRadius = 5;
+    self.datePickerContainer.layer.cornerRadius = 4;
     self.datePickerContainer.clipsToBounds = YES;
     self.datePickerContainer.translatesAutoresizingMaskIntoConstraints = NO;
     
     self.cancelAndSelectButtonContainer.backgroundColor = [UIColor whiteColor];
-    self.cancelAndSelectButtonContainer.layer.cornerRadius = 5;
+    self.cancelAndSelectButtonContainer.layer.cornerRadius = 4;
     self.cancelAndSelectButtonContainer.clipsToBounds = YES;
     self.cancelAndSelectButtonContainer.translatesAutoresizingMaskIntoConstraints = NO;
     
