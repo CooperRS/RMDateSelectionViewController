@@ -134,6 +134,11 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 @property (assign, nonatomic) BOOL disableBlurEffects;
 
 /**
+ *  Used to choose a particular blur effect style (default value is UIBlurEffectStyleExtraLight). Ignored if blur effects are disabled.
+ */
+@property (assign, nonatomic) UIBlurEffectStyle blurEffectStyle;
+
+/**
  When YES the now button is hidden. Default value is NO.
  
  Must be set before -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called or otherwise this property has no effect.

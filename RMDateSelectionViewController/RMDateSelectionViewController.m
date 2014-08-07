@@ -302,6 +302,8 @@ static NSString *_localizedSelectTitle = @"Select";
 - (id)init {
     self = [super init];
     if(self) {
+        self.blurEffectStyle = UIBlurEffectStyleExtraLight;
+        
         [self setupUIElements];
     }
     return self;
@@ -354,28 +356,28 @@ static NSString *_localizedSelectTitle = @"Select";
 
 - (void)setupContainerElements {
     if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
-        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         self.titleLabelContainer = [[UIVisualEffectView alloc] initWithEffect:blur];
     } else {
         self.titleLabelContainer = [[UIView alloc] initWithFrame:CGRectZero];
     }
     
     if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
-        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         self.nowButtonContainer = [[UIVisualEffectView alloc] initWithEffect:blur];
     } else {
         self.nowButtonContainer = [[UIView alloc] initWithFrame:CGRectZero];
     }
     
     if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
-        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         self.datePickerContainer = [[UIVisualEffectView alloc] initWithEffect:blur];
     } else {
         self.datePickerContainer = [[UIView alloc] initWithFrame:CGRectZero];
     }
     
     if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
-        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         self.cancelAndSelectButtonContainer = [[UIVisualEffectView alloc] initWithEffect:blur];
     } else {
         self.cancelAndSelectButtonContainer = [[UIView alloc] initWithFrame:CGRectZero];
@@ -386,9 +388,9 @@ static NSString *_localizedSelectTitle = @"Select";
         [[(UIVisualEffectView *)self.nowButtonContainer contentView] addSubview:self.nowButton];
         [[(UIVisualEffectView *)self.datePickerContainer contentView] addSubview:self.datePicker];
         
-        self.titleLabelContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
-        self.nowButtonContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
-        self.datePickerContainer.backgroundColor = [[UIColor whiteColor] colorWithAlphaComponent:0.6];
+        self.titleLabelContainer.backgroundColor = [UIColor clearColor];
+        self.nowButtonContainer.backgroundColor = [UIColor clearColor];
+        self.datePickerContainer.backgroundColor = [UIColor clearColor];
     } else {
         [self.titleLabelContainer addSubview:self.titleLabel];
         [self.nowButtonContainer addSubview:self.nowButton];
@@ -446,7 +448,7 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.view addConstraint:self.pickerHeightConstraint];
     
     [self.datePickerContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[picker]-(0)-|" options:0 metrics:nil views:bindingsDict]];
-    [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[cancel]-(0)-[seperator(1)]-(0)-[select]-(0)-|" options:0 metrics:nil views:bindingsDict]];
+    [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[cancel]-(0)-[seperator(0.5)]-(0)-[select]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     [self.cancelAndSelectButtonContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.cancelAndSelectButtonSeperator attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.cancelAndSelectButtonContainer attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     
     [self.datePickerContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[picker]-(0)-|" options:0 metrics:nil views:bindingsDict]];
