@@ -355,7 +355,7 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 - (void)setupContainerElements {
-    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
+    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVibrancyEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         UIVibrancyEffect *vibrancy = [UIVibrancyEffect effectForBlurEffect:blur];
         
@@ -368,7 +368,7 @@ static NSString *_localizedSelectTitle = @"Select";
         self.titleLabelContainer = [[UIView alloc] initWithFrame:CGRectZero];
     }
     
-    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
+    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVibrancyEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         UIVibrancyEffect *vibrancy = [UIVibrancyEffect effectForBlurEffect:blur];
         
@@ -381,7 +381,7 @@ static NSString *_localizedSelectTitle = @"Select";
         self.nowButtonContainer = [[UIView alloc] initWithFrame:CGRectZero];
     }
     
-    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
+    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVibrancyEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         UIVibrancyEffect *vibrancy = [UIVibrancyEffect effectForBlurEffect:blur];
         
@@ -394,7 +394,7 @@ static NSString *_localizedSelectTitle = @"Select";
         self.datePickerContainer = [[UIView alloc] initWithFrame:CGRectZero];
     }
     
-    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
+    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVibrancyEffect") && NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
         UIBlurEffect *blur = [UIBlurEffect effectWithStyle:self.blurEffectStyle];
         UIVibrancyEffect *vibrancy = [UIVibrancyEffect effectForBlurEffect:blur];
         
