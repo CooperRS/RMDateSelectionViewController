@@ -43,12 +43,13 @@
     //dateSelectionVC.disableMotionEffects = YES;
     //dateSelectionVC.disableBlurEffects = YES;
     
-    //You can also adjust colors (enabling the following 2 lines of code will result in a black version of RMDateSelectionViewController)
-    //dateSelectionVC.tintColor = [UIColor whiteColor];
+    //You can also adjust colors (enabling the following line will result in a black version of RMDateSelectionViewController)
     //dateSelectionVC.blurEffectStyle = UIBlurEffectStyleDark;
     
-    //Enable the following line of code if you enabled the black version of RMDateSelectionViewController but also disabled blur effects (or run on iOS 7)
+    //Enable the following lines if you enabled the black version of RMDateSelectionViewController but also disabled blur effects (or run on iOS 7)
+    //dateSelectionVC.tintColor = [UIColor whiteColor];
     //dateSelectionVC.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
+    //dateSelectionVC.selectedBackgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
     
     //You can access the actual UIDatePicker via the datePicker property
     dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
