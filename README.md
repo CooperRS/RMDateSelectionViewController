@@ -10,7 +10,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ### Landscape
 ![Landscape](http://cooperrs.github.com/RMDateSelectionViewController/Images/Blur-Screen-Landscape.png)
 
-### Different colors
+### Black version
 ![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait-Black.png)
 
 ##Installation
