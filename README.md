@@ -5,13 +5,13 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 
 ## Screenshots
 ### Portrait
-![Portrait](http://cooperrs.github.io/RMDateSelectionViewController/Images/Screen-Portrait.png)
+![Portrait](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait.png)
 
 ### Landscape
-![Landscape](http://cooperrs.github.com/RMDateSelectionViewController/Images/Screen-Landscape.png)
+![Landscape](http://cooperrs.github.com/RMDateSelectionViewController/Images/Blur-Screen-Landscape.png)
 
 ### Different colors
-![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Screen-Portrait-Black.png)
+![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait-Black.png)
 
 The labels of the UIDatePicker are still black because Apple does not allow to change the appearance of UIDatePickers. (But there are hacks around...)
 
@@ -19,7 +19,7 @@ The labels of the UIDatePicker are still black because Apple does not allow to c
 ###CocoaPods
 ```ruby
 platform :ios, '7.0'
-pod "RMDateSelectionViewController", "~> 1.2.1"
+pod "RMDateSelectionViewController", "~> 1.3.0"
 ```
 
 ###Manual
@@ -69,9 +69,6 @@ Additionally, there is a method called `showFromViewController:`. With this meth
 ###How to localize the buttons? 
 [Localization](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Localization)
 
-###Limitations
-Due to some UIKit internals, it is not possible to show a date selection view controller from an instance of UITableViewController. If the UITableViewController instance is wrapped into an UINavigationController instance the date selection view controller will be shown from the UINavigationController instance. If no UINavigationController can be used instead, an error will be logged and showing the date selection view controller will be canceled (to prevent your app from crashing).
-
 ## Documentation
 There is an additional documentation available provided by the CocoaPods team. Take a look at [cocoadocs.org](http://cocoadocs.org/docsets/RMDateSelectionViewController/).
 
@@ -82,7 +79,9 @@ Works with:
 * iOS 8 SDK
 * ARC (You can turn it on and off on a per file basis)
 
-iOS 8 SDK is only needed for compiling (as it uses the blur feature provided by iOS 8 SDK). At runtime the control only needs iOS 7 or later.
+iOS 8 SDK is only needed for compiling (as it uses the blur features provided by iOS 8 SDK). At runtime the control only needs iOS 7 or later.
+
+If you absolutely need to use iOS 7 SDK you can take a look at the iOS 7 branch called [1.3.x](https://github.com/CooperRS/RMDateSelectionViewController/tree/1.3.x)
 
 ## Apps using this control
 Using this control in your app or know anyone who does?
