@@ -28,6 +28,11 @@
 
 @interface RMViewController () <RMDateSelectionViewControllerDelegate>
 
+@property (nonatomic, weak) IBOutlet UISwitch *blackSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *blurSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *motionSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *bouncingSwitch;
+
 @end
 
 @implementation RMViewController
@@ -39,12 +44,13 @@
     dateSelectionVC.titleLabel.text = @"This is an example title.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
     
     //You can enable or disable blur, bouncing and motion effects
-    //dateSelectionVC.disableBouncingWhenShowing = YES;
-    //dateSelectionVC.disableMotionEffects = YES;
-    //dateSelectionVC.disableBlurEffects = YES;
+    dateSelectionVC.disableBouncingWhenShowing = !self.bouncingSwitch.on;
+    dateSelectionVC.disableMotionEffects = !self.motionSwitch.on;
+    dateSelectionVC.disableBlurEffects = !self.blurSwitch.on;
     
     //You can also adjust colors (enabling the following line will result in a black version of RMDateSelectionViewController)
-    //dateSelectionVC.blurEffectStyle = UIBlurEffectStyleDark;
+    if(self.blackSwitch.on)
+        dateSelectionVC.blurEffectStyle = UIBlurEffectStyleDark;
     
     //Enable the following lines if you enabled the black version of RMDateSelectionViewController but also disabled blur effects (or run on iOS 7)
     //dateSelectionVC.tintColor = [UIColor whiteColor];
@@ -56,35 +62,22 @@
     dateSelectionVC.datePicker.minuteInterval = 5;
     dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     
+    //The following lines show the two ways to show the date selection view controller:
+    // 1. Just show the date selection view controller (make sure the delegate property is assigned)
     [dateSelectionVC show];
-}
-
-- (IBAction)openDateSelectionControllerWithBlock:(id)sender {
-    RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
     
-    //You can enable or disable bouncing and motion effects
-    //dateSelectionVC.disableBouncingWhenShowing = YES;
-    //dateSelectionVC.disableMotionEffects = YES;
-    //dateSelectionVC.disableBlurEffects = YES;
-    
-    //You can access the actual UIDatePicker via the datePicker property
-    dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    dateSelectionVC.datePicker.minuteInterval = 5;
-    dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
-    
-    [dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
-        NSLog(@"Successfully selected date: %@ (With block)", aDate);
-    } andCancelHandler:^(RMDateSelectionViewController *vc) {
-        NSLog(@"Date selection was canceled (with block)");
-    }];
+    // 2. Instead of using a delegate you can also pass blocks when showing the date selection view controller
+    //[dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
+    //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
+    //} andCancelHandler:^(RMDateSelectionViewController *vc) {
+    //    NSLog(@"Date selection was canceled (with block)");
+    //}];
 }
 
 #pragma mark - UITableView Delegates
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if(indexPath.section == 0 && indexPath.row == 0) {
         [self openDateSelectionController:self];
-    } else if (indexPath.section == 0 && indexPath.row == 1) {
-        [self openDateSelectionControllerWithBlock:self];
     }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
