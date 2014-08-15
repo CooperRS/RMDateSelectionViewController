@@ -52,7 +52,7 @@
     if(self.blackSwitch.on)
         dateSelectionVC.blurEffectStyle = UIBlurEffectStyleDark;
     
-    //Enable the following lines if you enabled the black version of RMDateSelectionViewController but also disabled blur effects (or run on iOS 7)
+    //Enable the following lines if you want a black version of RMDateSelectionViewController but also disabled blur effects (or run on iOS 7)
     //dateSelectionVC.tintColor = [UIColor whiteColor];
     //dateSelectionVC.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
     //dateSelectionVC.selectedBackgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
