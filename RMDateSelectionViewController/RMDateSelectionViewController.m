@@ -540,10 +540,17 @@ static NSString *_localizedSelectTitle = @"Select";
     }
     
     if(self.backgroundColor) {
-        self.titleLabelContainer.backgroundColor = self.backgroundColor;
-        self.nowButton.backgroundColor = self.backgroundColor;
-        self.datePickerContainer.backgroundColor = self.backgroundColor;
-        self.cancelAndSelectButtonContainer.backgroundColor = self.backgroundColor;
+        if(!self.disableBlurEffects) {
+            [((UIVisualEffectView *)self.titleLabelContainer).contentView setBackgroundColor:self.backgroundColor];
+            [((UIVisualEffectView *)self.nowButtonContainer).contentView setBackgroundColor:self.backgroundColor];
+            [((UIVisualEffectView *)self.datePickerContainer).contentView setBackgroundColor:self.backgroundColor];
+            [((UIVisualEffectView *)self.cancelAndSelectButtonContainer).contentView setBackgroundColor:self.backgroundColor];
+        } else {
+            self.titleLabelContainer.backgroundColor = self.backgroundColor;
+            self.nowButtonContainer.backgroundColor = self.backgroundColor;
+            self.datePickerContainer.backgroundColor = self.backgroundColor;
+            self.cancelAndSelectButtonContainer.backgroundColor = self.backgroundColor;
+        }
     }
     
     if(self.selectedBackgroundColor) {
@@ -685,12 +692,23 @@ static NSString *_localizedSelectTitle = @"Select";
     if(_backgroundColor != newBackgroundColor) {
         _backgroundColor = newBackgroundColor;
         
-        //if([self isViewLoaded]) {
-            self.titleLabelContainer.backgroundColor = newBackgroundColor;
-            self.nowButton.backgroundColor = newBackgroundColor;
-            self.datePickerContainer.backgroundColor = newBackgroundColor;
-            self.cancelAndSelectButtonContainer.backgroundColor = newBackgroundColor;
-        //}
+        if([self isViewLoaded]) {
+            if(!self.disableBlurEffects &&
+               [self.titleLabelContainer isKindOfClass:[UIVisualEffectView class]] &&
+               [self.nowButtonContainer isKindOfClass:[UIVisualEffectView class]] &&
+               [self.datePickerContainer isKindOfClass:[UIVisualEffectView class]] &&
+               [self.cancelAndSelectButtonContainer isKindOfClass:[UIVisualEffectView class]]) {
+                [((UIVisualEffectView *)self.titleLabelContainer).contentView setBackgroundColor:newBackgroundColor];
+                [((UIVisualEffectView *)self.nowButtonContainer).contentView setBackgroundColor:newBackgroundColor];
+                [((UIVisualEffectView *)self.datePickerContainer).contentView setBackgroundColor:newBackgroundColor];
+                [((UIVisualEffectView *)self.cancelAndSelectButtonContainer).contentView setBackgroundColor:newBackgroundColor];
+            } else {
+                self.titleLabelContainer.backgroundColor = newBackgroundColor;
+                self.nowButtonContainer.backgroundColor = newBackgroundColor;
+                self.datePickerContainer.backgroundColor = newBackgroundColor;
+                self.cancelAndSelectButtonContainer.backgroundColor = newBackgroundColor;
+            }
+        }
     }
 }
 
