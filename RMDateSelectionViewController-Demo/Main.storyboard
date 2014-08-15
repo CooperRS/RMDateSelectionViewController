@@ -3,7 +3,6 @@
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
-        <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Demo-->
@@ -66,9 +65,9 @@ If your need a black version on iOS 7, take a look at the demo code.</string>
                                                 </switch>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="yE6-Ce-zqw" firstAttribute="leading" secondItem="KyP-Va-Nm0" secondAttribute="leadingMargin" constant="7" id="C2f-as-32c"/>
+                                                <constraint firstItem="yE6-Ce-zqw" firstAttribute="leading" secondItem="KyP-Va-Nm0" secondAttribute="leading" constant="15" id="C2f-as-32c"/>
                                                 <constraint firstAttribute="centerY" secondItem="yE6-Ce-zqw" secondAttribute="centerY" id="eVP-eW-cev"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="1xT-9c-DP6" secondAttribute="trailing" constant="7" id="gAY-DC-sbE"/>
+                                                <constraint firstAttribute="trailing" secondItem="1xT-9c-DP6" secondAttribute="trailing" constant="15" id="gAY-DC-sbE"/>
                                                 <constraint firstAttribute="centerY" secondItem="1xT-9c-DP6" secondAttribute="centerY" id="q2J-VY-oWg"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -96,9 +95,9 @@ If your need a black version on iOS 7, take a look at the demo code.</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="TBO-oL-Wit" secondAttribute="centerY" id="Fep-Ze-PLT"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="TBO-oL-Wit" secondAttribute="trailing" constant="7" id="cmv-zi-x5b"/>
+                                                <constraint firstAttribute="trailing" secondItem="TBO-oL-Wit" secondAttribute="trailing" constant="15" id="cmv-zi-x5b"/>
                                                 <constraint firstAttribute="centerY" secondItem="51g-7C-LhM" secondAttribute="centerY" id="kz0-co-L2O"/>
-                                                <constraint firstItem="51g-7C-LhM" firstAttribute="leading" secondItem="4Bu-c3-VHZ" secondAttribute="leadingMargin" constant="7" id="lKn-fe-YAY"/>
+                                                <constraint firstItem="51g-7C-LhM" firstAttribute="leading" secondItem="4Bu-c3-VHZ" secondAttribute="leading" constant="15" id="lKn-fe-YAY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -121,9 +120,9 @@ If your need a black version on iOS 7, take a look at the demo code.</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="HnX-Zu-wjY" secondAttribute="centerY" id="2OH-zH-6yv"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="HnX-Zu-wjY" secondAttribute="trailing" constant="7" id="OxR-3z-ymj"/>
+                                                <constraint firstAttribute="trailing" secondItem="HnX-Zu-wjY" secondAttribute="trailing" constant="15" id="OxR-3z-ymj"/>
                                                 <constraint firstAttribute="centerY" secondItem="1Me-f5-tid" secondAttribute="centerY" id="fPc-Sm-ZEK"/>
-                                                <constraint firstItem="1Me-f5-tid" firstAttribute="leading" secondItem="th7-Xh-cqY" secondAttribute="leadingMargin" constant="7" id="qir-rL-DA0"/>
+                                                <constraint firstItem="1Me-f5-tid" firstAttribute="leading" secondItem="th7-Xh-cqY" secondAttribute="leading" constant="15" id="qir-rL-DA0"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -146,9 +145,9 @@ If your need a black version on iOS 7, take a look at the demo code.</string>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="centerY" secondItem="zJU-2E-j7w" secondAttribute="centerY" id="HNr-Bm-aob"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="f0b-sT-275" secondAttribute="trailing" constant="7" id="X0v-7X-d5Q"/>
+                                                <constraint firstAttribute="trailing" secondItem="f0b-sT-275" secondAttribute="trailing" constant="15" id="X0v-7X-d5Q"/>
                                                 <constraint firstAttribute="centerY" secondItem="f0b-sT-275" secondAttribute="centerY" id="vaf-rk-KJn"/>
-                                                <constraint firstItem="zJU-2E-j7w" firstAttribute="leading" secondItem="tZs-WW-TWt" secondAttribute="leadingMargin" constant="7" id="ygp-Vm-AqF"/>
+                                                <constraint firstItem="zJU-2E-j7w" firstAttribute="leading" secondItem="tZs-WW-TWt" secondAttribute="leading" constant="15" id="ygp-Vm-AqF"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
