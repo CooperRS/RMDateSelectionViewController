@@ -331,17 +331,17 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.nowButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.nowButton.backgroundColor = [UIColor clearColor];
-    self.nowButton.layer.cornerRadius = 5;
+    self.nowButton.layer.cornerRadius = 4;
     self.nowButton.clipsToBounds = YES;
     self.nowButton.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.datePicker.layer.cornerRadius = 5;
+    self.datePicker.layer.cornerRadius = 4;
     self.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.cancelButton setTitle:[RMDateSelectionViewController localizedTitleForCancelButton] forState:UIControlStateNormal];
     [self.cancelButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    self.cancelButton.layer.cornerRadius = 5;
+    self.cancelButton.layer.cornerRadius = 4;
     self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.cancelButton setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     
@@ -349,7 +349,7 @@ static NSString *_localizedSelectTitle = @"Select";
     [self.selectButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.selectButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.selectButton.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
-    self.selectButton.layer.cornerRadius = 5;
+    self.selectButton.layer.cornerRadius = 4;
     self.selectButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.selectButton setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
 }
@@ -621,10 +621,12 @@ static NSString *_localizedSelectTitle = @"Select";
     if(_disableMotionEffects != newDisableMotionEffects) {
         _disableMotionEffects = newDisableMotionEffects;
         
-        if(newDisableMotionEffects) {
-            [self removeMotionEffects];
-        } else {
-            [self addMotionEffects];
+        if([self isViewLoaded]) {
+            if(newDisableMotionEffects) {
+                [self removeMotionEffects];
+            } else {
+                [self addMotionEffects];
+            }
         }
     }
 }
@@ -683,10 +685,12 @@ static NSString *_localizedSelectTitle = @"Select";
     if(_backgroundColor != newBackgroundColor) {
         _backgroundColor = newBackgroundColor;
         
-        self.titleLabelContainer.backgroundColor = newBackgroundColor;
-        self.nowButton.backgroundColor = newBackgroundColor;
-        self.datePickerContainer.backgroundColor = newBackgroundColor;
-        self.cancelAndSelectButtonContainer.backgroundColor = newBackgroundColor;
+        //if([self isViewLoaded]) {
+            self.titleLabelContainer.backgroundColor = newBackgroundColor;
+            self.nowButton.backgroundColor = newBackgroundColor;
+            self.datePickerContainer.backgroundColor = newBackgroundColor;
+            self.cancelAndSelectButtonContainer.backgroundColor = newBackgroundColor;
+        //}
     }
 }
 
