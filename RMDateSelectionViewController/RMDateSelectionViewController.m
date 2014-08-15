@@ -540,7 +540,7 @@ static NSString *_localizedSelectTitle = @"Select";
     }
     
     if(self.backgroundColor) {
-        if(!self.disableBlurEffects) {
+        if(NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects) {
             [((UIVisualEffectView *)self.titleLabelContainer).contentView setBackgroundColor:self.backgroundColor];
             [((UIVisualEffectView *)self.nowButtonContainer).contentView setBackgroundColor:self.backgroundColor];
             [((UIVisualEffectView *)self.datePickerContainer).contentView setBackgroundColor:self.backgroundColor];
@@ -693,7 +693,7 @@ static NSString *_localizedSelectTitle = @"Select";
         _backgroundColor = newBackgroundColor;
         
         if([self isViewLoaded]) {
-            if(!self.disableBlurEffects &&
+            if(NSClassFromString(@"UIVisualEffectView") && !self.disableBlurEffects &&
                [self.titleLabelContainer isKindOfClass:[UIVisualEffectView class]] &&
                [self.nowButtonContainer isKindOfClass:[UIVisualEffectView class]] &&
                [self.datePickerContainer isKindOfClass:[UIVisualEffectView class]] &&
