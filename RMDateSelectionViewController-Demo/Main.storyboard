@@ -17,14 +17,14 @@
                         <sections>
                             <tableViewSection id="RpU-EU-7Kk">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="P5c-K8-PSR" detailTextLabel="jPP-2K-vHN" style="IBUITableViewCellStyleValue1" id="FPp-0L-HGH">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="P5c-K8-PSR" detailTextLabel="jPP-2K-vHN" style="IBUITableViewCellStyleValue1" id="FPp-0L-HGH">
                                         <rect key="frame" x="0.0" y="99" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FPp-0L-HGH" id="7yb-ll-4G7">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Open date selection" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P5c-K8-PSR">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Show date selection view controller…" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="P5c-K8-PSR">
                                                     <rect key="frame" x="15" y="11" width="155" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -43,7 +43,10 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Colors" id="Q44-u3-nQ0">
+                            <tableViewSection headerTitle="Colors and Effects" id="Q44-u3-nQ0">
+                                <string key="footerTitle">The black version only works if blur effects are enabled. As blur effects require iOS 8 and later, the black version also requires iOS 8 and later.
+
+If your need a black version on iOS 7, take a look at the demo code.</string>
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SBc-EQ-rx8">
                                         <rect key="frame" x="0.0" y="207" width="320" height="44"/>
@@ -72,7 +75,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Effects" id="vsH-Op-pEw">
+                            <tableViewSection headerTitle="" footerTitle="Blur effects are only available on iOS 8 and later." id="vsH-Op-pEw">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="1yw-Ch-44m">
                                         <rect key="frame" x="0.0" y="207" width="320" height="44"/>
