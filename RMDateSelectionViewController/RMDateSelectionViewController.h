@@ -26,20 +26,14 @@
 
 #import <UIKit/UIKit.h>
 
-/**
- `RMDateSelectionViewController` is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashon.
- */
-
 @class RMDateSelectionViewController;
 
 /**
  This block is called when the user selects a certain date if blocks are used.
  
  @param vc The date selection view controller that just finished selecting a date.
- 
  @param aDate The selected date.
  */
-
 typedef void (^RMDateSelectionBlock)(RMDateSelectionViewController *vc, NSDate *aDate);
 
 /**
@@ -49,99 +43,115 @@ typedef void (^RMDateSelectionBlock)(RMDateSelectionViewController *vc, NSDate *
   */
 typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 
+/**
+ *  These methods are used to inform the [delegate]([RMDateSelectionViewController delegate]) of an instance of RMDateSelectionViewController about the status of the date selection view controller.
+ */
 @protocol RMDateSelectionViewControllerDelegate <NSObject>
 
+/// @name Cancel and Select
+
 /**
- This delegate method is called when the user selects a certain date.
+ This method is called when the user selects a certain date.
  
- @param vc The date selection view controller that just finished selecting a date.
- 
- @param aDate The selected date.
+ @param vc      The date selection view controller that just finished selecting a date.
+ @param aDate   The selected date.
  */
 - (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate;
 
 /**
- This delegate method is called when the user selects the cancel button or taps the darkened background (if `backgroundTapsDisabled` is set to NO).
+ This method is called when the user selects the cancel button or taps the darkened background (if the property [backgroundTapsDisabled]([RMDateSelectionViewController backgroundTapsDisabled]) of RMDateSelectionViewController returns NO).
  
- @param vc The date selection view controller that just canceled.
+ @param vc  The date selection view controller that just canceled.
  */
 - (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc;
 
 @optional
 
+/// @name Additional Buttons
+
 /**
- *  This delegate is called when the now button of the date selection view controller has been pressed.
+ *  This method is called when the now button of the date selection view controller has been pressed.
  *  
- *  Implementation of this delegate is optional. If you choose to implement it, you are responsible to do whatever should be done when the now button has been pressed. If you do not choose to implement it, the default behavior is to set the date selection control to the current date.
+ *  @warning Implementation of this method is optional. If you choose to implement it, you are responsible to do whatever should be done when the now button has been pressed. If you do not choose to implement it, the default behavior is to set the date selection control to the current date.
  *
- *  @param vc The date selection view controller whose now button has been pressed.
+ *  @param vc   The date selection view controller whose now button has been pressed.
  */
 - (void)dateSelectionViewControllerNowButtonPressed:(RMDateSelectionViewController *)vc;
 
 @end
 
+/**
+ *  RMDateSelectionViewController is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashon. When a RMDateSelectionViewController is shown the user gets the opportunity to select a date using a UIDatePicker.
+ *
+ *  RMDateSelectionViewController supports bouncing effects when animating the date selection view controller. In addition, motion effects are supported while showing the date selection view controller. Both effects can be disabled by using the properties called disableBouncingWhenShowing and disableMotionEffects.
+ *
+ *  On iOS 8 and later Apple opened up their API for blurring the background of UIViews. RMDateSelectionViewController makes use of this feature. The type of the blur effect can be changed by using the blurEffectStyle property. If you want to disbale the blur effect you can do so by using the disableBlurEffects property.
+ *
+ *  @warning RMDateSelectionViewController is not designed to be reused. Each time you want to display a RMDateSelectionViewController a new instance should be created. If you want to set a specific date before displaying, you can do so by using the datePicker property.
+ */
 @interface RMDateSelectionViewController : UIViewController
 
-/// @name Properties
+/// @name Getting an Instance
 
 /**
- Will return the instance of UIDatePicker that is used.
+ *  This returns a new instance of RMDateSelectionViewController.
+ *
+ *  @warning Always use this class method to get an instance. Do not initialize an instance yourself.
+ *
+ *  @return  Returns a new instance of RMDateSelectionViewController
+ */
++ (instancetype)dateSelectionController;
+
+/// @name Localization
+
+/**
+ *  Set a localized title for the now button. Default title is 'Now'.
+ *
+ *  @param newLocalizedTitle    The new localized title for the now button.
+ */
++ (void)setLocalizedTitleForNowButton:(NSString *)newLocalizedTitle;
+
+/**
+ *  Set a localized title for the cancel button. Default title is 'Cancel'.
+ *
+ *  @param newLocalizedTitle    The new localized title for the cancel button.
+ */
++ (void)setLocalizedTitleForCancelButton:(NSString *)newLocalizedTitle;
+
+/**
+ *  Set a localized title for the select button. Default is 'Select'.
+ *
+ *  @param newLocalizedTitle    The new localized title for the select button.
+ */
++ (void)setLocalizedTitleForSelectButton:(NSString *)newLocalizedTitle;
+
+/// @name Delegate
+
+/**
+ *  Used to set the delegate.
+ *
+ *  The delegate must conform to the RMDateSelectionViewControllerDelegate protocol.
+ */
+@property (weak) id<RMDateSelectionViewControllerDelegate> delegate;
+
+/// @name User Interface
+
+/**
+ *  Will return the instance of UIDatePicker that is used.
  */
 @property (nonatomic, readonly) UIDatePicker *datePicker;
 
 /**
- Will return the label that is used as a title for the picker. You can use this property to set a title and to customize the appearance of the title.
- 
- If you want to set a title, be sure to set it before showing the picker view controller as otherwise the title will not be shown.
+ *  Will return the label that is used as a title for the picker. You can use this property to set a title and to customize the appearance of the title.
+ *
+ *  @warning If you want to set a title, be sure to set it before showing the picker view controller as otherwise the title will not be shown.
  */
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 
 /**
- Used to set the delegate.
- 
- The delegate must conform to the `RMDateSelectionViewControllerDelegate` protocol.
- */
-@property (weak) id<RMDateSelectionViewControllerDelegate> delegate;
-
-/**
- Used to set the text color of the buttons but not the date picker.
- */
-@property (strong, nonatomic) UIColor *tintColor;
-
-/**
- Used to set the background color.
- */
-@property (strong, nonatomic) UIColor *backgroundColor;
-
-/**
- *  Used to set the background color when the user selets a button.
- */
-@property (strong, nonatomic) UIColor *selectedBackgroundColor;
-
-/**
- Used to enable or disable motion effects. Default value is NO.
- */
-@property (assign, nonatomic) BOOL disableMotionEffects;
-
-/**
- Used to enable or disable bouncing effects when sliding in the date selection view. Default value is NO.
- */
-@property (assign, nonatomic) BOOL disableBouncingWhenShowing;
-
-/**
- Used to enable or disable blurring the date selection view. Default value is NO.
- */
-@property (assign, nonatomic) BOOL disableBlurEffects;
-
-/**
- *  Used to choose a particular blur effect style (default value is UIBlurEffectStyleExtraLight). Ignored if blur effects are disabled.
- */
-@property (assign, nonatomic) UIBlurEffectStyle blurEffectStyle;
-
-/**
- When YES the now button is hidden. Default value is NO.
- 
- Must be set before -[RMDateSelectionViewController show] or -[RMDateSelectionViewController showFromViewController:] is called or otherwise this property has no effect.
+ *  When YES the now button is hidden. Default value is NO.
+ *
+ *  @warning If you want to change this property you must do this before showing the RMDateSelectionViewController or otherwise setting this property has no effect.
  */
 @property (assign, nonatomic) BOOL hideNowButton;
 
@@ -150,47 +160,62 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 @property (assign, nonatomic) BOOL backgroundTapsDisabled;
 
-/// @name Class Methods
+/// @name Appearance
 
 /**
- This returns a new instance of `RMDateSelectionViewController`. Always use this class method to get an instance. Do not initialize an instance yourself.
- 
- @return Returns a new instance of `RMDateSelectionViewController`
+ *  Used to set the text color of the buttons but not the date picker.
  */
-+ (instancetype)dateSelectionController;
+@property (strong, nonatomic) UIColor *tintColor;
 
 /**
- Set a localized title for the select button. Default is 'Now'.
+ *  Used to set the background color.
  */
-+ (void)setLocalizedTitleForNowButton:(NSString *)newLocalizedTitle;
+@property (strong, nonatomic) UIColor *backgroundColor;
 
 /**
- Set a localized title for the select button. Default is 'Cancel'.
+ *  Used to set the background color when the user selets a button.
  */
-+ (void)setLocalizedTitleForCancelButton:(NSString *)newLocalizedTitle;
+@property (strong, nonatomic) UIColor *selectedBackgroundColor;
+
+/// @name Effects
 
 /**
- Set a localized title for the select button. Default is 'Select'.
+ *  Used to enable or disable motion effects. Default value is NO.
  */
-+ (void)setLocalizedTitleForSelectButton:(NSString *)newLocalizedTitle;
+@property (assign, nonatomic) BOOL disableMotionEffects;
 
-/// @name Instance Methods
+/**
+ *  Used to enable or disable bouncing effects when sliding in the date selection view. Default value is NO.
+ */
+@property (assign, nonatomic) BOOL disableBouncingWhenShowing;
+
+/**
+ *  Used to enable or disable blurring the date selection view. Default value is NO.
+ */
+@property (assign, nonatomic) BOOL disableBlurEffects;
+
+/**
+ *  Used to choose a particular blur effect style (default value is UIBlurEffectStyleExtraLight). The value ir ignored if blur effects are disabled.
+ */
+@property (assign, nonatomic) UIBlurEffectStyle blurEffectStyle;
+
+/// @name Showing
 
 /**
  *  This shows the date selection view controller on top of every other view controller using a new UIWindow. The RMDateSelectionViewController will be added as a child view controller of the UIWindows root view controller. The background of the root view controller is used to darken the views behind the RMDateSelectionViewController.
  *
- *  This method is the preferred method for showing a RMDateSelectionViewController on iPhones and iPads. Nevertheless, there are situations where this method is not sufficient on iPads. An example for this is that the RMDateSelectionViewController shall be shown within an UIPopover. This can be achieved by using -[RMDateSelectionViewController showFromViewController:].
+ *  This method is the preferred method for showing a RMDateSelectionViewController on iPhones and iPads. Nevertheless, there are situations where this method is not sufficient on iPads. An example for this is that the RMDateSelectionViewController shall be shown within an UIPopover. This can be achieved by using [showFromViewController:]([RMDateSelectionViewController showFromViewController:]).
  *
- *  Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
+ *  @warning Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
  */
 - (void)show;
 
 /**
  *  This shows the date selection view controller on top of every other view controller using a new UIWindow. The RMDateSelectionViewController will be added as a child view controller of the UIWindows root view controller. The background of the root view controller is used to darken the views behind the RMDateSelectionViewController.
  *
- *  This method is the preferred method for showing a RMDateSelectionViewController on iPhones and iPads when a block based API is preferred. Nevertheless, there are situations where this method is not sufficient on iPads. An example for this is that the RMDateSelectionViewController shall be shown within an UIPopover. This can be achieved by using -[RMDateSelectionViewController showFromViewController:withSelectionHandler:andCancelHandler:].
+ *  After a date has been selected the selection block will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding methods will be called, too.
  *
- *  After a date has been selected the selectionBlock will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding delegate methods will be called, too.
+ *  This method is the preferred method for showing a RMDateSelectionViewController on iPhones and iPads when a block based API is preferred. Nevertheless, there are situations where this method is not sufficient on iPads. An example for this is that the RMDateSelectionViewController shall be shown within an UIPopover. This can be achieved by using [showFromViewController:withSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showFromViewController:withSelectionHandler:andCancelHandler:]).
  *
  *  @param selectionBlock The block to call when the user selects a date.
  *  @param cancelBlock    The block to call when the user cancels the selection.
@@ -198,22 +223,22 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 - (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
 
 /**
- *  This shows the date selection view controller as child view controller of `aViewController`. The content of `aViewController` will be darkened and the date selection view controller will be shown on top.
+ *  This shows the date selection view controller as child view controller of the view controller you passed in as parameter. The content of this view controller will be darkened and the date selection view controller will be shown on top.
  *
- *  This method should only be used on iPads in situations where -[RMDateSelectionViewController show:] is not sufficient (for example, when the RMDateSelectionViewController shoud be shown within an UIPopover). If -[RMDateSelectionViewController show:] is sufficient, please use it!
+ *  @warning This method should only be used on iPads in situations where [show]([RMDateSelectionViewController show]) is not sufficient (for example, when the RMDateSelectionViewController shoud be shown within an UIPopover). If [show]([RMDateSelectionViewController show]) is sufficient, please use it!
  *
- *  Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
+ *  @warning Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
  *
  *  @param aViewController The parent view controller of the RMDateSelectionViewController.
  */
 - (void)showFromViewController:(UIViewController *)aViewController;
 
 /**
- *  This shows the date selection view controller as child view controller of `aViewController`. The content of `aViewController` will be darkened and the date selection view controller will be shown on top.
+ *  This shows the date selection view controller as child view controller of the view controller you passed in as parameter. The content of this view controller will be darkened and the date selection view controller will be shown on top.
  *
- *  This method should only be used on iPads in situations where -[RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:] is not sufficient (for example, when the RMDateSelectionViewController shoud be shown within an UIPopover). If -[RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:] is sufficient, please use it!
+ *  After a date has been selected the selection block will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding methods will be called, too.
  *
- *  After a date has been selected the selectionBlock will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding delegate methods will be called, too.
+ *  @warning This method should only be used on iPads in situations where [showWithSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:]) is not sufficient (for example, when the RMDateSelectionViewController shoud be shown within an UIPopover). If [showWithSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:]) is sufficient, please use it!
  *
  *  @param aViewController The parent view controller of the RMDateSelectionViewController.
  *  @param selectionBlock  The block to call when the user selects a date.
@@ -221,8 +246,10 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 - (void)showFromViewController:(UIViewController *)aViewController withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
 
+/// @name Dismissing
+
 /**
- This will remove the date selection view controller from whatever view controller it is currently shown in.
+ *  This will dismiss the date selection view controller and remove it from the view hierarchy.
  */
 - (void)dismiss;
 
