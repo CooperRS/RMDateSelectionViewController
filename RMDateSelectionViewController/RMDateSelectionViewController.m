@@ -312,12 +312,12 @@ static NSString *_localizedSelectTitle = @"Select";
 - (void)setupUIElements {
     //Instantiate elements
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    self.nowButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.nowButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     
     self.cancelAndSelectButtonSeperator = [[UIView alloc] initWithFrame:CGRectZero];
-    self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.selectButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.selectButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
     //Setup properties of elements
     self.titleLabel.backgroundColor = [UIColor clearColor];
@@ -328,7 +328,6 @@ static NSString *_localizedSelectTitle = @"Select";
     self.titleLabel.numberOfLines = 0;
     
     [self.nowButton setTitle:[RMDateSelectionViewController localizedTitleForNowButton] forState:UIControlStateNormal];
-    [self.nowButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.nowButton.backgroundColor = [UIColor clearColor];
     self.nowButton.layer.cornerRadius = 4;
@@ -339,14 +338,12 @@ static NSString *_localizedSelectTitle = @"Select";
     self.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.cancelButton setTitle:[RMDateSelectionViewController localizedTitleForCancelButton] forState:UIControlStateNormal];
-    [self.cancelButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.cancelButton.layer.cornerRadius = 4;
     self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.cancelButton setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     
     [self.selectButton setTitle:[RMDateSelectionViewController localizedTitleForSelectButton] forState:UIControlStateNormal];
-    [self.selectButton setTitleColor:[UIColor colorWithRed:0 green:122./255. blue:1 alpha:1] forState:UIControlStateNormal];
     [self.selectButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.selectButton.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
     self.selectButton.layer.cornerRadius = 4;
@@ -533,10 +530,18 @@ static NSString *_localizedSelectTitle = @"Select";
     
     [self setupConstraints];
     
-    if(self.tintColor) {
-        [self.nowButton setTitleColor:self.tintColor forState:UIControlStateNormal];
-        [self.cancelButton setTitleColor:self.tintColor forState:UIControlStateNormal];
-        [self.selectButton setTitleColor:self.tintColor forState:UIControlStateNormal];
+    if(self.disableBlurEffects) {
+        if(self.tintColor) {
+            self.nowButton.tintColor = self.tintColor;
+            self.datePicker.tintColor = self.tintColor;
+            self.cancelButton.tintColor = self.tintColor;
+            self.selectButton.tintColor = self.tintColor;
+        } else {
+            self.nowButton.tintColor = [UIColor colorWithRed:0 green:122./255. blue:1 alpha:1];
+            self.datePicker.tintColor = nil;
+            self.cancelButton.tintColor = [UIColor colorWithRed:0 green:122./255. blue:1 alpha:1];
+            self.selectButton.tintColor = [UIColor colorWithRed:0 green:122./255. blue:1 alpha:1];
+        }
     }
     
     if(self.backgroundColor) {
@@ -682,9 +687,10 @@ static NSString *_localizedSelectTitle = @"Select";
     if(_tintColor != newTintColor) {
         _tintColor = newTintColor;
         
-        [self.nowButton setTitleColor:newTintColor forState:UIControlStateNormal];
-        [self.cancelButton setTitleColor:newTintColor forState:UIControlStateNormal];
-        [self.selectButton setTitleColor:newTintColor forState:UIControlStateNormal];
+        self.nowButton.tintColor = newTintColor;
+        self.datePicker.tintColor = newTintColor;
+        self.cancelButton.tintColor = newTintColor;
+        self.selectButton.tintColor = newTintColor;
     }
 }
 
