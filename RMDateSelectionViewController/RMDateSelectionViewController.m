@@ -329,6 +329,7 @@ static NSString *_localizedSelectTitle = @"Select";
     
     [self.nowButton setTitle:[RMDateSelectionViewController localizedTitleForNowButton] forState:UIControlStateNormal];
     [self.nowButton addTarget:self action:@selector(nowButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.nowButton.titleLabel.font = [UIFont systemFontOfSize:[UIFont buttonFontSize]];
     self.nowButton.backgroundColor = [UIColor clearColor];
     self.nowButton.layer.cornerRadius = 4;
     self.nowButton.clipsToBounds = YES;
@@ -339,6 +340,7 @@ static NSString *_localizedSelectTitle = @"Select";
     
     [self.cancelButton setTitle:[RMDateSelectionViewController localizedTitleForCancelButton] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:[UIFont buttonFontSize]];
     self.cancelButton.layer.cornerRadius = 4;
     self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.cancelButton setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
