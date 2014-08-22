@@ -23,6 +23,7 @@
 		CAE2906E182E287500272C55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAE2906C182E287500272C55 /* InfoPlist.strings */; };
 		CAE29078182E2A2F00272C55 /* NSDate+Rounding-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */; };
 		CAE29079182E2BD500272C55 /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
+		CAFFF2C019A732C400432B37 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFFF2BF19A732C400432B37 /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		CAE2906D182E287500272C55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CAE29071182E287500272C55 /* RMDateSelectionViewController-Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RMDateSelectionViewController-Tests-Prefix.pch"; sourceTree = "<group>"; };
 		CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Rounding-Tests.m"; sourceTree = "<group>"; };
+		CAFFF2BF19A732C400432B37 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				CAA60A4B181C1A0200198490 /* RMAppDelegate.h */,
 				CAA60A4C181C1A0200198490 /* RMAppDelegate.m */,
 				CAA60A77181C1ACF00198490 /* Main.storyboard */,
+				CAFFF2BF19A732C400432B37 /* Main_iPad.storyboard */,
 				CAA60A51181C1A0200198490 /* RMViewController.h */,
 				CAA60A52181C1A0200198490 /* RMViewController.m */,
 				CAA60A54181C1A0200198490 /* Images.xcassets */,
@@ -254,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAFFF2C019A732C400432B37 /* Main_iPad.storyboard in Resources */,
 				CAA60A55181C1A0200198490 /* Images.xcassets in Resources */,
 				CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */,
 			);
@@ -391,6 +395,7 @@
 				GCC_PREFIX_HEADER = "RMDateSelectionViewController-Demo/RMDateSelectionViewController-Demo-Prefix.pch";
 				INFOPLIST_FILE = "RMDateSelectionViewController-Demo/RMDateSelectionViewController-Demo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -404,6 +409,7 @@
 				GCC_PREFIX_HEADER = "RMDateSelectionViewController-Demo/RMDateSelectionViewController-Demo-Prefix.pch";
 				INFOPLIST_FILE = "RMDateSelectionViewController-Demo/RMDateSelectionViewController-Demo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

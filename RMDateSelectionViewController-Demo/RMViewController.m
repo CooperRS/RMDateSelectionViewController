@@ -62,16 +62,36 @@
     dateSelectionVC.datePicker.minuteInterval = 5;
     dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     
-    //The following lines show the two ways to show the date selection view controller:
-    // 1. Just show the date selection view controller (make sure the delegate property is assigned)
-    [dateSelectionVC show];
-    
-    // 2. Instead of using a delegate you can also pass blocks when showing the date selection view controller
-    //[dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
-    //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
-    //} andCancelHandler:^(RMDateSelectionViewController *vc) {
-    //    NSLog(@"Date selection was canceled (with block)");
-    //}];
+    //The example project is universal. So we first need to check whether we run on an iPhone or an iPad.
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        //OK, running on an iPhone. The following lines demonstrate the two ways to show the date selection view controller on iPhones:
+        //(Note: These two methods also work an iPads.)
+        
+        // 1. Just show the date selection view controller (make sure the delegate property is assigned)
+        [dateSelectionVC show];
+        
+        // 2. Instead of using a delegate you can also pass blocks when showing the date selection view controller
+        //[dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
+        //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
+        //} andCancelHandler:^(RMDateSelectionViewController *vc) {
+        //    NSLog(@"Date selection was canceled (with block)");
+        //}];
+    } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        //OK, running on an iPad. The following lines demonstrate the two special ways of showing the date selection view controller on iPads:
+        
+        // 1. Show the date selection view controller from a particular view controller (make sure the delegate property is assigned).
+        //    This method can be used to show the date selection view controller within popovers.
+        //    (Note: We do not use self as the view controller, as showing a date selection view controller from a table view controller
+        //           is not supported due to UIKit limitations.)
+        [dateSelectionVC showFromViewController:self.navigationController];
+        
+        // 2. As with the two ways of showing the date selection view controller on iPhones, we can also use a blocks based API.
+        //[dateSelectionVC showFromViewController:self.navigationController withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
+        //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
+        //} andCancelHandler:^(RMDateSelectionViewController *vc) {
+        //    NSLog(@"Date selection was canceled (with block)");
+        //}];
+    }
 }
 
 #pragma mark - UITableView Delegates
