@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="zMW-Zw-ivM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.8" systemVersion="14A329f" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="Lcu-AB-Z8e">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
-        <capability name="Constraints with attributes relative to the layout margin" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Demo-->
@@ -181,10 +180,10 @@ If your need a black version on iOS 7, take a look at the demo code.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M86-D7-fx0">
-                                <rect key="frame" x="20" y="428" width="728" height="169"/>
+                                <rect key="frame" x="0.0" y="428" width="768" height="169"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMo-gd-JzQ">
-                                        <rect key="frame" x="0.0" y="29" width="728" height="102"/>
+                                        <rect key="frame" x="0.0" y="29" width="768" height="102"/>
                                         <string key="text">In general, RMDateSelectionViewController works on the iPad just like on the iPhone. But RMDateSelectionViewController has some special features when it comes to show the date selection view controller within popovers.
 
 To check it out, open a new popover using the button below.</string>
@@ -193,13 +192,13 @@ To check it out, open a new popover using the button below.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to RMDateSelectionViewController Demo on the iPad!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzK-6r-gaY">
-                                        <rect key="frame" x="0.0" y="0.0" width="728" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tBj-Fs-mpM">
-                                        <rect key="frame" x="309" y="139" width="111" height="30"/>
+                                        <rect key="frame" x="329" y="139" width="111" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="ENY-5n-CUp"/>
                                         </constraints>
@@ -229,9 +228,9 @@ To check it out, open a new popover using the button below.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="M86-D7-fx0" firstAttribute="leading" secondItem="uQw-PW-y37" secondAttribute="leadingMargin" id="Fza-i5-Cgk"/>
+                            <constraint firstItem="M86-D7-fx0" firstAttribute="leading" secondItem="uQw-PW-y37" secondAttribute="leading" id="Fza-i5-Cgk"/>
                             <constraint firstAttribute="centerY" secondItem="M86-D7-fx0" secondAttribute="centerY" id="Skb-3H-D8e"/>
-                            <constraint firstItem="M86-D7-fx0" firstAttribute="trailing" secondItem="uQw-PW-y37" secondAttribute="trailingMargin" id="bQv-M3-2bm"/>
+                            <constraint firstItem="M86-D7-fx0" firstAttribute="trailing" secondItem="uQw-PW-y37" secondAttribute="trailing" id="bQv-M3-2bm"/>
                         </constraints>
                     </view>
                 </viewController>

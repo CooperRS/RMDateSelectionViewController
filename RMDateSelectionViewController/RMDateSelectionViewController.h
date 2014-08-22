@@ -248,6 +248,14 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 - (void)showFromViewController:(UIViewController *)aViewController withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
 
+/**
+ *  <#Description#>
+ *
+ *  @param aRect <#aRect description#>
+ *  @param aView <#aView description#>
+ */
+- (void)showFromRect:(CGRect)aRect inView:(UIView *)aView;
+
 /// @name Dismissing
 
 /**

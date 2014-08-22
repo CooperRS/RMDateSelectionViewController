@@ -134,8 +134,15 @@
 #import "RMDateSelectionViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+typedef enum {
+    RMDateSelectionViewControllerPresentationTypeWindow,
+    RMDateSelectionViewControllerPresentationTypeViewController,
+    RMDateSelectionViewControllerPresentationTypePopover
+} RMDateSelectionViewControllerPresentationType;
+
 @interface RMDateSelectionViewController ()
 
+@property (nonatomic, assign) RMDateSelectionViewControllerPresentationType presentationType;
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *rootViewController;
 @property (nonatomic, strong) UIView *backgroundView;
@@ -205,19 +212,21 @@ static NSString *_localizedSelectTitle = @"Select";
     _localizedSelectTitle = newLocalizedTitle;
 }
 
-+ (void)showDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController usingWindow:(BOOL)extraWindow {
-    if(extraWindow) {
++ (void)showDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController animated:(BOOL)animated {
+    if(aDateSelectionViewController.presentationType == RMDateSelectionViewControllerPresentationTypeWindow) {
         [(RMNonRotatingDateSelectionViewController *)aDateSelectionViewController.rootViewController updateUIForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation animated:NO];
         [aDateSelectionViewController.window makeKeyAndVisible];
     }
     
-    aDateSelectionViewController.backgroundView.alpha = 0;
-    [aDateSelectionViewController.rootViewController.view addSubview:aDateSelectionViewController.backgroundView];
-    
-    [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-    [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
-    [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-    [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+    if(aDateSelectionViewController.presentationType != RMDateSelectionViewControllerPresentationTypePopover) {
+        aDateSelectionViewController.backgroundView.alpha = 0;
+        [aDateSelectionViewController.rootViewController.view addSubview:aDateSelectionViewController.backgroundView];
+        
+        [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
+        [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
+        [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
+        [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
+    }
     
     [aDateSelectionViewController willMoveToParentViewController:aDateSelectionViewController.rootViewController];
     [aDateSelectionViewController viewWillAppear:YES];
@@ -256,19 +265,25 @@ static NSString *_localizedSelectTitle = @"Select";
     
     [aDateSelectionViewController.rootViewController.view setNeedsUpdateConstraints];
     
-    CGFloat damping = 1.0f;
-    CGFloat duration = 0.3f;
-    if(!aDateSelectionViewController.disableBouncingWhenShowing) {
-        damping = 0.6f;
-        duration = 1.0f;
-    }
-    
-    [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:1 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
-        aDateSelectionViewController.backgroundView.alpha = 1;
+    if(animated) {
+        CGFloat damping = 1.0f;
+        CGFloat duration = 0.3f;
+        if(!aDateSelectionViewController.disableBouncingWhenShowing) {
+            damping = 0.6f;
+            duration = 1.0f;
+        }
+        
+        [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:1 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
+            aDateSelectionViewController.backgroundView.alpha = 1;
+            
+            [aDateSelectionViewController.rootViewController.view layoutIfNeeded];
+        } completion:^(BOOL finished) {
+        }];
+    } else {
+        aDateSelectionViewController.backgroundView.alpha = 0;
         
         [aDateSelectionViewController.rootViewController.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-    }];
+    }
 }
 
 + (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController {
@@ -761,9 +776,11 @@ static NSString *_localizedSelectTitle = @"Select";
 - (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
     self.selectedDateBlock = selectionBlock;
     self.cancelBlock = cancelBlock;
+    
+    self.presentationType = RMDateSelectionViewControllerPresentationTypeWindow;
     self.rootViewController = self.window.rootViewController;
     
-    [RMDateSelectionViewController showDateSelectionViewController:self usingWindow:YES];
+    [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
 }
 
 - (void)showFromViewController:(UIViewController *)aViewController {
@@ -783,9 +800,30 @@ static NSString *_localizedSelectTitle = @"Select";
     
     self.selectedDateBlock = selectionBlock;
     self.cancelBlock = cancelBlock;
+    
+    self.presentationType = RMDateSelectionViewControllerPresentationTypeViewController;
     self.rootViewController = aViewController;
     
-    [RMDateSelectionViewController showDateSelectionViewController:self usingWindow:NO];
+    [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
+}
+
+- (void)showFromRect:(CGRect)aRect inView:(UIView *)aView {
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        UIViewController *container = [[UIViewController alloc] init];
+        
+        self.presentationType = RMDateSelectionViewControllerPresentationTypePopover;
+        self.rootViewController = container;
+        
+        [RMDateSelectionViewController showDateSelectionViewController:self animated:NO];
+        
+        UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:container];
+        popoverController.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        popoverController.popoverContentSize = CGSizeMake(320, self.cancelAndSelectButtonContainer.frame.origin.y + self.cancelAndSelectButtonContainer.frame.size.height + 35);
+        
+        [popoverController presentPopoverFromRect:aRect inView:aView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        [self show];
+    }
 }
 
 - (void)dismiss {

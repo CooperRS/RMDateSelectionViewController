@@ -83,7 +83,7 @@
         //    This method can be used to show the date selection view controller within popovers.
         //    (Note: We do not use self as the view controller, as showing a date selection view controller from a table view controller
         //           is not supported due to UIKit limitations.)
-        [dateSelectionVC showFromViewController:self.navigationController];
+        //[dateSelectionVC showFromViewController:self.navigationController];
         
         // 2. As with the two ways of showing the date selection view controller on iPhones, we can also use a blocks based API.
         //[dateSelectionVC showFromViewController:self.navigationController withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
@@ -91,6 +91,8 @@
         //} andCancelHandler:^(RMDateSelectionViewController *vc) {
         //    NSLog(@"Date selection was canceled (with block)");
         //}];
+        
+        [dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] inView:self.view];
     }
 }
 
