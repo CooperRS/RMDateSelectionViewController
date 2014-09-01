@@ -794,10 +794,10 @@ static NSString *_localizedSelectTitle = @"Select";
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         if([aViewController isKindOfClass:[UITableViewController class]]) {
             if(aViewController.navigationController) {
-                NSLog(@"Warning: -[RMDateSelectionViewController showFromViewController:] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.");
+                NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.", NSStringFromSelector(_cmd));
                 aViewController = aViewController.navigationController;
             } else {
-                NSLog(@"Error: -[RMDateSelectionViewController showFromViewController:] has been called with an instance of UITableViewController as argument. Showing the date selection view controller from an instance of UITableViewController is not possible due to some internals of UIKit. To prevent your app from crashing, showing the date selection view controller will be canceled.");
+                NSLog(@"Error: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Showing the date selection view controller from an instance of UITableViewController is not possible due to some internals of UIKit. To prevent your app from crashing, showing the date selection view controller will be canceled.", NSStringFromSelector(_cmd));
                 return;
             }
         }
@@ -810,6 +810,7 @@ static NSString *_localizedSelectTitle = @"Select";
         
         [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
     } else {
+        NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called on an iPhone. This method is iPad only so we will use -[RMDateSelectionViewController %@] instead.", NSStringFromSelector(_cmd), NSStringFromSelector(@selector(showWithSelectionHandler:andCancelHandler:)));
         [self showWithSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
     }
 }
@@ -833,6 +834,7 @@ static NSString *_localizedSelectTitle = @"Select";
         
         [self.popover presentPopoverFromRect:aRect inView:aView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {
+        NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called on an iPhone. This method is iPad only so we will use -[RMDateSelectionViewController %@] instead.", NSStringFromSelector(_cmd), NSStringFromSelector(@selector(showWithSelectionHandler:andCancelHandler:)));
         [self showWithSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
     }
 }
