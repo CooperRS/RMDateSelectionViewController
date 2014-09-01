@@ -791,27 +791,38 @@ static NSString *_localizedSelectTitle = @"Select";
 }
 
 - (void)showFromViewController:(UIViewController *)aViewController withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
-    if([aViewController isKindOfClass:[UITableViewController class]]) {
-        if(aViewController.navigationController) {
-            NSLog(@"Warning: -[RMDateSelectionViewController showFromViewController:] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.");
-            aViewController = aViewController.navigationController;
-        } else {
-            NSLog(@"Error: -[RMDateSelectionViewController showFromViewController:] has been called with an instance of UITableViewController as argument. Showing the date selection view controller from an instance of UITableViewController is not possible due to some internals of UIKit. To prevent your app from crashing, showing the date selection view controller will be canceled.");
-            return;
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        if([aViewController isKindOfClass:[UITableViewController class]]) {
+            if(aViewController.navigationController) {
+                NSLog(@"Warning: -[RMDateSelectionViewController showFromViewController:] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.");
+                aViewController = aViewController.navigationController;
+            } else {
+                NSLog(@"Error: -[RMDateSelectionViewController showFromViewController:] has been called with an instance of UITableViewController as argument. Showing the date selection view controller from an instance of UITableViewController is not possible due to some internals of UIKit. To prevent your app from crashing, showing the date selection view controller will be canceled.");
+                return;
+            }
         }
+        
+        self.selectedDateBlock = selectionBlock;
+        self.cancelBlock = cancelBlock;
+        
+        self.presentationType = RMDateSelectionViewControllerPresentationTypeViewController;
+        self.rootViewController = aViewController;
+        
+        [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
+    } else {
+        [self showWithSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
     }
-    
-    self.selectedDateBlock = selectionBlock;
-    self.cancelBlock = cancelBlock;
-    
-    self.presentationType = RMDateSelectionViewControllerPresentationTypeViewController;
-    self.rootViewController = aViewController;
-    
-    [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
 }
 
 - (void)showFromRect:(CGRect)aRect inView:(UIView *)aView {
+    [self showFromRect:aRect inView:aView withSelectionHandler:nil andCancelHandler:nil];
+}
+
+- (void)showFromRect:(CGRect)aRect inView:(UIView *)aView withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        self.selectedDateBlock = selectionBlock;
+        self.cancelBlock = cancelBlock;
+        
         self.presentationType = RMDateSelectionViewControllerPresentationTypePopover;
         CGSize fittingSize = [self.view systemLayoutSizeFittingSize:CGSizeMake(0, 0)];
         
@@ -822,7 +833,7 @@ static NSString *_localizedSelectTitle = @"Select";
         
         [self.popover presentPopoverFromRect:aRect inView:aView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {
-        [self show];
+        [self showWithSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
     }
 }
 

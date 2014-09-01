@@ -77,7 +77,7 @@
         //    NSLog(@"Date selection was canceled (with block)");
         //}];
     } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        //OK, running on an iPad. The following lines demonstrate the two special ways of showing the date selection view controller on iPads:
+        //OK, running on an iPad. The following lines demonstrate the four special ways of showing the date selection view controller on iPads:
         
         // 1. Show the date selection view controller from a particular view controller (make sure the delegate property is assigned).
         //    This method can be used to show the date selection view controller within popovers.
@@ -92,7 +92,16 @@
         //    NSLog(@"Date selection was canceled (with block)");
         //}];
         
+        // 3. Show the date selection view controller using a UIPopoverController. The rect and the view are used to tell the
+        //    UIPopoverController where to show up.
         [dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] inView:self.view];
+        
+        // 4. The date selectionview controller can also be shown within a popover while also using blocks based API.
+        //[dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] inView:self.view withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
+        //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
+        //} andCancelHandler:^(RMDateSelectionViewController *vc) {
+        //    NSLog(@"Date selection was canceled (with block)");
+        //}];
     }
 }
 
