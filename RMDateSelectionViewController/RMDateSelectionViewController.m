@@ -140,12 +140,13 @@ typedef enum {
     RMDateSelectionViewControllerPresentationTypePopover
 } RMDateSelectionViewControllerPresentationType;
 
-@interface RMDateSelectionViewController ()
+@interface RMDateSelectionViewController () <UIPopoverControllerDelegate>
 
 @property (nonatomic, assign) RMDateSelectionViewControllerPresentationType presentationType;
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *rootViewController;
 @property (nonatomic, strong) UIView *backgroundView;
+@property (nonatomic, strong) UIPopoverController *popover;
 
 @property (nonatomic, weak) NSLayoutConstraint *xConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *yConstraint;
@@ -516,14 +517,16 @@ static NSString *_localizedSelectTitle = @"Select";
         [self.titleLabelContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(10)-[label]-(10)-|" options:0 metrics:nil views:bindingsDict]];
     }
     
+    NSDictionary *metricsDict = @{@"TopMargin": @(self.presentationType == RMDateSelectionViewControllerPresentationTypePopover ? 10 : 0)};
+    
     if(showNowButton && showTitle) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[labelContainer]-(10)-[now(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(TopMargin)-[labelContainer]-(10)-[now(44)]-(10)-[pickerContainer]" options:0 metrics:metricsDict views:bindingsDict]];
     } else if(showNowButton && !showTitle) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[nowContainer(44)]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(TopMargin)-[nowContainer(44)]-(10)-[pickerContainer]" options:0 metrics:metricsDict views:bindingsDict]];
     } else if(!showNowButton && showTitle) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[labelContainer]-(10)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(TopMargin)-[labelContainer]-(10)-[pickerContainer]" options:0 metrics:metricsDict views:bindingsDict]];
     } else if(!showNowButton && !showTitle) {
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[pickerContainer]" options:0 metrics:nil views:bindingsDict]];
+        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(TopMargin)-[pickerContainer]" options:0 metrics:metricsDict views:bindingsDict]];
     }
 }
 
@@ -809,25 +812,29 @@ static NSString *_localizedSelectTitle = @"Select";
 
 - (void)showFromRect:(CGRect)aRect inView:(UIView *)aView {
     if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        UIViewController *container = [[UIViewController alloc] init];
-        
         self.presentationType = RMDateSelectionViewControllerPresentationTypePopover;
-        self.rootViewController = container;
+        CGSize fittingSize = [self.view systemLayoutSizeFittingSize:CGSizeMake(0, 0)];
         
-        [RMDateSelectionViewController showDateSelectionViewController:self animated:NO];
+        self.popover = [[UIPopoverController alloc] initWithContentViewController:self];
+        self.popover.delegate = self;
+        self.popover.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        self.popover.popoverContentSize = CGSizeMake(fittingSize.width, fittingSize.height+10);
         
-        UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:container];
-        popoverController.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-        popoverController.popoverContentSize = CGSizeMake(320, self.cancelAndSelectButtonContainer.frame.origin.y + self.cancelAndSelectButtonContainer.frame.size.height + 35);
-        
-        [popoverController presentPopoverFromRect:aRect inView:aView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [self.popover presentPopoverFromRect:aRect inView:aView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {
         [self show];
     }
 }
 
 - (void)dismiss {
-    [RMDateSelectionViewController dismissDateSelectionViewController:self];
+    if(self.presentationType == RMDateSelectionViewControllerPresentationTypePopover && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        self.popover.delegate = nil;
+        
+        [self.popover dismissPopoverAnimated:YES];
+        self.popover = nil;
+    } else {
+        [RMDateSelectionViewController dismissDateSelectionViewController:self];
+    }
 }
 
 #pragma mark - Actions
@@ -873,6 +880,21 @@ static NSString *_localizedSelectTitle = @"Select";
         }
         [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
     }
+}
+
+#pragma mark - UIPopoverController Delegates
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
+    if(!self.hasBeenDismissed) {
+        self.hasBeenDismissed = YES;
+        
+        [self.delegate dateSelectionViewControllerDidCancel:self];
+        if (self.cancelBlock) {
+            self.cancelBlock(self);
+        }
+        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
+    }
+    
+    self.popover = nil;
 }
 
 @end
