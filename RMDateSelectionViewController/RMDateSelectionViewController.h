@@ -249,20 +249,26 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 - (void)showFromViewController:(UIViewController *)aViewController withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
 
 /**
- *  <#Description#>
+ *  This shows the date selection view controller within a popover. The popover is initialized with the date selection view controller as content view controller and then presented from the rect in the view given as parameters.
  *
- *  @param aRect <#aRect description#>
- *  @param aView <#aView description#>
+ *  @warning Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
+ *
+ *  @warning This method should only be used on iPads. On iPhones please use [show]([RMDateSelectionViewController show]) or [showWithSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:]) instead.
+ *
+ *  @param aRect The rect in the given view the popover should be presented from.
+ *  @param aView The view the popover should be presented from.
  */
 - (void)showFromRect:(CGRect)aRect inView:(UIView *)aView;
 
 /**
- *  <#Description#>
+ *  This shows the date selection view controller within a popover. The popover is initialized with the date selection view controller as content view controller and then presented from the rect in the view given as parameters.
  *
- *  @param aRect          <#aRect description#>
- *  @param aView          <#aView description#>
- *  @param selectionBlock <#selectionBlock description#>
- *  @param cancelBlock    <#cancelBlock description#>
+ *  After a date has been selected the selection block will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding methods will be called, too.
+ *
+ *  @param aRect The rect in the given view the popover should be presented from.
+ *  @param aView The view the popover should be presented from.
+ *  @param selectionBlock The block to call when the user selects a date.
+ *  @param cancelBlock    The block to call when the user cancels the selection.
  */
 - (void)showFromRect:(CGRect)aRect inView:(UIView *)aView withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
 
