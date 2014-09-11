@@ -219,7 +219,7 @@ static NSString *_localizedSelectTitle = @"Select";
         [aDateSelectionViewController.window makeKeyAndVisible];
         
         // If we start in landscape mode also update the windows frame to be accurate
-        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation) && animated) {
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
             aDateSelectionViewController.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
         }
     }
