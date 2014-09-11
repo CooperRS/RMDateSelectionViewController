@@ -217,6 +217,11 @@ static NSString *_localizedSelectTitle = @"Select";
     if(aDateSelectionViewController.presentationType == RMDateSelectionViewControllerPresentationTypeWindow) {
         [(RMNonRotatingDateSelectionViewController *)aDateSelectionViewController.rootViewController updateUIForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation animated:NO];
         [aDateSelectionViewController.window makeKeyAndVisible];
+        
+        // If we start in landscape mode also update the windows frame to be accurate
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation) && animated) {
+            aDateSelectionViewController.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+        }
     }
     
     if(aDateSelectionViewController.presentationType != RMDateSelectionViewControllerPresentationTypePopover) {
