@@ -245,7 +245,7 @@ static NSString *_localizedSelectTitle = @"Select";
     
     //CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        if(UIInterfaceOrientationIsLandscape(aDateSelectionViewController.rootViewController.interfaceOrientation)) {
+        if(UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
             //height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
             aDateSelectionViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
