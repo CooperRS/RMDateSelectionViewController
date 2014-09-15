@@ -265,6 +265,8 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  *
  *  After a date has been selected the selection block will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding methods will be called, too.
  *
+ *  @warning This method should only be used on iPads. On iPhones please use [show]([RMDateSelectionViewController show]) or [showWithSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:]) instead.
+ *
  *  @param aRect The rect in the given view the popover should be presented from.
  *  @param aView The view the popover should be presented from.
  *  @param selectionBlock The block to call when the user selects a date.
