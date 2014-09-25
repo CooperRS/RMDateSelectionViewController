@@ -17,7 +17,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ###CocoaPods
 ```ruby
 platform :ios, '7.0'
-pod "RMDateSelectionViewController", "~> 1.3.0"
+pod "RMDateSelectionViewController", "~> 1.4.0"
 ```
 
 ###Manual
