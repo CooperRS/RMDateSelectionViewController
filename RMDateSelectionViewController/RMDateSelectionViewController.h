@@ -102,6 +102,14 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 + (instancetype)dateSelectionController;
 
+/**
+ *  This returns a new instance of RMDateSelectionViewController with custom date picker.
+ *
+ *  @warning Always use this class method to get an instance. Do not initialize an instance yourself.
+ *
+ *  @return  Returns a new instance of RMDateSelectionViewController with provider picker. If no picker provided user default
+ */
++ (instancetype)dateSelectionControllerWithPicker:(id)picker;
 /// @name Localization
 
 /**
