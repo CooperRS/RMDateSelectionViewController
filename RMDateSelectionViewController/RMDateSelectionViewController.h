@@ -58,14 +58,16 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 - (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate;
 
+@optional
+
 /**
- This method is called when the user selects the cancel button or taps the darkened background (if the property [backgroundTapsDisabled]([RMDateSelectionViewController backgroundTapsDisabled]) of RMDateSelectionViewController returns NO).
- 
+ *  This method is called when the user selects the cancel button or taps the darkened background (if the property [backgroundTapsDisabled]([RMDateSelectionViewController backgroundTapsDisabled]) of RMDateSelectionViewController returns NO).
+ *
+ *  @discussion Implementation of this method is optional. When the cancel button is pressed, the date selection view controller will be dismissed. This method can mbe implemented to do anything additional to the dismissal.
+
  @param vc  The date selection view controller that just canceled.
  */
 - (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc;
-
-@optional
 
 /// @name Additional Buttons
 
