@@ -102,6 +102,8 @@ Code contributions:
 	* Cancel delegate method is called when background view is tapped
 * Denis Andrasec
 	* Bugfixes
+* AnthonyMDev
+	* Cancel delegate method should be optional
 
 I want to thank everyone who has contributed code and/or time to this project!
 
