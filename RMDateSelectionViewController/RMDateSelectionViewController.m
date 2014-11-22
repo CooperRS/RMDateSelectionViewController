@@ -893,7 +893,10 @@ static NSString *_localizedSelectTitle = @"Select";
     if(!self.hasBeenDismissed) {
         self.hasBeenDismissed = YES;
         
-        [self.delegate dateSelectionViewControllerDidCancel:self];
+        if ([self.delegate respondsToSelector:@selector(dateSelectionViewControllerDidCancel:)]) {
+          [self.delegate dateSelectionViewControllerDidCancel:self];
+        }
+      
         if (self.cancelBlock) {
             self.cancelBlock(self);
         }
@@ -912,8 +915,11 @@ static NSString *_localizedSelectTitle = @"Select";
 - (IBAction)backgroundViewTapped:(UIGestureRecognizer *)sender {
     if(!self.backgroundTapsDisabled && !self.hasBeenDismissed) {
         self.hasBeenDismissed = YES;
-        
-        [self.delegate dateSelectionViewControllerDidCancel:self];
+      
+        if ([self.delegate respondsToSelector:@selector(dateSelectionViewControllerDidCancel:)]) {
+            [self.delegate dateSelectionViewControllerDidCancel:self];
+        }
+      
         if (self.cancelBlock) {
             self.cancelBlock(self);
         }
@@ -926,7 +932,9 @@ static NSString *_localizedSelectTitle = @"Select";
     if(!self.hasBeenDismissed) {
         self.hasBeenDismissed = YES;
         
-        [self.delegate dateSelectionViewControllerDidCancel:self];
+        if ([self.delegate respondsToSelector:@selector(dateSelectionViewControllerDidCancel:)]) {
+          [self.delegate dateSelectionViewControllerDidCancel:self];
+        }
         if (self.cancelBlock) {
             self.cancelBlock(self);
         }
