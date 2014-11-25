@@ -105,6 +105,7 @@ Code contributions:
 	* Bugfixes
 * AnthonyMDev
 	* Cancel delegate method should be optional
+* steveoleary
 	* Bugfixes
 
 I want to thank everyone who has contributed code and/or time to this project!
