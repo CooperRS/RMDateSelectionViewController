@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA153F5518279AC000428F05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA153F5418279AC000428F05 /* QuartzCore.framework */; };
+		CA1E62491A24D3C10025A6A6 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */; };
 		CAA60A3D181C1A0200198490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAA60A3F181C1A0200198490 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
 		CAA60A41181C1A0200198490 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A40181C1A0200198490 /* UIKit.framework */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		CA153F5418279AC000428F05 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "../Launch Screen.xib"; sourceTree = "<group>"; };
 		CAA60A39181C1A0200198490 /* RMDateSelectionViewController-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RMDateSelectionViewController-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA60A3C181C1A0200198490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CAA60A3E181C1A0200198490 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +124,7 @@
 		CAA60A42181C1A0200198490 /* RMDateSelectionViewController-Demo */ = {
 			isa = PBXGroup;
 			children = (
+				CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */,
 				CAA60A4B181C1A0200198490 /* RMAppDelegate.h */,
 				CAA60A4C181C1A0200198490 /* RMAppDelegate.m */,
 				CAA60A77181C1ACF00198490 /* Main.storyboard */,
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAFFF2C019A732C400432B37 /* Main_iPad.storyboard in Resources */,
+				CA1E62491A24D3C10025A6A6 /* Launch Screen.xib in Resources */,
 				CAA60A55181C1A0200198490 /* Images.xcassets in Resources */,
 				CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */,
 			);
