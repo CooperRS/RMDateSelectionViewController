@@ -566,6 +566,10 @@ static NSString *_localizedSelectTitle = @"Select";
     self.view.backgroundColor = [UIColor clearColor];
     self.view.layer.masksToBounds = YES;
     
+#if DEBUG
+    self.view.accessibilityLabel = @"DateSelectionView";
+#endif
+    
     [self setupContainerElements];
     
     if(self.titleLabel.text && self.titleLabel.text.length != 0)

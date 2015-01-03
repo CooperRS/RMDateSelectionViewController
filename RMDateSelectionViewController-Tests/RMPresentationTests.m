@@ -99,54 +99,95 @@
     }
 }
 
-- (void)testPresentingWhiteDateSelection {
+- (void)testPresentingWhiteVersionWithEnabledEffects {
     [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
     
-    /*UIView *datePickerAsUIView = [tester waitForViewWithAccessibilityLabel:@"DatePicker"];
+    UIView *nowButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"NowButton"];
+    UIView *datePickerAsUIView = [tester waitForViewWithAccessibilityLabel:@"DatePicker"];
+    UIView *selectButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"SelectButton"];
+    UIView *cancelButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"CancelButton"];
     
+    XCTAssertTrue([nowButtonAsUIView isKindOfClass:[UIButton class]]);
     XCTAssertTrue([datePickerAsUIView isKindOfClass:[UIDatePicker class]]);
-    if([datePickerAsUIView isKindOfClass:[UIDatePicker class]]) {
-        UIDatePicker *datePicker = (UIDatePicker *)datePickerAsUIView;
-        
-    }*/
+    XCTAssertTrue([selectButtonAsUIView isKindOfClass:[UIButton class]]);
+    XCTAssertTrue([cancelButtonAsUIView isKindOfClass:[UIButton class]]);
+    
+    UIView *nowButtonContainer = nowButtonAsUIView.superview.superview;
+    UIView *datePickerContainer = datePickerAsUIView.superview.superview;
+    UIView *selectCancelButtonContainer = selectButtonAsUIView.superview.superview;
+    XCTAssertTrue(selectCancelButtonContainer == cancelButtonAsUIView.superview.superview);
+    
+    XCTAssertTrue([nowButtonContainer isKindOfClass:[UIVisualEffectView class]]);
+    XCTAssertTrue([datePickerContainer isKindOfClass:[UIVisualEffectView class]]);
+    XCTAssertTrue([selectCancelButtonContainer isKindOfClass:[UIVisualEffectView class]]);
+    
+    UIView *dateSelectionView = [tester waitForViewWithAccessibilityLabel:@"DateSelectionView"];
+    XCTAssertTrue([dateSelectionView.motionEffects count] == 1);
     
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
 }
 
-- (void)testPresentingBlackDateSelection {
+- (void)testPresentingBlackVersionWithEnabledEffects {
     [tester setOn:YES forSwitchWithAccessibilityLabel:@"BlackVersion"];
     
     [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
+    
+    UIView *nowButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"NowButton"];
+    UIView *datePickerAsUIView = [tester waitForViewWithAccessibilityLabel:@"DatePicker"];
+    UIView *selectButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"SelectButton"];
+    UIView *cancelButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"CancelButton"];
+    
+    XCTAssertTrue([nowButtonAsUIView isKindOfClass:[UIButton class]]);
+    XCTAssertTrue([datePickerAsUIView isKindOfClass:[UIDatePicker class]]);
+    XCTAssertTrue([selectButtonAsUIView isKindOfClass:[UIButton class]]);
+    XCTAssertTrue([cancelButtonAsUIView isKindOfClass:[UIButton class]]);
+    
+    UIView *nowButtonContainer = nowButtonAsUIView.superview.superview;
+    UIView *datePickerContainer = datePickerAsUIView.superview.superview;
+    UIView *selectCancelButtonContainer = selectButtonAsUIView.superview.superview;
+    XCTAssertTrue(selectCancelButtonContainer == cancelButtonAsUIView.superview.superview);
+    
+    XCTAssertTrue([nowButtonContainer isKindOfClass:[UIVisualEffectView class]]);
+    XCTAssertTrue([datePickerContainer isKindOfClass:[UIVisualEffectView class]]);
+    XCTAssertTrue([selectCancelButtonContainer isKindOfClass:[UIVisualEffectView class]]);
+    
+    //Unfortunately, it is not possible to test which kind of blur effect is used for UIVibrancyEffect
+    
+    UIView *dateSelectionView = [tester waitForViewWithAccessibilityLabel:@"DateSelectionView"];
+    XCTAssertTrue([dateSelectionView.motionEffects count] == 1);
+    
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
 }
 
-- (void)testPresentingWithDisabledEffects {
+- (void)testPresentingWhiteVersionWithDisabledEffects {
     [tester setOn:NO forSwitchWithAccessibilityLabel:@"BlurEffects"];
     [tester setOn:NO forSwitchWithAccessibilityLabel:@"MotionEffects"];
     [tester setOn:NO forSwitchWithAccessibilityLabel:@"BouncingEffects"];
     
     [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
-    [tester tapViewWithAccessibilityLabel:@"SelectButton"];
-}
-
-- (void)testPresentingWithDisabledBlurEffects {
-    [tester setOn:NO forSwitchWithAccessibilityLabel:@"BlurEffects"];
     
-    [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
-    [tester tapViewWithAccessibilityLabel:@"SelectButton"];
-}
-
-- (void)testPresentingWithDisabledMotionEffects {
-    [tester setOn:NO forSwitchWithAccessibilityLabel:@"MotionEffects"];
+    UIView *nowButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"NowButton"];
+    UIView *datePickerAsUIView = [tester waitForViewWithAccessibilityLabel:@"DatePicker"];
+    UIView *selectButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"SelectButton"];
+    UIView *cancelButtonAsUIView = [tester waitForViewWithAccessibilityLabel:@"CancelButton"];
     
-    [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
-    [tester tapViewWithAccessibilityLabel:@"SelectButton"];
-}
-
-- (void)testPresentingWithDisabledBouncingEffects {
-    [tester setOn:NO forSwitchWithAccessibilityLabel:@"BouncingEffects"];
+    XCTAssertTrue([nowButtonAsUIView isKindOfClass:[UIButton class]]);
+    XCTAssertTrue([datePickerAsUIView isKindOfClass:[UIDatePicker class]]);
+    XCTAssertTrue([selectButtonAsUIView isKindOfClass:[UIButton class]]);
+    XCTAssertTrue([cancelButtonAsUIView isKindOfClass:[UIButton class]]);
     
-    [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
+    UIView *nowButtonContainer = nowButtonAsUIView.superview.superview;
+    UIView *datePickerContainer = datePickerAsUIView.superview.superview;
+    UIView *selectCancelButtonContainer = selectButtonAsUIView.superview.superview;
+    XCTAssertTrue(selectCancelButtonContainer == cancelButtonAsUIView.superview.superview);
+    
+    XCTAssertTrue([nowButtonContainer isKindOfClass:[UIView class]]);
+    XCTAssertTrue([datePickerContainer isKindOfClass:[UIView class]]);
+    XCTAssertTrue([selectCancelButtonContainer isKindOfClass:[UIView class]]);
+    
+    UIView *dateSelectionView = [tester waitForViewWithAccessibilityLabel:@"DateSelectionView"];
+    XCTAssertTrue([dateSelectionView.motionEffects count] == 0);
+    
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
 }
 
