@@ -21,9 +21,6 @@
 @implementation RMPresentationTests
 
 - (void)beforeEach {
-    [system simulateDeviceRotationToOrientation:UIDeviceOrientationFaceUp];
-    [tester waitForTimeInterval:0.5];
-    
     [tester setOn:NO forSwitchWithAccessibilityLabel:@"BlackVersion"];
     
     [tester setOn:YES forSwitchWithAccessibilityLabel:@"BlurEffects"];
@@ -241,6 +238,9 @@
     }
     
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
+    
+    [system simulateDeviceRotationToOrientation:UIDeviceOrientationPortrait];
+    [tester waitForTimeInterval:0.5];
 }
 
 - (void)testPresentingInPortraitAndRotatingToLandscape {
@@ -285,6 +285,9 @@
     }
     
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
+    
+    [system simulateDeviceRotationToOrientation:UIDeviceOrientationPortrait];
+    [tester waitForTimeInterval:0.5];
 }
 
 @end
