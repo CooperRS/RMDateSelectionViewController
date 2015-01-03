@@ -18,7 +18,10 @@
 		CAA60A55181C1A0200198490 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A54181C1A0200198490 /* Images.xcassets */; };
 		CAA60A75181C1A8700198490 /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
 		CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A77181C1ACF00198490 /* Main.storyboard */; };
-		CAE29066182E287500272C55 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A5B181C1A0200198490 /* XCTest.framework */; };
+		CAD0DABA1A580CD300EA2734 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD0DAB11A580C7F00EA2734 /* libKIF.a */; };
+		CAD0DABB1A580CDD00EA2734 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
+		CAD0DABC1A580E6900EA2734 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A5B181C1A0200198490 /* XCTest.framework */; };
+		CAD0DABE1A580EC900EA2734 /* RMPresentationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0DABD1A580EC900EA2734 /* RMPresentationTests.m */; };
 		CAE29067182E287500272C55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAE29068182E287500272C55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A40181C1A0200198490 /* UIKit.framework */; };
 		CAE2906E182E287500272C55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAE2906C182E287500272C55 /* InfoPlist.strings */; };
@@ -28,6 +31,41 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CAD0DAB01A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EABD46AA1857A0C700A5F081;
+			remoteInfo = KIF;
+		};
+		CAD0DAB21A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB72047C1680DDAD00278DA2;
+			remoteInfo = "KIF-OCUnit";
+		};
+		CAD0DAB41A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB60ECC1177F8C83005A041A;
+			remoteInfo = "Test Host";
+		};
+		CAD0DAB61A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EABD46CD1857A0F300A5F081;
+			remoteInfo = "KIF Tests";
+		};
+		CAD0DAB81A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
+			remoteInfo = "KIF Tests-OCUnit";
+		};
 		CAE29072182E287500272C55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CAA60A31181C1A0200198490 /* Project object */;
@@ -56,6 +94,8 @@
 		CAA60A72181C1A8700198490 /* RMDateSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMDateSelectionViewController.h; path = RMDateSelectionViewController/RMDateSelectionViewController.h; sourceTree = SOURCE_ROOT; };
 		CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMDateSelectionViewController.m; path = RMDateSelectionViewController/RMDateSelectionViewController.m; sourceTree = SOURCE_ROOT; };
 		CAA60A77181C1ACF00198490 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KIF.xcodeproj; path = External/KIF/KIF.xcodeproj; sourceTree = "<group>"; };
+		CAD0DABD1A580EC900EA2734 /* RMPresentationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPresentationTests.m; sourceTree = "<group>"; };
 		CAE29065182E287500272C55 /* RMDateSelectionViewController-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RMDateSelectionViewController-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE2906B182E287500272C55 /* RMDateSelectionViewController-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RMDateSelectionViewController-Tests-Info.plist"; sourceTree = "<group>"; };
 		CAE2906D182E287500272C55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -80,7 +120,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAE29066182E287500272C55 /* XCTest.framework in Frameworks */,
+				CAD0DABB1A580CDD00EA2734 /* CoreGraphics.framework in Frameworks */,
+				CAD0DABA1A580CD300EA2734 /* libKIF.a in Frameworks */,
+				CAD0DABC1A580E6900EA2734 /* XCTest.framework in Frameworks */,
 				CAE29068182E287500272C55 /* UIKit.framework in Frameworks */,
 				CAE29067182E287500272C55 /* Foundation.framework in Frameworks */,
 			);
@@ -112,6 +154,7 @@
 		CAA60A3B181C1A0200198490 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */,
 				CA153F5418279AC000428F05 /* QuartzCore.framework */,
 				CAA60A3C181C1A0200198490 /* Foundation.framework */,
 				CAA60A3E181C1A0200198490 /* CoreGraphics.framework */,
@@ -157,9 +200,22 @@
 			path = "RMDateSelectionViewController-Demo";
 			sourceTree = "<group>";
 		};
+		CAD0DAA81A580C7F00EA2734 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAD0DAB11A580C7F00EA2734 /* libKIF.a */,
+				CAD0DAB31A580C7F00EA2734 /* libKIF-OCUnit.a */,
+				CAD0DAB51A580C7F00EA2734 /* Test Host.app */,
+				CAD0DAB71A580C7F00EA2734 /* KIF Tests - XCTest.xctest */,
+				CAD0DAB91A580C7F00EA2734 /* KIF Tests-OCUnit.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CAE29069182E287500272C55 /* RMDateSelectionViewController-Tests */ = {
 			isa = PBXGroup;
 			children = (
+				CAD0DABD1A580EC900EA2734 /* RMPresentationTests.m */,
 				CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */,
 				CAE2906A182E287500272C55 /* Supporting Files */,
 			);
@@ -247,6 +303,12 @@
 			mainGroup = CAA60A30181C1A0200198490;
 			productRefGroup = CAA60A3A181C1A0200198490 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = CAD0DAA81A580C7F00EA2734 /* Products */;
+					ProjectRef = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				CAA60A38181C1A0200198490 /* RMDateSelectionViewController-Demo */,
@@ -254,6 +316,44 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		CAD0DAB11A580C7F00EA2734 /* libKIF.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libKIF.a;
+			remoteRef = CAD0DAB01A580C7F00EA2734 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAD0DAB31A580C7F00EA2734 /* libKIF-OCUnit.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libKIF-OCUnit.a";
+			remoteRef = CAD0DAB21A580C7F00EA2734 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAD0DAB51A580C7F00EA2734 /* Test Host.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Test Host.app";
+			remoteRef = CAD0DAB41A580C7F00EA2734 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAD0DAB71A580C7F00EA2734 /* KIF Tests - XCTest.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "KIF Tests - XCTest.xctest";
+			remoteRef = CAD0DAB61A580C7F00EA2734 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CAD0DAB91A580C7F00EA2734 /* KIF Tests-OCUnit.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "KIF Tests-OCUnit.octest";
+			remoteRef = CAD0DAB81A580C7F00EA2734 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		CAA60A37181C1A0200198490 /* Resources */ = {
@@ -293,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAD0DABE1A580EC900EA2734 /* RMPresentationTests.m in Sources */,
 				CAE29079182E2BD500272C55 /* RMDateSelectionViewController.m in Sources */,
 				CAE29078182E2A2F00272C55 /* NSDate+Rounding-Tests.m in Sources */,
 			);
@@ -434,6 +535,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "RMDateSelectionViewController-Tests/RMDateSelectionViewController-Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -452,6 +557,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RMDateSelectionViewController-Tests/RMDateSelectionViewController-Tests-Prefix.pch";
 				INFOPLIST_FILE = "RMDateSelectionViewController-Tests/RMDateSelectionViewController-Tests-Info.plist";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

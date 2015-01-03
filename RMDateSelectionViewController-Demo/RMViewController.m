@@ -28,6 +28,8 @@
 
 @interface RMViewController () <RMDateSelectionViewControllerDelegate>
 
+@property (nonatomic, weak) IBOutlet UILabel *selectedDateLabel;
+
 @property (nonatomic, weak) IBOutlet UISwitch *blackSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch *blurSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch *motionSwitch;
@@ -36,6 +38,22 @@
 @end
 
 @implementation RMViewController
+
+#pragma mark - Init and Dealloc
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    [self updateSelectedDateLabelWithDate:[NSDate dateWithTimeIntervalSinceReferenceDate:0]];
+}
+
+#pragma mark - Helper
+- (void)updateSelectedDateLabelWithDate:(NSDate *)aDate {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateStyle = NSDateFormatterShortStyle;
+    formatter.timeStyle = NSDateFormatterShortStyle;
+    
+    self.selectedDateLabel.text = [formatter stringFromDate:aDate];
+}
 
 #pragma mark - Actions
 - (IBAction)openDateSelectionController:(id)sender {
@@ -73,6 +91,8 @@
         // 2. Instead of using a delegate you can also pass blocks when showing the date selection view controller
         //[dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
         //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
+        //
+        //    [self updateSelectedDateLabelWithDate:aDate];
         //} andCancelHandler:^(RMDateSelectionViewController *vc) {
         //    NSLog(@"Date selection was canceled (with block)");
         //}];
@@ -85,9 +105,11 @@
         //           is not supported due to UIKit limitations.)
         //[dateSelectionVC showFromViewController:self.navigationController];
         
-        // 2. As with the two ways of showing the date selection view controller on iPhones, we can also use a blocks based API.
+        // 2. As with the two ways of showing the date selection view controller on iPhones, we can also use a block based API.
         //[dateSelectionVC showFromViewController:self.navigationController withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
         //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
+        //
+        //    [self updateSelectedDateLabelWithDate:aDate];
         //} andCancelHandler:^(RMDateSelectionViewController *vc) {
         //    NSLog(@"Date selection was canceled (with block)");
         //}];
@@ -96,9 +118,11 @@
         //    UIPopoverController where to show up.
         [dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] inView:self.view];
         
-        // 4. The date selectionview controller can also be shown within a popover while also using blocks based API.
+        // 4. The date selectionview controller can also be shown within a popover while also using block based API.
         //[dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] inView:self.view withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
         //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
+        //
+        //    [self updateSelectedDateLabelWithDate:aDate];
         //} andCancelHandler:^(RMDateSelectionViewController *vc) {
         //    NSLog(@"Date selection was canceled (with block)");
         //}];
@@ -107,7 +131,7 @@
 
 #pragma mark - UITableView Delegates
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0 && indexPath.row == 0) {
+    if(indexPath.section == 0 && indexPath.row == 1) {
         [self openDateSelectionController:self];
     }
     
@@ -117,6 +141,8 @@
 #pragma mark - RMDAteSelectionViewController Delegates
 - (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate {
     NSLog(@"Successfully selected date: %@", aDate);
+    
+    [self updateSelectedDateLabelWithDate:aDate];
 }
 
 - (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc {

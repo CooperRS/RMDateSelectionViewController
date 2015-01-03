@@ -389,6 +389,13 @@ static NSString *_localizedSelectTitle = @"Select";
     self.selectButton.layer.cornerRadius = 4;
     self.selectButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.selectButton setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    
+#if DEBUG
+    self.nowButton.accessibilityLabel = @"NowButton";
+    self.datePicker.accessibilityLabel = @"DatePicker";
+    self.selectButton.accessibilityLabel = @"SelectButton";
+    self.cancelButton.accessibilityLabel = @"CancelButton";
+#endif
 }
 
 - (void)setupContainerElements {
