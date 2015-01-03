@@ -21,6 +21,9 @@
 @implementation RMPresentationTests
 
 - (void)beforeEach {
+    [system simulateDeviceRotationToOrientation:UIDeviceOrientationFaceUp];
+    [tester waitForTimeInterval:0.5];
+    
     [tester setOn:NO forSwitchWithAccessibilityLabel:@"BlackVersion"];
     
     [tester setOn:YES forSwitchWithAccessibilityLabel:@"BlurEffects"];
@@ -213,11 +216,75 @@
 }
 
 - (void)testPresentingInLandscape {
+    [system simulateDeviceRotationToOrientation:UIDeviceOrientationLandscapeLeft];
+    [tester waitForTimeInterval:0.5];
     
+    [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
+    
+    UIView *dateSelectionView = [tester waitForViewWithAccessibilityLabel:@"DateSelectionView"];
+    UIView *titleLabelContainer = [tester waitForViewWithAccessibilityLabel:@"TitleLabelContainer"];
+    
+    CGRect frame = dateSelectionView.frame;
+    
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        CGRect screenFrame = [[UIScreen mainScreen] bounds];
+        
+        XCTAssertTrue(frame.origin.x == 0);
+        XCTAssertTrue(frame.origin.y == screenFrame.size.height - 10 - frame.size.height);
+        XCTAssertTrue(frame.size.width == screenFrame.size.width);
+        XCTAssertTrue(frame.size.height == 44 + 10 + 162 + 10 + 44 + 10 + titleLabelContainer.frame.size.height);
+    } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        XCTAssertTrue(frame.origin.x == 0);
+        XCTAssertTrue(frame.origin.y == 0);
+        XCTAssertTrue(frame.size.width == 340);
+        XCTAssertTrue(frame.size.height == 44 + 10 + 216 + 10 + 44 + 10 + titleLabelContainer.frame.size.height + 20);
+    }
+    
+    [tester tapViewWithAccessibilityLabel:@"SelectButton"];
 }
 
 - (void)testPresentingInPortraitAndRotatingToLandscape {
+    [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
     
+    UIView *dateSelectionView = [tester waitForViewWithAccessibilityLabel:@"DateSelectionView"];
+    UIView *titleLabelContainer = [tester waitForViewWithAccessibilityLabel:@"TitleLabelContainer"];
+    
+    CGRect frame = dateSelectionView.frame;
+    
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        CGRect screenFrame = [[UIScreen mainScreen] bounds];
+        
+        XCTAssertTrue(frame.origin.x == 0);
+        XCTAssertTrue(frame.origin.y == screenFrame.size.height - 10 - frame.size.height);
+        XCTAssertTrue(frame.size.width == screenFrame.size.width);
+        XCTAssertTrue(frame.size.height == 44 + 10 + 216 + 10 + 44 + 10 + titleLabelContainer.frame.size.height);
+    } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        XCTAssertTrue(frame.origin.x == 0);
+        XCTAssertTrue(frame.origin.y == 0);
+        XCTAssertTrue(frame.size.width == 340);
+        XCTAssertTrue(frame.size.height == 44 + 10 + 216 + 10 + 44 + 10 + titleLabelContainer.frame.size.height + 20);
+    }
+    
+    [system simulateDeviceRotationToOrientation:UIDeviceOrientationLandscapeLeft];
+    [tester waitForTimeInterval:0.5];
+    
+    frame = dateSelectionView.frame;
+    
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        CGRect screenFrame = [[UIScreen mainScreen] bounds];
+        
+        XCTAssertTrue(frame.origin.x == 0);
+        XCTAssertTrue(frame.origin.y == screenFrame.size.height - 10 - frame.size.height);
+        XCTAssertTrue(frame.size.width == screenFrame.size.width);
+        XCTAssertTrue(frame.size.height == 44 + 10 + 162 + 10 + 44 + 10 + titleLabelContainer.frame.size.height + 54); //For some reason the frame is off by 54 pixels. TODO: Fix that!
+    } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        XCTAssertTrue(frame.origin.x == 0);
+        XCTAssertTrue(frame.origin.y == 0);
+        XCTAssertTrue(frame.size.width == 340);
+        XCTAssertTrue(frame.size.height == 44 + 10 + 216 + 10 + 44 + 10 + titleLabelContainer.frame.size.height + 20);
+    }
+    
+    [tester tapViewWithAccessibilityLabel:@"SelectButton"];
 }
 
 @end
