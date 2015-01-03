@@ -116,10 +116,10 @@
         
         // 3. Show the date selection view controller using a UIPopoverController. The rect and the view are used to tell the
         //    UIPopoverController where to show up.
-        [dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] inView:self.view];
+        [dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] inView:self.view];
         
         // 4. The date selectionview controller can also be shown within a popover while also using block based API.
-        //[dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]] inView:self.view withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
+        //[dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] inView:self.view withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
         //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
         //
         //    [self updateSelectedDateLabelWithDate:aDate];

@@ -127,13 +127,21 @@
     UIView *dateSelectionView = [tester waitForViewWithAccessibilityLabel:@"DateSelectionView"];
     XCTAssertTrue([dateSelectionView.motionEffects count] == 1);
     
-    CGRect screenFrame = [[UIScreen mainScreen] bounds];
     CGRect frame = dateSelectionView.frame;
     
-    XCTAssertTrue(frame.origin.x == 0);
-    XCTAssertTrue(frame.origin.y == screenFrame.size.height - 10 - frame.size.height);
-    XCTAssertTrue(frame.size.width == screenFrame.size.width);
-    XCTAssertTrue(frame.size.height == 44 + 10 + 216 + 10 + 44 + 10 + titleLabelContainer.frame.size.height);
+    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+        CGRect screenFrame = [[UIScreen mainScreen] bounds];
+        
+        XCTAssertTrue(frame.origin.x == 0);
+        XCTAssertTrue(frame.origin.y == screenFrame.size.height - 10 - frame.size.height);
+        XCTAssertTrue(frame.size.width == screenFrame.size.width);
+        XCTAssertTrue(frame.size.height == 44 + 10 + 216 + 10 + 44 + 10 + titleLabelContainer.frame.size.height);
+    } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+        XCTAssertTrue(frame.origin.x == 0);
+        XCTAssertTrue(frame.origin.y == 0);
+        XCTAssertTrue(frame.size.width == 340);
+        XCTAssertTrue(frame.size.height == 44 + 10 + 216 + 10 + 44 + 10 + titleLabelContainer.frame.size.height + 20);
+    }
     
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
 }
@@ -202,6 +210,14 @@
     XCTAssertTrue([dateSelectionView.motionEffects count] == 0);
     
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
+}
+
+- (void)testPresentingInLandscape {
+    
+}
+
+- (void)testPresentingInPortraitAndRotatingToLandscape {
+    
 }
 
 @end
