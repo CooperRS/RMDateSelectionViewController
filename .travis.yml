@@ -1,4 +1,14 @@
 language: objective-c
+env:
+  matrix:
+   - TEST_SDK=iphonesimulator8.1 OS=8.1 NAME='iPhone 4S'
+   - TEST_SDK=iphonesimulator8.1 OS=8.1 NAME='iPhone 5'
+   - TEST_SDK=iphonesimulator8.1 OS=8.1 NAME='iPhone 6'
+   - TEST_SDK=iphonesimulator8.1 OS=8.1 NAME='iPhone 6 Plus'
+   - TEST_SDK=iphonesimulator8.1 OS=8.1 NAME='iPad 2'
+   - TEST_SDK=iphonesimulator8.1 OS=8.1 NAME='iPad Retina'
+   - TEST_SDK=iphonesimulator8.1 OS=8.1 NAME='iPad Air'
 script:
   - xcodebuild -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator8.1 ONLY_ACTIVE_ARCH=NO
   - xcodebuild test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator8.1 ONLY_ACTIVE_ARCH=NO
+  - xcodebuild test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -destination 'name=$NAME,OS=$OS'
