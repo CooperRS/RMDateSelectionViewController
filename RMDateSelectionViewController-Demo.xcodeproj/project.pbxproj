@@ -19,7 +19,6 @@
 		CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A77181C1ACF00198490 /* Main.storyboard */; };
 		CAD0DABA1A580CD300EA2734 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD0DAB11A580C7F00EA2734 /* libKIF.a */; };
 		CAD0DABB1A580CDD00EA2734 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
-		CAD0DABC1A580E6900EA2734 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A5B181C1A0200198490 /* XCTest.framework */; };
 		CAD0DABE1A580EC900EA2734 /* RMPresentationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0DABD1A580EC900EA2734 /* RMPresentationTests.m */; };
 		CAE29067182E287500272C55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAE29068182E287500272C55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A40181C1A0200198490 /* UIKit.framework */; };
@@ -65,6 +64,13 @@
 			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
 			remoteInfo = "KIF Tests-OCUnit";
 		};
+		CAD0DABF1A582CBB00EA2734 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = EABD46791857A0C700A5F081;
+			remoteInfo = KIF;
+		};
 		CAE29072182E287500272C55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CAA60A31181C1A0200198490 /* Project object */;
@@ -88,7 +94,6 @@
 		CAA60A51181C1A0200198490 /* RMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RMViewController.h; sourceTree = "<group>"; };
 		CAA60A52181C1A0200198490 /* RMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMViewController.m; sourceTree = "<group>"; };
 		CAA60A54181C1A0200198490 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CAA60A5B181C1A0200198490 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		CAA60A72181C1A8700198490 /* RMDateSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMDateSelectionViewController.h; path = RMDateSelectionViewController/RMDateSelectionViewController.h; sourceTree = SOURCE_ROOT; };
 		CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMDateSelectionViewController.m; path = RMDateSelectionViewController/RMDateSelectionViewController.m; sourceTree = SOURCE_ROOT; };
 		CAA60A77181C1ACF00198490 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -120,7 +125,6 @@
 			files = (
 				CAD0DABB1A580CDD00EA2734 /* CoreGraphics.framework in Frameworks */,
 				CAD0DABA1A580CD300EA2734 /* libKIF.a in Frameworks */,
-				CAD0DABC1A580E6900EA2734 /* XCTest.framework in Frameworks */,
 				CAE29068182E287500272C55 /* UIKit.framework in Frameworks */,
 				CAE29067182E287500272C55 /* Foundation.framework in Frameworks */,
 			);
@@ -157,7 +161,6 @@
 				CAA60A3C181C1A0200198490 /* Foundation.framework */,
 				CAA60A3E181C1A0200198490 /* CoreGraphics.framework */,
 				CAA60A40181C1A0200198490 /* UIKit.framework */,
-				CAA60A5B181C1A0200198490 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				CAD0DAC01A582CBB00EA2734 /* PBXTargetDependency */,
 				CAE29073182E287500272C55 /* PBXTargetDependency */,
 			);
 			name = "RMDateSelectionViewController-Tests";
@@ -398,6 +402,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CAD0DAC01A582CBB00EA2734 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KIF;
+			targetProxy = CAD0DABF1A582CBB00EA2734 /* PBXContainerItemProxy */;
+		};
 		CAE29073182E287500272C55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CAA60A38181C1A0200198490 /* RMDateSelectionViewController-Demo */;

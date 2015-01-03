@@ -1,5 +1,4 @@
 language: objective-c
-xcode_sdk: iphonesimulator
-xcode_project: RMDateSelectionViewController-Demo.xcodeproj
-xcode_scheme: RMDateSelectionViewController-Demo
-
+script:
+  - xctool -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - xctool test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Tests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
