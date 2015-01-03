@@ -497,6 +497,13 @@ static NSString *_localizedSelectTitle = @"Select";
     
     self.cancelAndSelectButtonSeperator.backgroundColor = [UIColor lightGrayColor];
     self.cancelAndSelectButtonSeperator.translatesAutoresizingMaskIntoConstraints = NO;
+    
+#if DEBUG
+    self.titleLabelContainer.accessibilityLabel = @"TitleLabelContainer";
+    self.nowButtonContainer.accessibilityLabel = @"NowButtonContainer";
+    self.datePickerContainer.accessibilityLabel = @"DatePickerContainer";
+    self.cancelAndSelectButtonContainer.accessibilityLabel = @"SelectAndCancelButtonContainer";
+#endif
 }
 
 - (void)setupConstraints {

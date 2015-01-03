@@ -112,17 +112,28 @@
     XCTAssertTrue([selectButtonAsUIView isKindOfClass:[UIButton class]]);
     XCTAssertTrue([cancelButtonAsUIView isKindOfClass:[UIButton class]]);
     
-    UIView *nowButtonContainer = nowButtonAsUIView.superview.superview;
-    UIView *datePickerContainer = datePickerAsUIView.superview.superview;
-    UIView *selectCancelButtonContainer = selectButtonAsUIView.superview.superview;
-    XCTAssertTrue(selectCancelButtonContainer == cancelButtonAsUIView.superview.superview);
+    UIView *titleLabelContainer = [tester waitForViewWithAccessibilityLabel:@"TitleLabelContainer"];
+    UIView *nowButtonContainer = [tester waitForViewWithAccessibilityLabel:@"NowButtonContainer"];
+    UIView *datePickerContainer = [tester waitForViewWithAccessibilityLabel:@"DatePickerContainer"];
+    UIView *selectAndCancelButtonContainer = [tester waitForViewWithAccessibilityLabel:@"SelectAndCancelButtonContainer"];
     
+    XCTAssertTrue([titleLabelContainer isKindOfClass:[UIVisualEffectView class]]);
     XCTAssertTrue([nowButtonContainer isKindOfClass:[UIVisualEffectView class]]);
     XCTAssertTrue([datePickerContainer isKindOfClass:[UIVisualEffectView class]]);
-    XCTAssertTrue([selectCancelButtonContainer isKindOfClass:[UIVisualEffectView class]]);
+    XCTAssertTrue([selectAndCancelButtonContainer isKindOfClass:[UIVisualEffectView class]]);
+    
+    //Unfortunately, it is not possible to test which kind of blur effect is used for UIVibrancyEffect
     
     UIView *dateSelectionView = [tester waitForViewWithAccessibilityLabel:@"DateSelectionView"];
     XCTAssertTrue([dateSelectionView.motionEffects count] == 1);
+    
+    CGRect screenFrame = [[UIScreen mainScreen] bounds];
+    CGRect frame = dateSelectionView.frame;
+    
+    XCTAssertTrue(frame.origin.x == 0);
+    XCTAssertTrue(frame.origin.y == screenFrame.size.height - 10 - frame.size.height);
+    XCTAssertTrue(frame.size.width == screenFrame.size.width);
+    XCTAssertTrue(frame.size.height == 44 + 10 + 216 + 10 + 44 + 10 + titleLabelContainer.frame.size.height);
     
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
 }
@@ -142,14 +153,15 @@
     XCTAssertTrue([selectButtonAsUIView isKindOfClass:[UIButton class]]);
     XCTAssertTrue([cancelButtonAsUIView isKindOfClass:[UIButton class]]);
     
-    UIView *nowButtonContainer = nowButtonAsUIView.superview.superview;
-    UIView *datePickerContainer = datePickerAsUIView.superview.superview;
-    UIView *selectCancelButtonContainer = selectButtonAsUIView.superview.superview;
-    XCTAssertTrue(selectCancelButtonContainer == cancelButtonAsUIView.superview.superview);
+    UIView *titleLabelContainer = [tester waitForViewWithAccessibilityLabel:@"TitleLabelContainer"];
+    UIView *nowButtonContainer = [tester waitForViewWithAccessibilityLabel:@"NowButtonContainer"];
+    UIView *datePickerContainer = [tester waitForViewWithAccessibilityLabel:@"DatePickerContainer"];
+    UIView *selectAndCancelButtonContainer = [tester waitForViewWithAccessibilityLabel:@"SelectAndCancelButtonContainer"];
     
+    XCTAssertTrue([titleLabelContainer isKindOfClass:[UIVisualEffectView class]]);
     XCTAssertTrue([nowButtonContainer isKindOfClass:[UIVisualEffectView class]]);
     XCTAssertTrue([datePickerContainer isKindOfClass:[UIVisualEffectView class]]);
-    XCTAssertTrue([selectCancelButtonContainer isKindOfClass:[UIVisualEffectView class]]);
+    XCTAssertTrue([selectAndCancelButtonContainer isKindOfClass:[UIVisualEffectView class]]);
     
     //Unfortunately, it is not possible to test which kind of blur effect is used for UIVibrancyEffect
     
@@ -176,14 +188,15 @@
     XCTAssertTrue([selectButtonAsUIView isKindOfClass:[UIButton class]]);
     XCTAssertTrue([cancelButtonAsUIView isKindOfClass:[UIButton class]]);
     
-    UIView *nowButtonContainer = nowButtonAsUIView.superview.superview;
-    UIView *datePickerContainer = datePickerAsUIView.superview.superview;
-    UIView *selectCancelButtonContainer = selectButtonAsUIView.superview.superview;
-    XCTAssertTrue(selectCancelButtonContainer == cancelButtonAsUIView.superview.superview);
+    UIView *titleLabelContainer = [tester waitForViewWithAccessibilityLabel:@"TitleLabelContainer"];
+    UIView *nowButtonContainer = [tester waitForViewWithAccessibilityLabel:@"NowButtonContainer"];
+    UIView *datePickerContainer = [tester waitForViewWithAccessibilityLabel:@"DatePickerContainer"];
+    UIView *selectAndCancelButtonContainer = [tester waitForViewWithAccessibilityLabel:@"SelectAndCancelButtonContainer"];
     
+    XCTAssertTrue([titleLabelContainer isKindOfClass:[UIView class]]);
     XCTAssertTrue([nowButtonContainer isKindOfClass:[UIView class]]);
     XCTAssertTrue([datePickerContainer isKindOfClass:[UIView class]]);
-    XCTAssertTrue([selectCancelButtonContainer isKindOfClass:[UIView class]]);
+    XCTAssertTrue([selectAndCancelButtonContainer isKindOfClass:[UIView class]]);
     
     UIView *dateSelectionView = [tester waitForViewWithAccessibilityLabel:@"DateSelectionView"];
     XCTAssertTrue([dateSelectionView.motionEffects count] == 0);
