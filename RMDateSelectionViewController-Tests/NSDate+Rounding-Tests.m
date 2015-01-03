@@ -31,16 +31,17 @@
     NSDate *preRoundingDate = [[NSCalendar currentCalendar] dateFromComponents:components];
     NSDate *roundedDate = [preRoundingDate dateByRoundingToMinutes:15];
     
-    NSDateComponents *roundedComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:roundedDate];
+    NSDateComponents *roundedComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:roundedDate];
     
-    XCTAssertEqual(roundedComponents.year, components.year, @"");
-    XCTAssertEqual(roundedComponents.month, components.month, @"");
-    XCTAssertEqual(roundedComponents.day, components.day, @"");
-    XCTAssertEqual(roundedComponents.hour, components.hour, @"");
-    XCTAssertEqual(roundedComponents.minute, 15, @"");
+    XCTAssertEqual(roundedComponents.year, components.year);
+    XCTAssertEqual(roundedComponents.month, components.month);
+    XCTAssertEqual(roundedComponents.day, components.day);
+    XCTAssertEqual(roundedComponents.hour, components.hour);
+    XCTAssertEqual(roundedComponents.minute, 15);
+    XCTAssertEqual(roundedComponents.second, 0);
 }
 
-- (void)testLowerRoundingBorder {
+- (void)testLowerBorder {
     NSDateComponents *components = [[NSDateComponents alloc] init];
     components.year = 2013;
     components.month = 11;
@@ -51,13 +52,14 @@
     NSDate *preRoundingDate = [[NSCalendar currentCalendar] dateFromComponents:components];
     NSDate *roundedDate = [preRoundingDate dateByRoundingToMinutes:15];
     
-    NSDateComponents *roundedComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:roundedDate];
+    NSDateComponents *roundedComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:roundedDate];
     
-    XCTAssertEqual(roundedComponents.year, components.year, @"");
-    XCTAssertEqual(roundedComponents.month, components.month, @"");
-    XCTAssertEqual(roundedComponents.day, components.day, @"");
-    XCTAssertEqual(roundedComponents.hour, components.hour, @"");
-    XCTAssertEqual(roundedComponents.minute, 0, @"");
+    XCTAssertEqual(roundedComponents.year, components.year);
+    XCTAssertEqual(roundedComponents.month, components.month);
+    XCTAssertEqual(roundedComponents.day, components.day);
+    XCTAssertEqual(roundedComponents.hour, components.hour);
+    XCTAssertEqual(roundedComponents.minute, 0);
+    XCTAssertEqual(roundedComponents.second, 0);
 }
 
 - (void)testUpperBorder {
@@ -71,13 +73,14 @@
     NSDate *preRoundingDate = [[NSCalendar currentCalendar] dateFromComponents:components];
     NSDate *roundedDate = [preRoundingDate dateByRoundingToMinutes:15];
     
-    NSDateComponents *roundedComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit fromDate:roundedDate];
+    NSDateComponents *roundedComponents = [[NSCalendar currentCalendar] components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit fromDate:roundedDate];
     
-    XCTAssertEqual(roundedComponents.year, components.year, @"");
-    XCTAssertEqual(roundedComponents.month, components.month, @"");
-    XCTAssertEqual(roundedComponents.day, components.day, @"");
-    XCTAssertEqual(roundedComponents.hour, components.hour, @"");
-    XCTAssertEqual(roundedComponents.minute, 15, @"");
+    XCTAssertEqual(roundedComponents.year, components.year);
+    XCTAssertEqual(roundedComponents.month, components.month);
+    XCTAssertEqual(roundedComponents.day, components.day);
+    XCTAssertEqual(roundedComponents.hour, components.hour);
+    XCTAssertEqual(roundedComponents.minute, 15);
+    XCTAssertEqual(roundedComponents.second, 0);
 }
 
 @end
