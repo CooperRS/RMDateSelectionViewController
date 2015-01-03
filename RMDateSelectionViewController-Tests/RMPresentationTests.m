@@ -101,6 +101,15 @@
 
 - (void)testPresentingWhiteDateSelection {
     [tester tapViewWithAccessibilityLabel:@"ShowDateSelection"];
+    
+    /*UIView *datePickerAsUIView = [tester waitForViewWithAccessibilityLabel:@"DatePicker"];
+    
+    XCTAssertTrue([datePickerAsUIView isKindOfClass:[UIDatePicker class]]);
+    if([datePickerAsUIView isKindOfClass:[UIDatePicker class]]) {
+        UIDatePicker *datePicker = (UIDatePicker *)datePickerAsUIView;
+        
+    }*/
+    
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
 }
 

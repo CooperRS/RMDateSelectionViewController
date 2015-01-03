@@ -74,9 +74,7 @@
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="Colors and Effects" id="Q44-u3-nQ0">
-                                <string key="footerTitle">The black version only works if blur effects are enabled. As blur effects require iOS 8 and later, the black version also requires iOS 8 and later.
-
-If your need a black version on iOS 7, take a look at the demo code.</string>
+                                <string key="footerTitle">The black version only works if blur effects are enabled. As blur effects require iOS 8 and later, the black version also requires iOS 8 and later.</string>
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="SBc-EQ-rx8">
                                         <rect key="frame" x="0.0" y="207" width="320" height="44"/>

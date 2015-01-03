@@ -37,11 +37,6 @@
                BlueprintName = "RMDateSelectionViewController-Tests"
                ReferencedContainer = "container:RMDateSelectionViewController-Demo.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "NSDate_Rounding_Tests">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
