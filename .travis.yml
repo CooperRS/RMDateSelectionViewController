@@ -10,4 +10,4 @@ env:
    - DESTINATION='name=iPad Air,OS=8.1'
 script:
   - xcodebuild -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator8.1 ONLY_ACTIVE_ARCH=NO
-  - xcodebuild test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -destination $DESTINATION
+  - xcodebuild test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -destination '$DESTINATION'
