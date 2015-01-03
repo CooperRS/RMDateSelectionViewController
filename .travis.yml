@@ -1,4 +1,4 @@
 language: objective-c
 script:
   - xctool -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
-  - xctool test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Tests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - xctool test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
