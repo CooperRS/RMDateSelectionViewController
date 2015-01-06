@@ -58,6 +58,7 @@
 @interface RMNonRotatingDateSelectionViewController : UIViewController
 
 @property (nonatomic, assign) UIInterfaceOrientation mutableInterfaceOrientation;
+@property (nonatomic, assign, readwrite) UIStatusBarStyle preferredStatusBarStyle;
 
 @end
 
@@ -716,7 +717,10 @@ static NSString *_localizedSelectTitle = @"Select";
     if(!_window) {
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         _window.windowLevel = UIWindowLevelStatusBar;
-        _window.rootViewController = [[RMNonRotatingDateSelectionViewController alloc] init];
+        
+        RMNonRotatingDateSelectionViewController *rootViewController = [[RMNonRotatingDateSelectionViewController alloc] init];
+        rootViewController.preferredStatusBarStyle = self.preferredStatusBarStyle;
+        _window.rootViewController = rootViewController;
     }
     
     return _window;
