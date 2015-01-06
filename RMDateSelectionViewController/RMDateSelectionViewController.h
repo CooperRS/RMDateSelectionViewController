@@ -165,6 +165,11 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
 /// @name Appearance
 
 /**
+ *  Used to set the preferred status bar style.
+ */
+@property (nonatomic, assign, readwrite) UIStatusBarStyle preferredStatusBarStyle;
+
+/**
  *  Used to set the text color of the buttons but not the date picker.
  */
 @property (strong, nonatomic) UIColor *tintColor;
