@@ -26,6 +26,15 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSInteger, RMStatusBarHiddenMode) {
+    /** On iOS 7, the status bar is not hidden in any orientation. On iOS 8, the status is not hidden in portrait mode and hidden in landscape mode. */
+    RMStatusBarHiddenModeDefault,
+    /** The status bar is always hidden, regardless of orientation and iOS version. */
+    RMStatusBarHiddenModeAlways,
+    /** The status bar is never hidden, regardless of orientation and iOS version. */
+    RMStatusBarHiddenModeNever
+};
+
 @class RMDateSelectionViewController;
 
 /**
@@ -168,6 +177,11 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  *  Used to set the preferred status bar style.
  */
 @property (nonatomic, assign, readwrite) UIStatusBarStyle preferredStatusBarStyle;
+
+/**
+ *  Used to hide the status bar.
+ */
+@property (nonatomic, assign) RMStatusBarHiddenMode statusBarHiddenMode;
 
 /**
  *  Used to set the text color of the buttons but not the date picker.

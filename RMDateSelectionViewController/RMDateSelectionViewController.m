@@ -24,6 +24,9 @@
 //  THE SOFTWARE.
 //
 
+#import "RMDateSelectionViewController.h"
+#import <QuartzCore/QuartzCore.h>
+
 @interface NSDate (Rounding)
 
 - (NSDate *)dateByRoundingToMinutes:(NSInteger)minutes;
@@ -59,6 +62,7 @@
 
 @property (nonatomic, assign) UIInterfaceOrientation mutableInterfaceOrientation;
 @property (nonatomic, assign, readwrite) UIStatusBarStyle preferredStatusBarStyle;
+@property (nonatomic, assign) RMStatusBarHiddenMode statusBarHiddenMode;
 
 @end
 
@@ -134,23 +138,26 @@
 
 #pragma mark - Status Bar
 - (BOOL)prefersStatusBarHidden {
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
-            return YES;
-        
+    if(self.statusBarHiddenMode == RMStatusBarHiddenModeNever) {
         return NO;
+    } else if(self.statusBarHiddenMode == RMStatusBarHiddenModeAlways) {
+        return YES;
+    } else {
+        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
+                return YES;
+            
+            return NO;
+        } else {
+            return NO;
+        }
     }
-    
-    return [super prefersStatusBarHidden];
 }
 
 @end
 
 #define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
 #define RM_DATE_PICKER_HEIGHT_LANDSCAPE 162
-
-#import "RMDateSelectionViewController.h"
-#import <QuartzCore/QuartzCore.h>
 
 typedef enum {
     RMDateSelectionViewControllerPresentationTypeWindow,
@@ -720,6 +727,7 @@ static NSString *_localizedSelectTitle = @"Select";
         
         RMNonRotatingDateSelectionViewController *rootViewController = [[RMNonRotatingDateSelectionViewController alloc] init];
         rootViewController.preferredStatusBarStyle = self.preferredStatusBarStyle;
+        rootViewController.statusBarHiddenMode = self.statusBarHiddenMode;
         _window.rootViewController = rootViewController;
     }
     
