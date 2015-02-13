@@ -62,7 +62,7 @@
 
 @property (nonatomic, assign) UIInterfaceOrientation mutableInterfaceOrientation;
 @property (nonatomic, assign, readwrite) UIStatusBarStyle preferredStatusBarStyle;
-@property (nonatomic, assign) RMStatusBarHiddenMode statusBarHiddenMode;
+@property (nonatomic, assign) RMDateSelectionViewControllerStatusBarHiddenMode statusBarHiddenMode;
 
 @end
 
@@ -138,9 +138,9 @@
 
 #pragma mark - Status Bar
 - (BOOL)prefersStatusBarHidden {
-    if(self.statusBarHiddenMode == RMStatusBarHiddenModeNever) {
+    if(self.statusBarHiddenMode == RMDateSelectionViewControllerStatusBarHiddenModeNever) {
         return NO;
-    } else if(self.statusBarHiddenMode == RMStatusBarHiddenModeAlways) {
+    } else if(self.statusBarHiddenMode == RMDateSelectionViewControllerStatusBarHiddenModeAlways) {
         return YES;
     } else {
         if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
