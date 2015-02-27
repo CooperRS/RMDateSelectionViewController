@@ -136,6 +136,20 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 + (void)setLocalizedTitleForSelectButton:(NSString *)newLocalizedTitle;
 
+/**
+ *  Set a image for the select button. Default is nil.
+ *
+ *  @param newImage    The new image for the select button.
+ */
++ (void)setImageForSelectButton:(UIImage *)newImage;
+
+/**
+ *  Set a image for the cancel button. Default is nil.
+ *
+ *  @param newImage    The new image for the cancel button.
+ */
++ (void)setImageForCancelButton:(UIImage *)newImage;
+
 /// @name Delegate
 
 /**

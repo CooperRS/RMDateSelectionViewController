@@ -213,6 +213,8 @@ typedef enum {
 static NSString *_localizedNowTitle = @"Now";
 static NSString *_localizedCancelTitle = @"Cancel";
 static NSString *_localizedSelectTitle = @"Select";
+static UIImage *_selectImage;
+static UIImage *_cancelImage;
 
 + (NSString *)localizedTitleForNowButton {
     return _localizedNowTitle;
@@ -236,6 +238,22 @@ static NSString *_localizedSelectTitle = @"Select";
 
 + (void)setLocalizedTitleForSelectButton:(NSString *)newLocalizedTitle {
     _localizedSelectTitle = newLocalizedTitle;
+}
+
++ (UIImage *)imageForSelectButton {
+    return _selectImage;
+}
+
++ (UIImage *)imageForCancelButton {
+    return _cancelImage;
+}
+
++ (void)setImageForSelectButton:(UIImage *)newImage {
+    _selectImage = newImage;
+}
+
++ (void)setImageForCancelButton:(UIImage *)newImage {
+    _cancelImage = newImage;
 }
 
 + (void)showDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController animated:(BOOL)animated {
@@ -384,14 +402,20 @@ static NSString *_localizedSelectTitle = @"Select";
     self.datePicker.layer.cornerRadius = 4;
     self.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [self.cancelButton setTitle:[RMDateSelectionViewController localizedTitleForCancelButton] forState:UIControlStateNormal];
+    if ([RMDateSelectionViewController imageForSelectButton]) {
+        [self.cancelButton setImage:[RMDateSelectionViewController imageForCancelButton] forState:UIControlStateNormal];
+    } else
+        [self.cancelButton setTitle:[RMDateSelectionViewController localizedTitleForCancelButton] forState:UIControlStateNormal];
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:[UIFont buttonFontSize]];
     self.cancelButton.layer.cornerRadius = 4;
     self.cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
     [self.cancelButton setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
     
-    [self.selectButton setTitle:[RMDateSelectionViewController localizedTitleForSelectButton] forState:UIControlStateNormal];
+    if ([RMDateSelectionViewController imageForSelectButton]) {
+        [self.selectButton setImage:[RMDateSelectionViewController imageForSelectButton] forState:UIControlStateNormal];
+    } else
+        [self.selectButton setTitle:[RMDateSelectionViewController localizedTitleForSelectButton] forState:UIControlStateNormal];
     [self.selectButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.selectButton.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
     self.selectButton.layer.cornerRadius = 4;
