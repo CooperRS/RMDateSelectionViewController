@@ -88,25 +88,32 @@ Using this control in your app or know anyone who does?
 Feel free to add the app to this list: [Apps using RMDateSelectionViewController](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Apps-using-RMDateSelectionViewController)
 
 ##Credits
-Localizations:
-* Robin Franssen (Dutch)
-* Anton Rusanov (Russian)
-* Pedro Ventura (Spanish)
-* Vincent Xue (Chinese)
-* Vinh Nguyen (Vietnamese)
-
 Code contributions:
+* AnthonyMDev
+    * Cancel delegate method should be optional
+* Digeon Benjamin 
+    * Delegate method when now button is pressed
+    * Cancel delegate method is called when background view is tapped
+* Denis Andrasec
+    * Bugfixes
 * Robin Franssen
 	* Block support
-* Digeon Benjamin 
-	* Delegate method when now button is pressed
-	* Cancel delegate method is called when background view is tapped
-* Denis Andrasec
-	* Bugfixes
-* AnthonyMDev
-	* Cancel delegate method should be optional
+* Scott Chou
+    * Images for cancel and select button
 * steveoleary
 	* Bugfixes
+
+Localizations:
+* Vincent Xue (Chinese)
+* Alex Studnička (Czech)
+* Robin Franssen (Dutch)
+* tobiasgr (Danish)
+* Thomas Besnehard (French)
+* Heberti Almeida (Portuguese)
+* Anton Rusanov (Russian)
+* Pedro Ventura (Spanish)
+* Aron Manucheri (Swedish)
+* Vinh Nguyen (Vietnamese)
 
 I want to thank everyone who has contributed code and/or time to this project!
 
