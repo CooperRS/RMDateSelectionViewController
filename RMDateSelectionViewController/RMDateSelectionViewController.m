@@ -405,8 +405,10 @@ static UIImage *_cancelImage;
     
     if ([RMDateSelectionViewController imageForSelectButton]) {
         [self.cancelButton setImage:[RMDateSelectionViewController imageForCancelButton] forState:UIControlStateNormal];
-    } else
+    } else {
         [self.cancelButton setTitle:[RMDateSelectionViewController localizedTitleForCancelButton] forState:UIControlStateNormal];
+    }
+    
     [self.cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.cancelButton.titleLabel.font = [UIFont systemFontOfSize:[UIFont buttonFontSize]];
     self.cancelButton.layer.cornerRadius = 4;
@@ -415,8 +417,10 @@ static UIImage *_cancelImage;
     
     if ([RMDateSelectionViewController imageForSelectButton]) {
         [self.selectButton setImage:[RMDateSelectionViewController imageForSelectButton] forState:UIControlStateNormal];
-    } else
+    } else {
         [self.selectButton setTitle:[RMDateSelectionViewController localizedTitleForSelectButton] forState:UIControlStateNormal];
+    }
+    
     [self.selectButton addTarget:self action:@selector(doneButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.selectButton.titleLabel.font = [UIFont boldSystemFontOfSize:[UIFont buttonFontSize]];
     self.selectButton.layer.cornerRadius = 4;
