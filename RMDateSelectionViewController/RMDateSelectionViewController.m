@@ -204,6 +204,7 @@ typedef enum {
 @implementation RMDateSelectionViewController
 
 @synthesize selectedBackgroundColor = _selectedBackgroundColor;
+@synthesize disableMotionEffects = _disableMotionEffects;
 
 #pragma mark - Class
 + (instancetype)dateSelectionController {
@@ -706,11 +707,21 @@ static UIImage *_cancelImage;
 
 #pragma mark - Properties
 - (BOOL)disableBlurEffects {
-    if(NSClassFromString(@"UIBlurEffect") && NSClassFromString(@"UIVibrancyEffect") && NSClassFromString(@"UIVisualEffectView") && !_disableBlurEffects) {
-        return NO;
+    if(!NSClassFromString(@"UIBlurEffect") || !NSClassFromString(@"UIVibrancyEffect") || !NSClassFromString(@"UIVisualEffectView")) {
+        return YES;
+    } else if(UIAccessibilityIsReduceTransparencyEnabled()) {
+        return YES;
     }
     
-    return YES;
+    return _disableBlurEffects;
+}
+
+- (BOOL)disableMotionEffects {
+    if(UIAccessibilityIsReduceMotionEnabled()) {
+        return YES;
+    }
+    
+    return _disableMotionEffects;
 }
 
 - (void)setDisableMotionEffects:(BOOL)newDisableMotionEffects {
@@ -725,6 +736,14 @@ static UIImage *_cancelImage;
             }
         }
     }
+}
+
+- (BOOL)disableBouncingWhenShowing {
+    if(UIAccessibilityIsReduceMotionEnabled()) {
+        return YES;
+    }
+    
+    return _disableBouncingWhenShowing;
 }
 
 - (UIMotionEffectGroup *)motionEffectGroup {
