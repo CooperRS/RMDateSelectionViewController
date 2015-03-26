@@ -69,7 +69,7 @@
     dateSelectionVC.datePicker.minuteInterval = 5;
     dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     
-    //On the iPad we want to show the date selection view controller within an iPad. Fortunately, we can use iOS 8 API for this! :)
+    //On the iPad we want to show the date selection view controller within a popover. Fortunately, we can use iOS 8 API for this! :)
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         //First we set the modal presentation style to the popover style
         dateSelectionVC.modalPresentationStyle = UIModalPresentationPopover;
