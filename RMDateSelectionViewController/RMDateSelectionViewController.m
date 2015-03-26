@@ -27,6 +27,38 @@
 #import "RMDateSelectionViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
+#define RM_DATE_PICKER_HEIGHT_LANDSCAPE 162
+
+@interface RMDateSelectionViewController () <UIViewControllerTransitioningDelegate>
+
+@property (nonatomic, strong) UIView *backgroundView;
+
+@property (nonatomic, weak) NSLayoutConstraint *xConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *yConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *widthConstraint;
+
+@property (nonatomic, strong) UIView *titleLabelContainer;
+@property (nonatomic, strong, readwrite) UILabel *titleLabel;
+
+@property (nonatomic, strong) UIView *nowButtonContainer;
+@property (nonatomic, strong) UIButton *nowButton;
+
+@property (nonatomic, strong) UIView *datePickerContainer;
+@property (nonatomic, readwrite, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) NSLayoutConstraint *pickerHeightConstraint;
+
+@property (nonatomic, strong) UIView *cancelAndSelectButtonContainer;
+@property (nonatomic, strong) UIView *cancelAndSelectButtonSeperator;
+@property (nonatomic, strong) UIButton *cancelButton;
+@property (nonatomic, strong) UIButton *selectButton;
+
+@property (nonatomic, strong) UIMotionEffectGroup *motionEffectGroup;
+
+@property (nonatomic, assign) BOOL hasBeenDismissed;
+
+@end
+
 @interface NSDate (Rounding)
 
 - (NSDate *)dateByRoundingToMinutes:(NSInteger)minutes;
@@ -50,46 +82,122 @@
 
 @end
 
-#define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
-#define RM_DATE_PICKER_HEIGHT_LANDSCAPE 162
+@interface RMDateSelectionViewControllerAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
 
-typedef enum {
-    RMDateSelectionViewControllerPresentationTypeViewController,
-    RMDateSelectionViewControllerPresentationTypePopover
-} RMDateSelectionViewControllerPresentationType;
+@property (nonatomic, assign) BOOL presenting;
 
-@interface RMDateSelectionViewController () <UIPopoverControllerDelegate>
+@end
 
-@property (nonatomic, assign) RMDateSelectionViewControllerPresentationType presentationType;
-@property (nonatomic, strong) UIViewController *rootViewController;
-@property (nonatomic, strong) UIView *backgroundView;
-@property (nonatomic, strong) UIPopoverController *popover;
+@implementation RMDateSelectionViewControllerAnimationController
 
-@property (nonatomic, weak) NSLayoutConstraint *xConstraint;
-@property (nonatomic, weak) NSLayoutConstraint *yConstraint;
-@property (nonatomic, weak) NSLayoutConstraint *widthConstraint;
+#pragma mark - Helper
+- (BOOL)currentOrientationIsLandscape {
+#if !__has_feature(attribute_availability_app_extension)
+    if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        return YES;
+    }
+    
+    return NO;
+#else
+    return NO;
+    
+    /*if(self.view.frame.size.width > self.view.frame.size.height) {
+        return YES;
+    }
+    
+    return NO;*/
+#endif
+}
 
-@property (nonatomic, strong) UIView *titleLabelContainer;
-@property (nonatomic, strong, readwrite) UILabel *titleLabel;
+#pragma mark - Transition
+- (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+    return 1.0f;
+}
 
-@property (nonatomic, strong) UIView *nowButtonContainer;
-@property (nonatomic, strong) UIButton *nowButton;
-
-@property (nonatomic, strong) UIView *datePickerContainer;
-@property (nonatomic, readwrite, strong) UIDatePicker *datePicker;
-@property (nonatomic, strong) NSLayoutConstraint *pickerHeightConstraint;
-
-@property (nonatomic, strong) UIView *cancelAndSelectButtonContainer;
-@property (nonatomic, strong) UIView *cancelAndSelectButtonSeperator;
-@property (nonatomic, strong) UIButton *cancelButton;
-@property (nonatomic, strong) UIButton *selectButton;
-
-@property (nonatomic, strong) UIMotionEffectGroup *motionEffectGroup;
-
-@property (nonatomic, copy) RMDateSelectionBlock selectedDateBlock;
-@property (nonatomic, copy) RMDateCancelBlock cancelBlock;
-
-@property (nonatomic, assign) BOOL hasBeenDismissed;
+- (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
+    UIView *containerView = [transitionContext containerView];
+    
+    if(self.presenting) {
+        UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        if([toVC isKindOfClass:[RMDateSelectionViewController class]]) {
+            RMDateSelectionViewController *dateSelectionVC = (RMDateSelectionViewController *)toVC;
+            
+            [containerView addSubview:dateSelectionVC.backgroundView];
+            [containerView addSubview:dateSelectionVC.view];
+            
+            NSDictionary *bindingsDict = @{@"Container": containerView, @"BGView": dateSelectionVC.backgroundView};
+            
+            [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[BGView]-(0)-|" options:0 metrics:nil views:bindingsDict]];
+            [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[BGView]-(0)-|" options:0 metrics:nil views:bindingsDict]];
+            
+            //CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
+            if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+                if([self currentOrientationIsLandscape]) {
+                    //height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
+                    dateSelectionVC.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
+                } else {
+                    //height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
+                    dateSelectionVC.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
+                }
+            }
+            
+            dateSelectionVC.xConstraint = [NSLayoutConstraint constraintWithItem:dateSelectionVC.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:containerView attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+            dateSelectionVC.yConstraint = [NSLayoutConstraint constraintWithItem:dateSelectionVC.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:containerView attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+            dateSelectionVC.widthConstraint = [NSLayoutConstraint constraintWithItem:dateSelectionVC.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:containerView attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
+            
+            [containerView addConstraint:dateSelectionVC.xConstraint];
+            [containerView addConstraint:dateSelectionVC.yConstraint];
+            [containerView addConstraint:dateSelectionVC.widthConstraint];
+            
+            [containerView setNeedsUpdateConstraints];
+            [containerView layoutIfNeeded];
+            
+            [containerView removeConstraint:dateSelectionVC.yConstraint];
+            dateSelectionVC.yConstraint = [NSLayoutConstraint constraintWithItem:dateSelectionVC.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:containerView attribute:NSLayoutAttributeBottom multiplier:1 constant:-10];
+            [containerView addConstraint:dateSelectionVC.yConstraint];
+            
+            [containerView setNeedsUpdateConstraints];
+            
+            CGFloat damping = 1.0f;
+            CGFloat duration = 0.3f;
+            if(!dateSelectionVC.disableBouncingWhenShowing) {
+                damping = 0.6f;
+                duration = 1.0f;
+            }
+            
+            [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:1 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
+                dateSelectionVC.backgroundView.alpha = 1;
+                
+                [containerView layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                [transitionContext completeTransition:YES];
+            }];
+        }
+    } else {
+        UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        if([fromVC isKindOfClass:[RMDateSelectionViewController class]]) {
+            RMDateSelectionViewController *dateSelectionVC = (RMDateSelectionViewController *)fromVC;
+            
+            [containerView removeConstraint:dateSelectionVC.yConstraint];
+            dateSelectionVC.yConstraint = [NSLayoutConstraint constraintWithItem:dateSelectionVC.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:containerView attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+            [containerView addConstraint:dateSelectionVC.yConstraint];
+            
+            [containerView setNeedsUpdateConstraints];
+            
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+                dateSelectionVC.backgroundView.alpha = 0;
+                
+                [containerView layoutIfNeeded];
+            } completion:^(BOOL finished) {
+                [dateSelectionVC.view removeFromSuperview];
+                [dateSelectionVC.backgroundView removeFromSuperview];
+                
+                dateSelectionVC.hasBeenDismissed = NO;
+                [transitionContext completeTransition:YES];
+            }];
+        }
+    }
+}
 
 @end
 
@@ -147,111 +255,6 @@ static UIImage *_cancelImage;
 
 + (void)setImageForCancelButton:(UIImage *)newImage {
     _cancelImage = newImage;
-}
-
-+ (void)showDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController animated:(BOOL)animated {
-    if(aDateSelectionViewController.presentationType == RMDateSelectionViewControllerPresentationTypeViewController) {
-        if([aDateSelectionViewController.rootViewController isKindOfClass:[UINavigationController class]] && [aDateSelectionViewController.rootViewController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-            ((UINavigationController *)aDateSelectionViewController.rootViewController).interactivePopGestureRecognizer.enabled = NO;
-        }
-        
-        aDateSelectionViewController.backgroundView.alpha = 0;
-        [aDateSelectionViewController.rootViewController.view addSubview:aDateSelectionViewController.backgroundView];
-        
-        [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeTop multiplier:1 constant:0]];
-        [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeLeading multiplier:1 constant:0]];
-        [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0]];
-        [aDateSelectionViewController.rootViewController.view addConstraint:[NSLayoutConstraint constraintWithItem:aDateSelectionViewController.backgroundView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
-    }
-    
-    [aDateSelectionViewController willMoveToParentViewController:aDateSelectionViewController.rootViewController];
-    [aDateSelectionViewController viewWillAppear:YES];
-    
-    [aDateSelectionViewController.rootViewController addChildViewController:aDateSelectionViewController];
-    [aDateSelectionViewController.rootViewController.view addSubview:aDateSelectionViewController.view];
-    
-    [aDateSelectionViewController viewDidAppear:YES];
-    [aDateSelectionViewController didMoveToParentViewController:aDateSelectionViewController.rootViewController];
-    
-    //CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
-    if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        if([aDateSelectionViewController currentOrientationIsLandscape]) {
-            //height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
-            aDateSelectionViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
-        } else {
-            //height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
-            aDateSelectionViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
-        }
-    }
-    
-    aDateSelectionViewController.xConstraint = [NSLayoutConstraint constraintWithItem:aDateSelectionViewController.view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-    aDateSelectionViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aDateSelectionViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    aDateSelectionViewController.widthConstraint = [NSLayoutConstraint constraintWithItem:aDateSelectionViewController.view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeWidth multiplier:1 constant:0];
-    
-    [aDateSelectionViewController.rootViewController.view addConstraint:aDateSelectionViewController.xConstraint];
-    [aDateSelectionViewController.rootViewController.view addConstraint:aDateSelectionViewController.yConstraint];
-    [aDateSelectionViewController.rootViewController.view addConstraint:aDateSelectionViewController.widthConstraint];
-    
-    [aDateSelectionViewController.rootViewController.view setNeedsUpdateConstraints];
-    [aDateSelectionViewController.rootViewController.view layoutIfNeeded];
-    
-    [aDateSelectionViewController.rootViewController.view removeConstraint:aDateSelectionViewController.yConstraint];
-    aDateSelectionViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aDateSelectionViewController.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:-10];
-    [aDateSelectionViewController.rootViewController.view addConstraint:aDateSelectionViewController.yConstraint];
-    
-    [aDateSelectionViewController.rootViewController.view setNeedsUpdateConstraints];
-    
-    if(animated) {
-        CGFloat damping = 1.0f;
-        CGFloat duration = 0.3f;
-        if(!aDateSelectionViewController.disableBouncingWhenShowing) {
-            damping = 0.6f;
-            duration = 1.0f;
-        }
-        
-        [UIView animateWithDuration:duration delay:0 usingSpringWithDamping:damping initialSpringVelocity:1 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionAllowUserInteraction animations:^{
-            aDateSelectionViewController.backgroundView.alpha = 1;
-            
-            [aDateSelectionViewController.rootViewController.view layoutIfNeeded];
-        } completion:^(BOOL finished) {
-        }];
-    } else {
-        aDateSelectionViewController.backgroundView.alpha = 0;
-        
-        [aDateSelectionViewController.rootViewController.view layoutIfNeeded];
-    }
-}
-
-+ (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController {
-    if(aDateSelectionViewController.presentationType == RMDateSelectionViewControllerPresentationTypeViewController) {
-        if([aDateSelectionViewController.rootViewController isKindOfClass:[UINavigationController class]] && [aDateSelectionViewController.rootViewController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-            ((UINavigationController *)aDateSelectionViewController.rootViewController).interactivePopGestureRecognizer.enabled = YES;
-        }
-    }
-    
-    [aDateSelectionViewController.rootViewController.view removeConstraint:aDateSelectionViewController.yConstraint];
-    aDateSelectionViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aDateSelectionViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-    [aDateSelectionViewController.rootViewController.view addConstraint:aDateSelectionViewController.yConstraint];
-    
-    [aDateSelectionViewController.rootViewController.view setNeedsUpdateConstraints];
-    
-    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        aDateSelectionViewController.backgroundView.alpha = 0;
-        
-        [aDateSelectionViewController.rootViewController.view layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        [aDateSelectionViewController willMoveToParentViewController:nil];
-        [aDateSelectionViewController viewWillDisappear:YES];
-        
-        [aDateSelectionViewController.view removeFromSuperview];
-        [aDateSelectionViewController removeFromParentViewController];
-        
-        [aDateSelectionViewController didMoveToParentViewController:nil];
-        [aDateSelectionViewController viewDidDisappear:YES];
-        
-        [aDateSelectionViewController.backgroundView removeFromSuperview];
-        aDateSelectionViewController.hasBeenDismissed = NO;
-    }];
 }
 
 #pragma mark - Init and Dealloc
@@ -467,7 +470,8 @@ static UIImage *_cancelImage;
         [self.titleLabelContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(10)-[label]-(10)-|" options:0 metrics:nil views:bindingsDict]];
     }
     
-    NSDictionary *metricsDict = @{@"TopMargin": @(self.presentationType == RMDateSelectionViewControllerPresentationTypePopover ? 10 : 0)};
+    //NSDictionary *metricsDict = @{@"TopMargin": @(self.presentationType == RMDateSelectionViewControllerPresentationTypePopover ? 10 : 0)};
+    NSDictionary *metricsDict = @{@"TopMargin": @0};
     
     if(showNowButton && showTitle) {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(TopMargin)-[labelContainer]-(10)-[now(44)]-(10)-[pickerContainer]" options:0 metrics:metricsDict views:bindingsDict]];
@@ -571,12 +575,28 @@ static UIImage *_cancelImage;
         [self.datePicker layoutIfNeeded];
     }
     
-    [self.rootViewController.view setNeedsUpdateConstraints];
+    [self.view.superview setNeedsUpdateConstraints];
     __weak RMDateSelectionViewController *blockself = self;
     [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-        [blockself.rootViewController.view layoutIfNeeded];
+        [blockself.view.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
+}
+
+- (BOOL)currentOrientationIsLandscape {
+#if !__has_feature(attribute_availability_app_extension)
+    if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        return YES;
+    }
+    
+    return NO;
+#else
+    if(self.view.frame.size.width > self.view.frame.size.height) {
+        return YES;
+    }
+     
+    return NO;
+#endif
 }
 
 #pragma mark - Helper
@@ -600,23 +620,16 @@ static UIImage *_cancelImage;
     return image;
 }
 
-- (BOOL)currentOrientationIsLandscape {
-#if !__has_feature(attribute_availability_app_extension)
-    if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        return YES;
-    }
-    
-    return NO;
-#else
-    if(self.view.frame.size.width > self.view.frame.size.height) {
-        return YES;
-    }
-    
-    return NO;
-#endif
+#pragma mark - UIKit Properties
+- (UIModalPresentationStyle)modalPresentationStyle {
+    return UIModalPresentationCustom;
 }
 
-#pragma mark - Properties
+- (id<UIViewControllerTransitioningDelegate>)transitioningDelegate {
+    return self;
+}
+
+#pragma mark - Custom Properties
 - (BOOL)disableBlurEffects {
     if(!NSClassFromString(@"UIBlurEffect") || !NSClassFromString(@"UIVibrancyEffect") || !NSClassFromString(@"UIVisualEffectView")) {
         return YES;
@@ -749,71 +762,19 @@ static UIImage *_cancelImage;
     }
 }
 
-#pragma mark - Presenting
-- (void)show {
-    [self showFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
-}
-
-- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
-    [self showFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController withSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
-}
-
-- (void)showFromViewController:(UIViewController *)aViewController {
-    [self showFromViewController:aViewController withSelectionHandler:nil andCancelHandler:nil];
-}
-
-- (void)showFromViewController:(UIViewController *)aViewController withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
-    if([aViewController isKindOfClass:[UITableViewController class]]) {
-        if(aViewController.navigationController) {
-            NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.", NSStringFromSelector(_cmd));
-            aViewController = aViewController.navigationController;
-        } else {
-            NSLog(@"Error: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Showing the date selection view controller from an instance of UITableViewController is not possible due to some internals of UIKit. To prevent your app from crashing, showing the date selection view controller will be canceled.", NSStringFromSelector(_cmd));
-            return;
-        }
-    }
+#pragma mark - Custom Transitions
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    RMDateSelectionViewControllerAnimationController *animationController = [[RMDateSelectionViewControllerAnimationController alloc] init];
+    animationController.presenting = YES;
     
-    self.selectedDateBlock = selectionBlock;
-    self.cancelBlock = cancelBlock;
+    return animationController;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    RMDateSelectionViewControllerAnimationController *animationController = [[RMDateSelectionViewControllerAnimationController alloc] init];
+    animationController.presenting = NO;
     
-    self.presentationType = RMDateSelectionViewControllerPresentationTypeViewController;
-    self.rootViewController = aViewController;
-    
-    [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
-}
-
-- (void)showFromRect:(CGRect)aRect inView:(UIView *)aView {
-    [self showFromRect:aRect inView:aView withSelectionHandler:nil andCancelHandler:nil];
-}
-
-- (void)showFromRect:(CGRect)aRect inView:(UIView *)aView withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
-    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        self.selectedDateBlock = selectionBlock;
-        self.cancelBlock = cancelBlock;
-        
-        self.presentationType = RMDateSelectionViewControllerPresentationTypePopover;
-        CGSize fittingSize = [self.view systemLayoutSizeFittingSize:CGSizeMake(0, 0)];
-        
-        self.popover = [[UIPopoverController alloc] initWithContentViewController:self];
-        self.popover.delegate = self;
-        self.popover.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
-        self.popover.popoverContentSize = CGSizeMake(fittingSize.width, fittingSize.height+10);
-        
-        [self.popover presentPopoverFromRect:aRect inView:aView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-    } else {
-        NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called on an iPhone. This method is iPad only so we will abort here...", NSStringFromSelector(_cmd));
-    }
-}
-
-- (void)dismiss {
-    if(self.presentationType == RMDateSelectionViewControllerPresentationTypePopover && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        self.popover.delegate = nil;
-        
-        [self.popover dismissPopoverAnimated:YES];
-        self.popover = nil;
-    } else {
-        [RMDateSelectionViewController dismissDateSelectionViewController:self];
-    }
+    return animationController;
 }
 
 #pragma mark - Actions
@@ -821,67 +782,38 @@ static UIImage *_cancelImage;
     if(!self.hasBeenDismissed) {
         self.hasBeenDismissed = YES;
         
-        [self.delegate dateSelectionViewController:self didSelectDate:self.datePicker.date];
-        if (self.selectedDateBlock) {
-            self.selectedDateBlock(self, self.datePicker.date);
+        if(self.selectButtonAction) {
+            self.selectButtonAction(self, self.datePicker.date);
         }
-        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
     if(!self.hasBeenDismissed) {
         self.hasBeenDismissed = YES;
-        
-        if ([self.delegate respondsToSelector:@selector(dateSelectionViewControllerDidCancel:)]) {
-          [self.delegate dateSelectionViewControllerDidCancel:self];
-        }
       
-        if (self.cancelBlock) {
-            self.cancelBlock(self);
+        if(self.cancelButtonAction) {
+            self.cancelButtonAction(self);
         }
-        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
 - (IBAction)nowButtonPressed:(id)sender {
-    if([self.delegate respondsToSelector:@selector(dateSelectionViewControllerNowButtonPressed:)]) {
-        [self.delegate dateSelectionViewControllerNowButtonPressed:self];
+    if(self.nowButtonAction) {
+        self.nowButtonAction(self);
     } else {
         [self.datePicker setDate:[[NSDate date] dateByRoundingToMinutes:self.datePicker.minuteInterval]];
     }
 }
 
 - (IBAction)backgroundViewTapped:(UIGestureRecognizer *)sender {
-    if(!self.backgroundTapsDisabled && !self.hasBeenDismissed) {
-        self.hasBeenDismissed = YES;
-      
-        if ([self.delegate respondsToSelector:@selector(dateSelectionViewControllerDidCancel:)]) {
-            [self.delegate dateSelectionViewControllerDidCancel:self];
-        }
-      
-        if (self.cancelBlock) {
-            self.cancelBlock(self);
-        }
-        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
+    if(!self.backgroundTapsDisabled) {
+        [self cancelButtonPressed:sender];
     }
-}
-
-#pragma mark - UIPopoverController Delegates
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController {
-    if(!self.hasBeenDismissed) {
-        self.hasBeenDismissed = YES;
-        
-        if ([self.delegate respondsToSelector:@selector(dateSelectionViewControllerDidCancel:)]) {
-          [self.delegate dateSelectionViewControllerDidCancel:self];
-        }
-        if (self.cancelBlock) {
-            self.cancelBlock(self);
-        }
-        [self performSelector:@selector(dismiss) withObject:nil afterDelay:0.1];
-    }
-    
-    self.popover = nil;
 }
 
 @end

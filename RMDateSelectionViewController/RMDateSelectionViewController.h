@@ -35,62 +35,6 @@ typedef NS_ENUM(NSInteger, RMDateSelectionViewControllerStatusBarHiddenMode) {
     RMDateSelectionViewControllerStatusBarHiddenModeNever
 };
 
-@class RMDateSelectionViewController;
-
-/**
- This block is called when the user selects a certain date if blocks are used.
- 
- @param vc The date selection view controller that just finished selecting a date.
- @param aDate The selected date.
- */
-typedef void (^RMDateSelectionBlock)(RMDateSelectionViewController *vc, NSDate *aDate);
-
-/**
- This block is called when the user cancels if blocks are used.
- 
- @param vc The date selection view controller that just got canceled.
-  */
-typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
-
-/**
- *  These methods are used to inform the [delegate]([RMDateSelectionViewController delegate]) of an instance of RMDateSelectionViewController about the status of the date selection view controller.
- */
-@protocol RMDateSelectionViewControllerDelegate <NSObject>
-
-/// @name Cancel and Select
-
-/**
- This method is called when the user selects a certain date.
- 
- @param vc      The date selection view controller that just finished selecting a date.
- @param aDate   The selected date.
- */
-- (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate;
-
-@optional
-
-/**
- This method is called when the user selects the cancel button or taps the darkened background (if the property [backgroundTapsDisabled]([RMDateSelectionViewController backgroundTapsDisabled]) of RMDateSelectionViewController returns NO).
- 
- @discussion Implementation of this method is optional. When the cancel button is pressed, the date selection view controller will be dismissed. This method can be implemented to do anything additional to the dismissal.
-
- @param vc  The date selection view controller that just canceled.
- */
-- (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc;
-
-/// @name Additional Buttons
-
-/**
- *  This method is called when the now button of the date selection view controller has been pressed.
- *  
- *  @warning Implementation of this method is optional. If you choose to implement it, you are responsible to do whatever should be done when the now button has been pressed. If you do not choose to implement it, the default behavior is to set the date selection control to the current date.
- *
- *  @param vc   The date selection view controller whose now button has been pressed.
- */
-- (void)dateSelectionViewControllerNowButtonPressed:(RMDateSelectionViewController *)vc;
-
-@end
-
 /**
  *  RMDateSelectionViewController is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashon. When a RMDateSelectionViewController is shown the user gets the opportunity to select a date using a UIDatePicker.
  *
@@ -150,14 +94,22 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  */
 + (void)setImageForCancelButton:(UIImage *)newImage;
 
-/// @name Delegate
+/// @name Block Support
 
 /**
- *  Used to set the delegate.
  *
- *  The delegate must conform to the RMDateSelectionViewControllerDelegate protocol.
  */
-@property (weak) id<RMDateSelectionViewControllerDelegate> delegate;
+@property (nonatomic, copy) void (^nowButtonAction)(RMDateSelectionViewController *controller);
+
+/**
+ *
+ */
+@property (nonatomic, copy) void (^selectButtonAction)(RMDateSelectionViewController *controller, NSDate *date);
+
+/**
+ *
+ */
+@property (nonatomic, copy) void (^cancelButtonAction)(RMDateSelectionViewController *controller);
 
 /// @name User Interface
 
@@ -239,85 +191,5 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  *  Used to choose a particular blur effect style (default value is UIBlurEffectStyleExtraLight). The value ir ignored if blur effects are disabled.
  */
 @property (assign, nonatomic) UIBlurEffectStyle blurEffectStyle;
-
-/// @name Showing
-
-/**
- *  This shows the date selection view controller on top of every other view controller using a new UIWindow. The RMDateSelectionViewController will be added as a child view controller of the UIWindows root view controller. The background of the root view controller is used to darken the views behind the RMDateSelectionViewController.
- *
- *  This method is the preferred method for showing a RMDateSelectionViewController on iPhones and iPads. Nevertheless, there are situations where this method is not sufficient on iPads. An example for this is that the RMDateSelectionViewController shall be shown within an UIPopover. This can be achieved by using [showFromViewController:]([RMDateSelectionViewController showFromViewController:]).
- *
- *  @warning Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
- */
-- (void)show NS_EXTENSION_UNAVAILABLE_IOS("Use showFromViewController: instead.");
-
-/**
- *  This shows the date selection view controller on top of every other view controller using a new UIWindow. The RMDateSelectionViewController will be added as a child view controller of the UIWindows root view controller. The background of the root view controller is used to darken the views behind the RMDateSelectionViewController.
- *
- *  After a date has been selected the selection block will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding methods will be called, too.
- *
- *  This method is the preferred method for showing a RMDateSelectionViewController on iPhones and iPads when a block based API is preferred. Nevertheless, there are situations where this method is not sufficient on iPads. An example for this is that the RMDateSelectionViewController shall be shown within an UIPopover. This can be achieved by using [showFromViewController:withSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showFromViewController:withSelectionHandler:andCancelHandler:]).
- *
- *  @param selectionBlock The block to call when the user selects a date.
- *  @param cancelBlock    The block to call when the user cancels the selection.
- */
-- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock NS_EXTENSION_UNAVAILABLE_IOS("Use showFromViewController:withSelectionHandler:andCancelHandler: instead.");
-
-/**
- *  This shows the date selection view controller as child view controller of the view controller you passed in as parameter. The content of this view controller will be darkened and the date selection view controller will be shown on top.
- *
- *  @warning This method should only be used on iPads in situations where [show]([RMDateSelectionViewController show]) is not sufficient (for example, when the RMDateSelectionViewController shoud be shown within an UIPopover). If [show]([RMDateSelectionViewController show]) is sufficient, please use it!
- *
- *  @warning Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
- *
- *  @param aViewController The parent view controller of the RMDateSelectionViewController.
- */
-- (void)showFromViewController:(UIViewController *)aViewController;
-
-/**
- *  This shows the date selection view controller as child view controller of the view controller you passed in as parameter. The content of this view controller will be darkened and the date selection view controller will be shown on top.
- *
- *  After a date has been selected the selection block will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding methods will be called, too.
- *
- *  @warning This method should only be used on iPads in situations where [showWithSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:]) is not sufficient (for example, when the RMDateSelectionViewController shoud be shown within an UIPopover). If [showWithSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:]) is sufficient, please use it!
- *
- *  @param aViewController The parent view controller of the RMDateSelectionViewController.
- *  @param selectionBlock  The block to call when the user selects a date.
- *  @param cancelBlock     The block to call when the user cancels the selection.
- */
-- (void)showFromViewController:(UIViewController *)aViewController withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
-
-/**
- *  This shows the date selection view controller within a popover. The popover is initialized with the date selection view controller as content view controller and then presented from the rect in the view given as parameters.
- *
- *  @warning Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
- *
- *  @warning This method should only be used on iPads. On iPhones please use [show]([RMDateSelectionViewController show]) or [showWithSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:]) instead.
- *
- *  @param aRect The rect in the given view the popover should be presented from.
- *  @param aView The view the popover should be presented from.
- */
-- (void)showFromRect:(CGRect)aRect inView:(UIView *)aView;
-
-/**
- *  This shows the date selection view controller within a popover. The popover is initialized with the date selection view controller as content view controller and then presented from the rect in the view given as parameters.
- *
- *  After a date has been selected the selection block will be called. If the user choses to cancel the selection, the cancel block will be called. If you assigned a delegate the corresponding methods will be called, too.
- *
- *  @warning This method should only be used on iPads. On iPhones please use [show]([RMDateSelectionViewController show]) or [showWithSelectionHandler:andCancelHandler:]([RMDateSelectionViewController showWithSelectionHandler:andCancelHandler:]) instead.
- *
- *  @param aRect The rect in the given view the popover should be presented from.
- *  @param aView The view the popover should be presented from.
- *  @param selectionBlock The block to call when the user selects a date.
- *  @param cancelBlock    The block to call when the user cancels the selection.
- */
-- (void)showFromRect:(CGRect)aRect inView:(UIView *)aView withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
-
-/// @name Dismissing
-
-/**
- *  This will dismiss the date selection view controller and remove it from the view hierarchy.
- */
-- (void)dismiss;
 
 @end
