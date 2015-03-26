@@ -152,7 +152,6 @@ static UIImage *_cancelImage;
 + (void)showDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController animated:(BOOL)animated {
     if(aDateSelectionViewController.presentationType == RMDateSelectionViewControllerPresentationTypeViewController) {
         if([aDateSelectionViewController.rootViewController isKindOfClass:[UINavigationController class]] && [aDateSelectionViewController.rootViewController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-            NSLog(@"Disabling interactive pop gesture");
             ((UINavigationController *)aDateSelectionViewController.rootViewController).interactivePopGestureRecognizer.enabled = NO;
         }
         
@@ -224,9 +223,8 @@ static UIImage *_cancelImage;
 }
 
 + (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController {
-    if(aDateSelectionViewController.presentationType != RMDateSelectionViewControllerPresentationTypePopover) {
+    if(aDateSelectionViewController.presentationType == RMDateSelectionViewControllerPresentationTypeViewController) {
         if([aDateSelectionViewController.rootViewController isKindOfClass:[UINavigationController class]] && [aDateSelectionViewController.rootViewController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-            NSLog(@"Enabling interactive pop gesture");
             ((UINavigationController *)aDateSelectionViewController.rootViewController).interactivePopGestureRecognizer.enabled = YES;
         }
     }
