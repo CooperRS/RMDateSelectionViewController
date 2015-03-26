@@ -50,117 +50,10 @@
 
 @end
 
-/*
- * We need RMNonRotatingDateSelectionViewController because Apple decided that a UIWindow adds a black background while rotating.
- * ( http://stackoverflow.com/questions/19782944/blacked-out-interface-rotation-when-using-second-uiwindow-with-rootviewcontrolle )
- *
- * To work around this problem, the root view controller of our window is a RMNonRotatingDateSelectionViewController which cannot rotate.
- * In this case, UIWindow does not add a black background (as it is not rotating any more) and we handle the rotation
- * ourselves.
- */
-@interface RMNonRotatingDateSelectionViewController : UIViewController
-
-@property (nonatomic, assign) UIInterfaceOrientation mutableInterfaceOrientation;
-@property (nonatomic, assign, readwrite) UIStatusBarStyle preferredStatusBarStyle;
-@property (nonatomic, assign) RMDateSelectionViewControllerStatusBarHiddenMode statusBarHiddenMode;
-
-@end
-
-@implementation RMNonRotatingDateSelectionViewController
-
-#pragma mark - Init and Dealloc
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-    
-    [super viewDidDisappear:animated];
-}
-
-#pragma mark - Orientation
-- (BOOL)shouldAutorotate {
-    return NO;
-}
-
-- (void)didRotate {
-    [self updateUIForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation animated:YES];
-    
-    [self setNeedsStatusBarAppearanceUpdate];
-}
-
-- (void)updateUIForInterfaceOrientation:(UIInterfaceOrientation)newOrientation animated:(BOOL)animated {
-    CGFloat duration = ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad ? 0.4f : 0.3f);
-    BOOL doubleDuration = NO;
-    
-    CGFloat angle = 0.f;
-    CGRect screenBounds = [[UIScreen mainScreen] bounds];
-    
-    if(newOrientation == UIInterfaceOrientationPortrait) {
-        angle = 0;
-        if(self.mutableInterfaceOrientation == UIInterfaceOrientationPortraitUpsideDown)
-            doubleDuration = YES;
-    } else if(newOrientation == UIInterfaceOrientationPortraitUpsideDown) {
-        angle = M_PI;
-        if(self.mutableInterfaceOrientation == UIInterfaceOrientationPortrait)
-            doubleDuration = YES;
-    } else if(newOrientation == UIInterfaceOrientationLandscapeLeft) {
-        angle = -M_PI_2;
-        if(self.mutableInterfaceOrientation == UIInterfaceOrientationLandscapeRight)
-            doubleDuration = YES;
-    } else if(newOrientation == UIInterfaceOrientationLandscapeRight) {
-        angle = M_PI_2;
-        if(self.mutableInterfaceOrientation == UIInterfaceOrientationLandscapeLeft)
-            doubleDuration = YES;
-    }
-    
-    if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && UIInterfaceOrientationIsLandscape(newOrientation) && animated) {
-        screenBounds = CGRectMake(0, 0, screenBounds.size.height, screenBounds.size.width);
-    }
-    
-    if(animated) {
-        __weak RMNonRotatingDateSelectionViewController *blockself = self;
-        [UIView animateWithDuration:(doubleDuration ? duration*2 : duration) delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
-            blockself.view.transform = CGAffineTransformMakeRotation(angle);
-            blockself.view.frame = screenBounds;
-        } completion:^(BOOL finished) {
-        }];
-    } else {
-        self.view.transform = CGAffineTransformMakeRotation(angle);
-        self.view.frame = screenBounds;
-    }
-    
-    self.mutableInterfaceOrientation = [UIApplication sharedApplication].statusBarOrientation;
-}
-
-#pragma mark - Status Bar
-- (BOOL)prefersStatusBarHidden {
-    if(self.statusBarHiddenMode == RMDateSelectionViewControllerStatusBarHiddenModeNever) {
-        return NO;
-    } else if(self.statusBarHiddenMode == RMDateSelectionViewControllerStatusBarHiddenModeAlways) {
-        return YES;
-    } else {
-        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation))
-                return YES;
-            
-            return NO;
-        } else {
-            return NO;
-        }
-    }
-}
-
-@end
-
 #define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
 #define RM_DATE_PICKER_HEIGHT_LANDSCAPE 162
 
 typedef enum {
-    RMDateSelectionViewControllerPresentationTypeWindow,
     RMDateSelectionViewControllerPresentationTypeViewController,
     RMDateSelectionViewControllerPresentationTypePopover
 } RMDateSelectionViewControllerPresentationType;
@@ -168,7 +61,6 @@ typedef enum {
 @interface RMDateSelectionViewController () <UIPopoverControllerDelegate>
 
 @property (nonatomic, assign) RMDateSelectionViewControllerPresentationType presentationType;
-@property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, strong) UIViewController *rootViewController;
 @property (nonatomic, strong) UIView *backgroundView;
 @property (nonatomic, strong) UIPopoverController *popover;
@@ -258,17 +150,12 @@ static UIImage *_cancelImage;
 }
 
 + (void)showDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController animated:(BOOL)animated {
-    if(aDateSelectionViewController.presentationType == RMDateSelectionViewControllerPresentationTypeWindow) {
-        [(RMNonRotatingDateSelectionViewController *)aDateSelectionViewController.rootViewController updateUIForInterfaceOrientation:[UIApplication sharedApplication].statusBarOrientation animated:NO];
-        [aDateSelectionViewController.window makeKeyAndVisible];
-        
-        // If we start in landscape mode also update the windows frame to be accurate
-        if([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0 && UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-            aDateSelectionViewController.window.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+    if(aDateSelectionViewController.presentationType == RMDateSelectionViewControllerPresentationTypeViewController) {
+        if([aDateSelectionViewController.rootViewController isKindOfClass:[UINavigationController class]] && [aDateSelectionViewController.rootViewController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+            NSLog(@"Disabling interactive pop gesture");
+            ((UINavigationController *)aDateSelectionViewController.rootViewController).interactivePopGestureRecognizer.enabled = NO;
         }
-    }
-    
-    if(aDateSelectionViewController.presentationType != RMDateSelectionViewControllerPresentationTypePopover) {
+        
         aDateSelectionViewController.backgroundView.alpha = 0;
         [aDateSelectionViewController.rootViewController.view addSubview:aDateSelectionViewController.backgroundView];
         
@@ -337,6 +224,13 @@ static UIImage *_cancelImage;
 }
 
 + (void)dismissDateSelectionViewController:(RMDateSelectionViewController *)aDateSelectionViewController {
+    if(aDateSelectionViewController.presentationType != RMDateSelectionViewControllerPresentationTypePopover) {
+        if([aDateSelectionViewController.rootViewController isKindOfClass:[UINavigationController class]] && [aDateSelectionViewController.rootViewController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+            NSLog(@"Enabling interactive pop gesture");
+            ((UINavigationController *)aDateSelectionViewController.rootViewController).interactivePopGestureRecognizer.enabled = YES;
+        }
+    }
+    
     [aDateSelectionViewController.rootViewController.view removeConstraint:aDateSelectionViewController.yConstraint];
     aDateSelectionViewController.yConstraint = [NSLayoutConstraint constraintWithItem:aDateSelectionViewController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:aDateSelectionViewController.rootViewController.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
     [aDateSelectionViewController.rootViewController.view addConstraint:aDateSelectionViewController.yConstraint];
@@ -358,7 +252,6 @@ static UIImage *_cancelImage;
         [aDateSelectionViewController viewDidDisappear:YES];
         
         [aDateSelectionViewController.backgroundView removeFromSuperview];
-        aDateSelectionViewController.window = nil;
         aDateSelectionViewController.hasBeenDismissed = NO;
     }];
 }
@@ -767,20 +660,6 @@ static UIImage *_cancelImage;
     return _motionEffectGroup;
 }
 
-- (UIWindow *)window {
-    if(!_window) {
-        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        _window.windowLevel = UIWindowLevelStatusBar;
-        
-        RMNonRotatingDateSelectionViewController *rootViewController = [[RMNonRotatingDateSelectionViewController alloc] init];
-        rootViewController.preferredStatusBarStyle = self.preferredStatusBarStyle;
-        rootViewController.statusBarHiddenMode = self.statusBarHiddenMode;
-        _window.rootViewController = rootViewController;
-    }
-    
-    return _window;
-}
-
 - (UIView *)backgroundView {
     if(!_backgroundView) {
         self.backgroundView = [[UIView alloc] initWithFrame:CGRectZero];
@@ -858,17 +737,11 @@ static UIImage *_cancelImage;
 
 #pragma mark - Presenting
 - (void)show {
-    [self showWithSelectionHandler:nil andCancelHandler:nil];
+    [self showFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController];
 }
 
 - (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
-    self.selectedDateBlock = selectionBlock;
-    self.cancelBlock = cancelBlock;
-    
-    self.presentationType = RMDateSelectionViewControllerPresentationTypeWindow;
-    self.rootViewController = self.window.rootViewController;
-    
-    [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
+    [self showFromViewController:[UIApplication sharedApplication].keyWindow.rootViewController withSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
 }
 
 - (void)showFromViewController:(UIViewController *)aViewController {
@@ -876,7 +749,7 @@ static UIImage *_cancelImage;
 }
 
 - (void)showFromViewController:(UIViewController *)aViewController withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
-    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    //if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         if([aViewController isKindOfClass:[UITableViewController class]]) {
             if(aViewController.navigationController) {
                 NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.", NSStringFromSelector(_cmd));
@@ -894,10 +767,10 @@ static UIImage *_cancelImage;
         self.rootViewController = aViewController;
         
         [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
-    } else {
-        NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called on an iPhone. This method is iPad only so we will use -[RMDateSelectionViewController %@] instead.", NSStringFromSelector(_cmd), NSStringFromSelector(@selector(showWithSelectionHandler:andCancelHandler:)));
-        [self showWithSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
-    }
+    //} else {
+    //    NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called on an iPhone. This method is iPad only so we will use -[RMDateSelectionViewController %@] instead.", NSStringFromSelector(_cmd), NSStringFromSelector(@selector(showWithSelectionHandler:andCancelHandler:)));
+    //    [self showWithSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
+    //}
 }
 
 - (void)showFromRect:(CGRect)aRect inView:(UIView *)aView {
