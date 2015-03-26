@@ -122,6 +122,7 @@
         if([toVC isKindOfClass:[RMDateSelectionViewController class]]) {
             RMDateSelectionViewController *dateSelectionVC = (RMDateSelectionViewController *)toVC;
             
+            dateSelectionVC.backgroundView.alpha = 0;
             [containerView addSubview:dateSelectionVC.backgroundView];
             [containerView addSubview:dateSelectionVC.view];
             
