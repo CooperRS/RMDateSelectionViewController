@@ -49,7 +49,7 @@
 @property (nonatomic, strong) NSLayoutConstraint *pickerHeightConstraint;
 
 @property (nonatomic, strong) UIView *cancelAndSelectButtonContainer;
-@property (nonatomic, strong) UIView *cancelAndSelectButtonSeperator;
+@property (nonatomic, strong) UIView *cancelAndSelectSeperator;
 @property (nonatomic, strong) UIButton *cancelButton;
 @property (nonatomic, strong) UIButton *selectButton;
 
@@ -111,6 +111,21 @@
 
 #pragma mark - Transition
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
+    if(self.presenting) {
+        UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        if([toVC isKindOfClass:[RMDateSelectionViewController class]]) {
+            RMDateSelectionViewController *dateSelectionVC = (RMDateSelectionViewController *)toVC;
+            
+            if(dateSelectionVC.disableBouncingWhenShowing) {
+                return 0.3f;
+            } else {
+                return 1.0f;
+            }
+        }
+    } else {
+        return 0.3f;
+    }
+    
     return 1.0f;
 }
 
@@ -264,6 +279,9 @@ static UIImage *_cancelImage;
     if(self) {
         self.blurEffectStyle = UIBlurEffectStyleExtraLight;
         
+        self.modalPresentationStyle = UIModalPresentationCustom;
+        self.transitioningDelegate = self;
+        
         [self setupUIElements];
     }
     return self;
@@ -275,7 +293,7 @@ static UIImage *_cancelImage;
     self.nowButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     
-    self.cancelAndSelectButtonSeperator = [[UIView alloc] initWithFrame:CGRectZero];
+    self.cancelAndSelectSeperator = [[UIView alloc] initWithFrame:CGRectZero];
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
     self.selectButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
@@ -381,7 +399,7 @@ static UIImage *_cancelImage;
         [[[[[(UIVisualEffectView *)self.nowButtonContainer contentView] subviews] objectAtIndex:0] contentView] addSubview:self.nowButton];
         [[[[[(UIVisualEffectView *)self.datePickerContainer contentView] subviews] objectAtIndex:0] contentView] addSubview:self.datePicker];
         
-        [[[[[(UIVisualEffectView *)self.cancelAndSelectButtonContainer contentView] subviews] objectAtIndex:0] contentView] addSubview:self.cancelAndSelectButtonSeperator];
+        [[[[[(UIVisualEffectView *)self.cancelAndSelectButtonContainer contentView] subviews] objectAtIndex:0] contentView] addSubview:self.cancelAndSelectSeperator];
         [[[[[(UIVisualEffectView *)self.cancelAndSelectButtonContainer contentView] subviews] objectAtIndex:0] contentView] addSubview:self.cancelButton];
         [[[[[(UIVisualEffectView *)self.cancelAndSelectButtonContainer contentView] subviews] objectAtIndex:0] contentView] addSubview:self.selectButton];
         
@@ -394,7 +412,7 @@ static UIImage *_cancelImage;
         [self.nowButtonContainer addSubview:self.nowButton];
         [self.datePickerContainer addSubview:self.datePicker];
         
-        [self.cancelAndSelectButtonContainer addSubview:self.cancelAndSelectButtonSeperator];
+        [self.cancelAndSelectButtonContainer addSubview:self.cancelAndSelectSeperator];
         [self.cancelAndSelectButtonContainer addSubview:self.cancelButton];
         [self.cancelAndSelectButtonContainer addSubview:self.selectButton];
         
@@ -420,14 +438,14 @@ static UIImage *_cancelImage;
     self.cancelAndSelectButtonContainer.clipsToBounds = YES;
     self.cancelAndSelectButtonContainer.translatesAutoresizingMaskIntoConstraints = NO;
     
-    self.cancelAndSelectButtonSeperator.backgroundColor = [UIColor lightGrayColor];
-    self.cancelAndSelectButtonSeperator.translatesAutoresizingMaskIntoConstraints = NO;
+    self.cancelAndSelectSeperator.backgroundColor = [UIColor lightGrayColor];
+    self.cancelAndSelectSeperator.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 - (void)setupConstraints {
     UIView *pickerContainer = self.datePickerContainer;
     UIView *cancelSelectContainer = self.cancelAndSelectButtonContainer;
-    UIView *seperator = self.cancelAndSelectButtonSeperator;
+    UIView *seperator = self.cancelAndSelectSeperator;
     UIButton *cancel = self.cancelButton;
     UIButton *select = self.selectButton;
     UIDatePicker *picker = self.datePicker;
@@ -447,7 +465,7 @@ static UIImage *_cancelImage;
     
     [self.datePickerContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[picker]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[cancel]-(0)-[seperator(0.5)]-(0)-[select]-(0)-|" options:0 metrics:nil views:bindingsDict]];
-    [self.cancelAndSelectButtonContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.cancelAndSelectButtonSeperator attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.cancelAndSelectButtonContainer attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
+    [self.cancelAndSelectButtonContainer addConstraint:[NSLayoutConstraint constraintWithItem:self.cancelAndSelectSeperator attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.cancelAndSelectButtonContainer attribute:NSLayoutAttributeCenterX multiplier:1 constant:0]];
     
     [self.datePickerContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[picker]-(0)-|" options:0 metrics:nil views:bindingsDict]];
     [self.cancelAndSelectButtonContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[cancel]-(0)-|" options:0 metrics:nil views:bindingsDict]];
@@ -619,15 +637,6 @@ static UIImage *_cancelImage;
     UIGraphicsEndImageContext();
     
     return image;
-}
-
-#pragma mark - UIKit Properties
-- (UIModalPresentationStyle)modalPresentationStyle {
-    return UIModalPresentationCustom;
-}
-
-- (id<UIViewControllerTransitioningDelegate>)transitioningDelegate {
-    return self;
 }
 
 #pragma mark - Custom Properties
