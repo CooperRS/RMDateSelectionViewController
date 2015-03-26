@@ -489,8 +489,7 @@ static UIImage *_cancelImage;
         [self.titleLabelContainer addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(10)-[label]-(10)-|" options:0 metrics:nil views:bindingsDict]];
     }
     
-    //NSDictionary *metricsDict = @{@"TopMargin": @(self.presentationType == RMDateSelectionViewControllerPresentationTypePopover ? 10 : 0)};
-    NSDictionary *metricsDict = @{@"TopMargin": @0};
+    NSDictionary *metricsDict = @{@"TopMargin": @(self.modalPresentationStyle == UIModalPresentationPopover ? 10 : 0)};
     
     if(showNowButton && showTitle) {
         [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(TopMargin)-[labelContainer]-(10)-[now(44)]-(10)-[pickerContainer]" options:0 metrics:metricsDict views:bindingsDict]];
@@ -512,11 +511,13 @@ static UIImage *_cancelImage;
     
     [self setupContainerElements];
     
-    if(self.titleLabel.text && self.titleLabel.text.length != 0)
+    if(self.titleLabel.text && self.titleLabel.text.length != 0) {
         [self.view addSubview:self.titleLabelContainer];
+    }
     
-    if(!self.hideNowButton)
+    if(!self.hideNowButton) {
         [self.view addSubview:self.nowButtonContainer];
+    }
     
     [self.view addSubview:self.datePickerContainer];
     [self.view addSubview:self.cancelAndSelectButtonContainer];
@@ -561,8 +562,18 @@ static UIImage *_cancelImage;
         }
     }
     
-    if(!self.disableMotionEffects)
+    if(!self.disableMotionEffects) {
         [self addMotionEffects];
+    }
+    
+    CGSize minimalSize = [self.view systemLayoutSizeFittingSize:CGSizeMake(999, 999)];
+    self.preferredContentSize = CGSizeMake(minimalSize.width, minimalSize.height+10);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.popoverPresentationController.backgroundColor = self.backgroundView.backgroundColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
