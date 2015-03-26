@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CA153F5518279AC000428F05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA153F5418279AC000428F05 /* QuartzCore.framework */; };
 		CA1E62491A24D3C10025A6A6 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */; };
+		CA52EE301AC42C760032E877 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA52EE2F1AC42C760032E877 /* MainInterface.storyboard */; };
+		CA52EE331AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CAA60A3D181C1A0200198490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAA60A3F181C1A0200198490 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
 		CAA60A41181C1A0200198490 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A40181C1A0200198490 /* UIKit.framework */; };
@@ -18,6 +20,8 @@
 		CAA60A55181C1A0200198490 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A54181C1A0200198490 /* Images.xcassets */; };
 		CAA60A75181C1A8700198490 /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
 		CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A77181C1ACF00198490 /* Main.storyboard */; };
+		CACF16BD1AC42CE4005CDB0F /* RMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A52181C1A0200198490 /* RMViewController.m */; };
+		CACF16BE1AC42CE6005CDB0F /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
 		CAE29066182E287500272C55 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A5B181C1A0200198490 /* XCTest.framework */; };
 		CAE29067182E287500272C55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAE29068182E287500272C55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A40181C1A0200198490 /* UIKit.framework */; };
@@ -28,6 +32,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		CA52EE311AC42C760032E877 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAA60A31181C1A0200198490 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA52EE271AC42C760032E877;
+			remoteInfo = "RMDateSelectionViewController-DemoExtension";
+		};
 		CAE29072182E287500272C55 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CAA60A31181C1A0200198490 /* Project object */;
@@ -37,9 +48,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CA52EE371AC42C760032E877 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CA52EE331AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		CA153F5418279AC000428F05 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Launch Screen.xib"; path = "../Launch Screen.xib"; sourceTree = "<group>"; };
+		CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "RMDateSelectionViewController-DemoExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA52EE2B1AC42C760032E877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA52EE2F1AC42C760032E877 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		CAA60A39181C1A0200198490 /* RMDateSelectionViewController-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RMDateSelectionViewController-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA60A3C181C1A0200198490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CAA60A3E181C1A0200198490 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -65,6 +93,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CA52EE251AC42C760032E877 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAA60A36181C1A0200198490 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -89,11 +124,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA52EE291AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */ = {
+			isa = PBXGroup;
+			children = (
+				CA52EE2F1AC42C760032E877 /* MainInterface.storyboard */,
+				CA52EE2A1AC42C760032E877 /* Supporting Files */,
+			);
+			path = "RMDateSelectionViewController-DemoExtension";
+			sourceTree = "<group>";
+		};
+		CA52EE2A1AC42C760032E877 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CA52EE2B1AC42C760032E877 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		CAA60A30181C1A0200198490 = {
 			isa = PBXGroup;
 			children = (
 				CAA60A71181C1A7600198490 /* RMDateSelectionViewController */,
 				CAA60A42181C1A0200198490 /* RMDateSelectionViewController-Demo */,
+				CA52EE291AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */,
 				CAE29069182E287500272C55 /* RMDateSelectionViewController-Tests */,
 				CAA60A3B181C1A0200198490 /* Frameworks */,
 				CAA60A3A181C1A0200198490 /* Products */,
@@ -105,6 +158,7 @@
 			children = (
 				CAA60A39181C1A0200198490 /* RMDateSelectionViewController-Demo.app */,
 				CAE29065182E287500272C55 /* RMDateSelectionViewController-Tests.xctest */,
+				CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -179,6 +233,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CA52EE271AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA52EE361AC42C760032E877 /* Build configuration list for PBXNativeTarget "RMDateSelectionViewController-DemoExtension" */;
+			buildPhases = (
+				CA52EE241AC42C760032E877 /* Sources */,
+				CA52EE251AC42C760032E877 /* Frameworks */,
+				CA52EE261AC42C760032E877 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RMDateSelectionViewController-DemoExtension";
+			productName = "RMDateSelectionViewController-DemoExtension";
+			productReference = CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		CAA60A38181C1A0200198490 /* RMDateSelectionViewController-Demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAA60A6B181C1A0200198490 /* Build configuration list for PBXNativeTarget "RMDateSelectionViewController-Demo" */;
@@ -186,10 +257,12 @@
 				CAA60A35181C1A0200198490 /* Sources */,
 				CAA60A36181C1A0200198490 /* Frameworks */,
 				CAA60A37181C1A0200198490 /* Resources */,
+				CA52EE371AC42C760032E877 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CA52EE321AC42C760032E877 /* PBXTargetDependency */,
 			);
 			name = "RMDateSelectionViewController-Demo";
 			productName = "RMDateSelectionViewController-Demo";
@@ -224,6 +297,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Roland Moers";
 				TargetAttributes = {
+					CA52EE271AC42C760032E877 = {
+						CreatedOnToolsVersion = 6.2;
+					};
 					CAE29064182E287500272C55 = {
 						TestTargetID = CAA60A38181C1A0200198490;
 					};
@@ -251,11 +327,20 @@
 			targets = (
 				CAA60A38181C1A0200198490 /* RMDateSelectionViewController-Demo */,
 				CAE29064182E287500272C55 /* RMDateSelectionViewController-Tests */,
+				CA52EE271AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CA52EE261AC42C760032E877 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA52EE301AC42C760032E877 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAA60A37181C1A0200198490 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,6 +363,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CA52EE241AC42C760032E877 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CACF16BE1AC42CE6005CDB0F /* RMDateSelectionViewController.m in Sources */,
+				CACF16BD1AC42CE4005CDB0F /* RMViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAA60A35181C1A0200198490 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -301,6 +395,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		CA52EE321AC42C760032E877 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA52EE271AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */;
+			targetProxy = CA52EE311AC42C760032E877 /* PBXContainerItemProxy */;
+		};
 		CAE29073182E287500272C55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CAA60A38181C1A0200198490 /* RMDateSelectionViewController-Demo */;
@@ -320,6 +419,41 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CA52EE341AC42C760032E877 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "RMDateSelectionViewController-DemoExtension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CA52EE351AC42C760032E877 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "RMDateSelectionViewController-DemoExtension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		CAA60A69181C1A0200198490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -461,6 +595,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CA52EE361AC42C760032E877 /* Build configuration list for PBXNativeTarget "RMDateSelectionViewController-DemoExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA52EE341AC42C760032E877 /* Debug */,
+				CA52EE351AC42C760032E877 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CAA60A34181C1A0200198490 /* Build configuration list for PBXProject "RMDateSelectionViewController-Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

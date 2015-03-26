@@ -249,7 +249,7 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  *
  *  @warning Make sure the delegate property is assigned. Otherwise you will not get any calls when a date is selected or the selection has been canceled.
  */
-- (void)show;
+- (void)show NS_EXTENSION_UNAVAILABLE_IOS("Use showFromViewController: instead.");
 
 /**
  *  This shows the date selection view controller on top of every other view controller using a new UIWindow. The RMDateSelectionViewController will be added as a child view controller of the UIWindows root view controller. The background of the root view controller is used to darken the views behind the RMDateSelectionViewController.
@@ -261,7 +261,7 @@ typedef void (^RMDateCancelBlock)(RMDateSelectionViewController *vc);
  *  @param selectionBlock The block to call when the user selects a date.
  *  @param cancelBlock    The block to call when the user cancels the selection.
  */
-- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock;
+- (void)showWithSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock NS_EXTENSION_UNAVAILABLE_IOS("Use showFromViewController:withSelectionHandler:andCancelHandler: instead.");
 
 /**
  *  This shows the date selection view controller as child view controller of the view controller you passed in as parameter. The content of this view controller will be darkened and the date selection view controller will be shown on top.

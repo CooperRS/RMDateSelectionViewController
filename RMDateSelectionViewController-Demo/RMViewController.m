@@ -68,7 +68,7 @@
         //(Note: These two methods also work an iPads.)
         
         // 1. Just show the date selection view controller (make sure the delegate property is assigned)
-        [dateSelectionVC show];
+        [dateSelectionVC showFromViewController:self.navigationController];
         
         // 2. Instead of using a delegate you can also pass blocks when showing the date selection view controller
         //[dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {

@@ -175,7 +175,7 @@ static UIImage *_cancelImage;
     
     //CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        if([aDateSelectionViewController currentOrientationIsLandscape]) {
             //height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
             aDateSelectionViewController.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
@@ -561,7 +561,7 @@ static UIImage *_cancelImage;
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         duration = 0.3;
         
-        if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        if([self currentOrientationIsLandscape]) {
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
@@ -598,6 +598,22 @@ static UIImage *_cancelImage;
     UIGraphicsEndImageContext();
     
     return image;
+}
+
+- (BOOL)currentOrientationIsLandscape {
+#if !__has_feature(attribute_availability_app_extension)
+    if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
+        return YES;
+    }
+    
+    return NO;
+#else
+    if(self.view.frame.size.width > self.view.frame.size.height) {
+        return YES;
+    }
+    
+    return NO;
+#endif
 }
 
 #pragma mark - Properties
@@ -747,28 +763,23 @@ static UIImage *_cancelImage;
 }
 
 - (void)showFromViewController:(UIViewController *)aViewController withSelectionHandler:(RMDateSelectionBlock)selectionBlock andCancelHandler:(RMDateCancelBlock)cancelBlock {
-    //if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        if([aViewController isKindOfClass:[UITableViewController class]]) {
-            if(aViewController.navigationController) {
-                NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.", NSStringFromSelector(_cmd));
-                aViewController = aViewController.navigationController;
-            } else {
-                NSLog(@"Error: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Showing the date selection view controller from an instance of UITableViewController is not possible due to some internals of UIKit. To prevent your app from crashing, showing the date selection view controller will be canceled.", NSStringFromSelector(_cmd));
-                return;
-            }
+    if([aViewController isKindOfClass:[UITableViewController class]]) {
+        if(aViewController.navigationController) {
+            NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Trying to use the navigation controller of the UITableViewController instance instead.", NSStringFromSelector(_cmd));
+            aViewController = aViewController.navigationController;
+        } else {
+            NSLog(@"Error: -[RMDateSelectionViewController %@] has been called with an instance of UITableViewController as argument. Showing the date selection view controller from an instance of UITableViewController is not possible due to some internals of UIKit. To prevent your app from crashing, showing the date selection view controller will be canceled.", NSStringFromSelector(_cmd));
+            return;
         }
-        
-        self.selectedDateBlock = selectionBlock;
-        self.cancelBlock = cancelBlock;
-        
-        self.presentationType = RMDateSelectionViewControllerPresentationTypeViewController;
-        self.rootViewController = aViewController;
-        
-        [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
-    //} else {
-    //    NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called on an iPhone. This method is iPad only so we will use -[RMDateSelectionViewController %@] instead.", NSStringFromSelector(_cmd), NSStringFromSelector(@selector(showWithSelectionHandler:andCancelHandler:)));
-    //    [self showWithSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
-    //}
+    }
+    
+    self.selectedDateBlock = selectionBlock;
+    self.cancelBlock = cancelBlock;
+    
+    self.presentationType = RMDateSelectionViewControllerPresentationTypeViewController;
+    self.rootViewController = aViewController;
+    
+    [RMDateSelectionViewController showDateSelectionViewController:self animated:YES];
 }
 
 - (void)showFromRect:(CGRect)aRect inView:(UIView *)aView {
@@ -790,8 +801,7 @@ static UIImage *_cancelImage;
         
         [self.popover presentPopoverFromRect:aRect inView:aView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     } else {
-        NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called on an iPhone. This method is iPad only so we will use -[RMDateSelectionViewController %@] instead.", NSStringFromSelector(_cmd), NSStringFromSelector(@selector(showWithSelectionHandler:andCancelHandler:)));
-        [self showWithSelectionHandler:selectionBlock andCancelHandler:cancelBlock];
+        NSLog(@"Warning: -[RMDateSelectionViewController %@] has been called on an iPhone. This method is iPad only so we will abort here...", NSStringFromSelector(_cmd));
     }
 }
 
