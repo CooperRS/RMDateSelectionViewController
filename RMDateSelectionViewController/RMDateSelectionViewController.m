@@ -30,6 +30,15 @@
 #define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
 #define RM_DATE_PICKER_HEIGHT_LANDSCAPE 162
 
+#if !__has_feature(attribute_availability_app_extension)
+//Normal App
+#define RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)
+if() {
+#else
+//App Extension
+#define RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE [UIScreen mainScreen].bounds.size.height < [UIScreen mainScreen].bounds.size.width
+#endif
+
 @interface RMDateSelectionViewController () <UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) UIView *backgroundView;
@@ -127,14 +136,10 @@
             [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"|-(0)-[BGView]-(0)-|" options:0 metrics:nil views:bindingsDict]];
             [containerView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(0)-[BGView]-(0)-|" options:0 metrics:nil views:bindingsDict]];
             
-            //CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
             if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-                UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-                if(UIDeviceOrientationIsLandscape(orientation)) {
-                    //height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
+                if(RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE) {
                     dateSelectionVC.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
                 } else {
-                    //height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
                     dateSelectionVC.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
                 }
             }
@@ -567,18 +572,14 @@ static UIImage *_cancelImage;
 
 #pragma mark - Orientation
 - (void)didRotate {
-    NSLog(@"Did Rotate");
     NSTimeInterval duration = 0.4;
     
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         duration = 0.3;
         
-        UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-        if(UIDeviceOrientationIsLandscape(orientation)) {
-            NSLog(@"Landscape");
+        if(RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE) {
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
-            NSLog(@"Portrait");
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
         }
         
