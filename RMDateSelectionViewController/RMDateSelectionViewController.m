@@ -90,25 +90,6 @@
 
 @implementation RMDateSelectionViewControllerAnimationController
 
-#pragma mark - Helper
-- (BOOL)currentOrientationIsLandscape {
-#if !__has_feature(attribute_availability_app_extension)
-    if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        return YES;
-    }
-    
-    return NO;
-#else
-    return NO;
-    
-    /*if(self.view.frame.size.width > self.view.frame.size.height) {
-        return YES;
-    }
-    
-    return NO;*/
-#endif
-}
-
 #pragma mark - Transition
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
     if(self.presenting) {
@@ -148,7 +129,8 @@
             
             //CGFloat height = RM_DATE_SELECTION_VIEW_HEIGHT_PORTAIT;
             if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-                if([self currentOrientationIsLandscape]) {
+                UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+                if(UIDeviceOrientationIsLandscape(orientation)) {
                     //height = RM_DATE_SELECTION_VIEW_HEIGHT_LANDSCAPE;
                     dateSelectionVC.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
                 } else {
@@ -568,36 +550,35 @@ static UIImage *_cancelImage;
     
     CGSize minimalSize = [self.view systemLayoutSizeFittingSize:CGSizeMake(999, 999)];
     self.preferredContentSize = CGSizeMake(minimalSize.width, minimalSize.height+10);
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     self.popoverPresentationController.backgroundColor = self.backgroundView.backgroundColor;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
     
     [super viewDidDisappear:animated];
 }
 
 #pragma mark - Orientation
 - (void)didRotate {
+    NSLog(@"Did Rotate");
     NSTimeInterval duration = 0.4;
     
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
         duration = 0.3;
         
-        if([self currentOrientationIsLandscape]) {
+        UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+        if(UIDeviceOrientationIsLandscape(orientation)) {
+            NSLog(@"Landscape");
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
         } else {
+            NSLog(@"Portrait");
             self.pickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
         }
         
@@ -611,22 +592,6 @@ static UIImage *_cancelImage;
         [blockself.view.superview layoutIfNeeded];
     } completion:^(BOOL finished) {
     }];
-}
-
-- (BOOL)currentOrientationIsLandscape {
-#if !__has_feature(attribute_availability_app_extension)
-    if(UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)) {
-        return YES;
-    }
-    
-    return NO;
-#else
-    if(self.view.frame.size.width > self.view.frame.size.height) {
-        return YES;
-    }
-     
-    return NO;
-#endif
 }
 
 #pragma mark - Helper
