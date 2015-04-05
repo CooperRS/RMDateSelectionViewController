@@ -33,7 +33,6 @@
 #if !__has_feature(attribute_availability_app_extension)
 //Normal App
 #define RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)
-if() {
 #else
 //App Extension
 #define RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE [UIScreen mainScreen].bounds.size.height < [UIScreen mainScreen].bounds.size.width
