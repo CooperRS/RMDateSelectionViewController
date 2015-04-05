@@ -40,8 +40,11 @@
 #pragma mark - Actions
 - (IBAction)openDateSelectionController:(id)sender {
     RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
+    
+    //Set a title for the date selection
     dateSelectionVC.titleLabel.text = @"This is an example title.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
     
+    //Set select and (optional) cancel blocks
     [dateSelectionVC setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
         NSLog(@"Successfully selected date: %@", date);
     }];
@@ -70,6 +73,7 @@
     dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     
     //On the iPad we want to show the date selection view controller within a popover. Fortunately, we can use iOS 8 API for this! :)
+    //(Of course only if we are running on iOS 8 or later)
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         //First we set the modal presentation style to the popover style
         dateSelectionVC.modalPresentationStyle = UIModalPresentationPopover;

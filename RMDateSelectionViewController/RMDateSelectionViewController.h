@@ -88,17 +88,23 @@
 /// @name Block Support
 
 /**
+ *  The block that is executed when the now button is tapped.
  *
+ *  @warning Setting this block is optional. The default behavior of the now button is to set the date picker to the current date. Only use this property, if you want to override this default behavior.
  */
 @property (nonatomic, copy) void (^nowButtonAction)(RMDateSelectionViewController *controller);
 
 /**
+ *  The block that is executed when the select button is tapped.
  *
+ *  @warning Although your app won't crash when presenting a RMDateSelectionViewController without a select block, setting this block is not really optional. You will need this block to get the date selected by the user.
  */
 @property (nonatomic, copy) void (^selectButtonAction)(RMDateSelectionViewController *controller, NSDate *date);
 
 /**
+ *  The block that is executed when the cancel button or the background view is tapped.
  *
+ *  @warning Setting this block is optional. the default behavior of RMDateSelectionViewController already dismisses the view controller when select or cancel is tapped.
  */
 @property (nonatomic, copy) void (^cancelButtonAction)(RMDateSelectionViewController *controller);
 
