@@ -39,11 +39,11 @@ pod "RMDateSelectionViewController", "~> 1.5.0"
 
 		//Set select and (optional) cancel blocks
 		[dateSelectionVC setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
-		NSLog(@"Successfully selected date: %@", date);
+			NSLog(@"Successfully selected date: %@", date);
 		}];
 
 		[dateSelectionVC setCancelButtonAction:^(RMDateSelectionViewController *controller) {
-		NSLog(@"Date selection was canceled");
+			NSLog(@"Date selection was canceled");
 		}];
 
 		//Now just present the date selection controller using the standard iOS presentation method
@@ -54,7 +54,29 @@ pod "RMDateSelectionViewController", "~> 1.5.0"
 ###Advanced
 Every RMDateSelectionViewController has a property datePicker. With this property you have total control over the UIDatePicker that is shown in the screen.
 
-Additionally, you can use the property `modalPresentationStyle` to control how the date selection controller is shown. By default, it is set to `UIModalPresentationCustom`. But on the iPad you could use `UIModalPresentationPopover` to present the date selection controller within a popover. Don't forget to set either `popoverPresentationController.barButtonItem` or `popoverPresentationController.sourceView`/`popoverPresentationController.sourceRect` in this case.
+Additionally, you can use the property `modalPresentationStyle` to control how the date selection controller is shown. By default, it is set to `UIModalPresentationCustom`. But on the iPad you could use `UIModalPresentationPopover` to present the date selection controller within a popover. See the following example on how this works:
+
+```objc
+- (IBAction)openDateSelectionController:(id)sender {
+	RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
+
+	//Set select and (optional) cancel blocks
+	...
+
+	//On the iPad we want to show the date selection view controller within a popover.
+    if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        //First we set the modal presentation style to the popover style
+        dateSelectionVC.modalPresentationStyle = UIModalPresentationPopover;
+        
+        //Then we tell the popover presentation controller, where the popover should appear
+        dateSelectionVC.popoverPresentationController.sourceView = self.view;
+        dateSelectionVC.popoverPresentationController.sourceRect = CGRectMake(...);
+    }
+
+	//Now just present the date selection controller using the standard iOS presentation method
+	[self presentViewController:dateSelectionVC animated:YES completion:nil];
+}
+```
 
 ###How to localize the buttons? 
 [Localization](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Localization)
