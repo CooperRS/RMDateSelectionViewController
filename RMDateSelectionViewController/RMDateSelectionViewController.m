@@ -91,9 +91,14 @@ if() {
 
 @end
 
+typedef NS_ENUM(NSInteger, RMDateSelectionViewControllerAnimationStyle) {
+    RMDateSelectionViewControllerAnimationStylePresenting,
+    RMDateSelectionViewControllerAnimationStyleDismissing
+};
+
 @interface RMDateSelectionViewControllerAnimationController : NSObject <UIViewControllerAnimatedTransitioning>
 
-@property (nonatomic, assign) BOOL presenting;
+@property (nonatomic, assign) RMDateSelectionViewControllerAnimationStyle animationStyle;
 
 @end
 
@@ -101,7 +106,7 @@ if() {
 
 #pragma mark - Transition
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    if(self.presenting) {
+    if(self.animationStyle == RMDateSelectionViewControllerAnimationStylePresenting) {
         UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         if([toVC isKindOfClass:[RMDateSelectionViewController class]]) {
             RMDateSelectionViewController *dateSelectionVC = (RMDateSelectionViewController *)toVC;
@@ -112,7 +117,7 @@ if() {
                 return 1.0f;
             }
         }
-    } else {
+    } else if(self.animationStyle == RMDateSelectionViewControllerAnimationStyleDismissing) {
         return 0.3f;
     }
     
@@ -122,7 +127,7 @@ if() {
 - (void)animateTransition:(id<UIViewControllerContextTransitioning>)transitionContext {
     UIView *containerView = [transitionContext containerView];
     
-    if(self.presenting) {
+    if(self.animationStyle == RMDateSelectionViewControllerAnimationStylePresenting) {
         UIViewController *toVC = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         if([toVC isKindOfClass:[RMDateSelectionViewController class]]) {
             RMDateSelectionViewController *dateSelectionVC = (RMDateSelectionViewController *)toVC;
@@ -176,7 +181,7 @@ if() {
                 [transitionContext completeTransition:YES];
             }];
         }
-    } else {
+    } else if(self.animationStyle == RMDateSelectionViewControllerAnimationStyleDismissing) {
         UIViewController *fromVC = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
         if([fromVC isKindOfClass:[RMDateSelectionViewController class]]) {
             RMDateSelectionViewController *dateSelectionVC = (RMDateSelectionViewController *)fromVC;
@@ -752,14 +757,14 @@ static UIImage *_cancelImage;
 #pragma mark - Custom Transitions
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
     RMDateSelectionViewControllerAnimationController *animationController = [[RMDateSelectionViewControllerAnimationController alloc] init];
-    animationController.presenting = YES;
+    animationController.animationStyle = RMDateSelectionViewControllerAnimationStylePresenting;
     
     return animationController;
 }
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     RMDateSelectionViewControllerAnimationController *animationController = [[RMDateSelectionViewControllerAnimationController alloc] init];
-    animationController.presenting = NO;
+    animationController.animationStyle = RMDateSelectionViewControllerAnimationStyleDismissing;
     
     return animationController;
 }
