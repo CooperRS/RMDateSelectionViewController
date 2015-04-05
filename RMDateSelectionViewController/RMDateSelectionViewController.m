@@ -562,6 +562,13 @@ static UIImage *_cancelImage;
     self.popoverPresentationController.backgroundColor = self.backgroundView.backgroundColor;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //Date selection controller will appear, so it hasn't been dismissed, right?
+    self.hasBeenDismissed = NO;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
