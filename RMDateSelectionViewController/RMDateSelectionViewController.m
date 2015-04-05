@@ -270,7 +270,7 @@ static UIImage *_cancelImage;
     if(self) {
         self.blurEffectStyle = UIBlurEffectStyleExtraLight;
         
-        self.modalPresentationStyle = UIModalPresentationCustom;
+        self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
         self.transitioningDelegate = self;
         
         [self setupUIElements];

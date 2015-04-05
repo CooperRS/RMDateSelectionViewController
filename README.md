@@ -16,7 +16,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ##Installation
 ###CocoaPods
 ```ruby
-platform :ios, '7.0'
+platform :ios, '8.0'
 pod "RMDateSelectionViewController", "~> 1.5.0"
 ```
 
@@ -52,9 +52,9 @@ pod "RMDateSelectionViewController", "~> 1.5.0"
 	```
 
 ###Advanced
-Every RMDateSelectionViewController has a property datePicker. With this property you have total control over the UIDatePicker that is shown in the screen.
+Every RMDateSelectionViewController has a property `datePicker`. With this property you have total control over the UIDatePicker that is shown in the screen.
 
-Additionally, you can use the property `modalPresentationStyle` to control how the date selection controller is shown. By default, it is set to `UIModalPresentationCustom`. But on the iPad you could use `UIModalPresentationPopover` to present the date selection controller within a popover. See the following example on how this works:
+Additionally, you can use the property `modalPresentationStyle` to control how the date selection controller is shown. By default, it is set to `UIModalPresentationOverCurrentContext`. But on the iPad you could use `UIModalPresentationPopover` to present the date selection controller within a popover. See the following example on how this works:
 
 ```objc
 - (IBAction)openDateSelectionController:(id)sender {
@@ -78,6 +78,8 @@ Additionally, you can use the property `modalPresentationStyle` to control how t
 }
 ```
 
+Finially, RMDateSelectionViewController can be used in both your main application and an action extension showing UI.
+
 ###How to localize the buttons? 
 [Localization](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Localization)
 
@@ -85,13 +87,16 @@ Additionally, you can use the property `modalPresentationStyle` to control how t
 There is an additional documentation available provided by the CocoaPods team. Take a look at [cocoadocs.org](http://cocoadocs.org/docsets/RMDateSelectionViewController/).
 
 ## Requirements
-Works with:
 
-* Xcode 6
-* iOS 8 SDK (Sometimes, iOS 7 is fine at runtime. Read on for more information)
-* ARC (You can turn it on and off on a per file basis)
+| Compile Time  | Runtime       |
+| :------------ | :------------ |
+| Xcode 6       | iOS 8         |
+| iOS 8 SDK     |               |
+| ARC           |               |
 
-RMDateSelectionViewController uses custom transitions for presenting the date selection controller. Custom transitions are a new feature introduced by Apple in iOS 7. Unfortunately, custom transitions are totally broken in landscape mode on iOS 7. This issue has been fixed with iOS 8. So if your application supports landscape mode, this control requires iOS 8. Otherwise, iOS 7 should be fine.
+Note: ARC can be turned on and off on a per file basis.
+
+Version 1.5.0 and above of RMDateSelectionViewController use custom transitions for presenting the date selection controller. Custom transitions are a new feature introduced by Apple in iOS 7. Unfortunately, custom transitions are totally broken in landscape mode on iOS 7. This issue has been fixed with iOS 8. So if your application supports landscape mode (even on iPad), version 1.5.0 and above of this control require iOS 8. Otherwise, iOS 7 should be fine. In particular, iOS 7 is fine for version 1.4.3 and below.
 
 ## Apps using this control
 Using this control in your app or know anyone who does?
