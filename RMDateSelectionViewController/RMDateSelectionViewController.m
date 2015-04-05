@@ -557,9 +557,11 @@ static UIImage *_cancelImage;
         [self addMotionEffects];
     }
     
-    CGSize minimalSize = [self.view systemLayoutSizeFittingSize:CGSizeMake(999, 999)];
-    self.preferredContentSize = CGSizeMake(minimalSize.width, minimalSize.height+10);
-    self.popoverPresentationController.backgroundColor = self.backgroundView.backgroundColor;
+    if([self respondsToSelector:@selector(popoverPresentationController)]) {
+        CGSize minimalSize = [self.view systemLayoutSizeFittingSize:CGSizeMake(999, 999)];
+        self.preferredContentSize = CGSizeMake(minimalSize.width, minimalSize.height+10);
+        self.popoverPresentationController.backgroundColor = self.backgroundView.backgroundColor;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -631,7 +633,7 @@ static UIImage *_cancelImage;
 - (BOOL)disableBlurEffects {
     if(!NSClassFromString(@"UIBlurEffect") || !NSClassFromString(@"UIVibrancyEffect") || !NSClassFromString(@"UIVisualEffectView")) {
         return YES;
-    } else if(UIAccessibilityIsReduceTransparencyEnabled()) {
+    } else if(&UIAccessibilityIsReduceTransparencyEnabled && UIAccessibilityIsReduceTransparencyEnabled()) {
         return YES;
     }
     
@@ -639,7 +641,7 @@ static UIImage *_cancelImage;
 }
 
 - (BOOL)disableMotionEffects {
-    if(UIAccessibilityIsReduceMotionEnabled()) {
+    if(&UIAccessibilityIsReduceMotionEnabled && UIAccessibilityIsReduceMotionEnabled()) {
         return YES;
     }
     
@@ -661,7 +663,7 @@ static UIImage *_cancelImage;
 }
 
 - (BOOL)disableBouncingWhenShowing {
-    if(UIAccessibilityIsReduceMotionEnabled()) {
+    if(&UIAccessibilityIsReduceMotionEnabled && UIAccessibilityIsReduceMotionEnabled()) {
         return YES;
     }
     
