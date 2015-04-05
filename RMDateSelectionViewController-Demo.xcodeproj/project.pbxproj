@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		CA153F5518279AC000428F05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA153F5418279AC000428F05 /* QuartzCore.framework */; };
+		CA1E62491A24D3C10025A6A6 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */; };
+		CA52EE301AC42C760032E877 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA52EE2F1AC42C760032E877 /* MainInterface.storyboard */; };
+		CA52EE331AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		CA56843C1AD1AB3800C55FFF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
+		CA56843E1AD1AB5000C55FFF /* RMPresentationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA56843D1AD1AB5000C55FFF /* RMPresentationTests.m */; };
+		CA5684521AD1AB6300C55FFF /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA5684491AD1AB5F00C55FFF /* libKIF.a */; };
 		CAA60A3D181C1A0200198490 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAA60A3F181C1A0200198490 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
 		CAA60A41181C1A0200198490 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A40181C1A0200198490 /* UIKit.framework */; };
@@ -17,56 +23,60 @@
 		CAA60A55181C1A0200198490 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A54181C1A0200198490 /* Images.xcassets */; };
 		CAA60A75181C1A8700198490 /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
 		CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A77181C1ACF00198490 /* Main.storyboard */; };
-		CAD0DABA1A580CD300EA2734 /* libKIF.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD0DAB11A580C7F00EA2734 /* libKIF.a */; };
-		CAD0DABB1A580CDD00EA2734 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3E181C1A0200198490 /* CoreGraphics.framework */; };
-		CAD0DABE1A580EC900EA2734 /* RMPresentationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD0DABD1A580EC900EA2734 /* RMPresentationTests.m */; };
+		CACF16BD1AC42CE4005CDB0F /* RMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A52181C1A0200198490 /* RMViewController.m */; };
+		CACF16BE1AC42CE6005CDB0F /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
 		CAE29067182E287500272C55 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A3C181C1A0200198490 /* Foundation.framework */; };
 		CAE29068182E287500272C55 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAA60A40181C1A0200198490 /* UIKit.framework */; };
-		CAE2906E182E287500272C55 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CAE2906C182E287500272C55 /* InfoPlist.strings */; };
 		CAE29078182E2A2F00272C55 /* NSDate+Rounding-Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */; };
 		CAE29079182E2BD500272C55 /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */; };
-		CAFFF2C019A732C400432B37 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFFF2BF19A732C400432B37 /* Main_iPad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CAD0DAB01A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+		CA52EE311AC42C760032E877 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			containerPortal = CAA60A31181C1A0200198490 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA52EE271AC42C760032E877;
+			remoteInfo = "RMDateSelectionViewController-DemoExtension";
+		};
+		CA5684481AD1AB5F00C55FFF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EABD46AA1857A0C700A5F081;
 			remoteInfo = KIF;
 		};
-		CAD0DAB21A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+		CA56844A1AD1AB5F00C55FFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			containerPortal = CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB72047C1680DDAD00278DA2;
 			remoteInfo = "KIF-OCUnit";
 		};
-		CAD0DAB41A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+		CA56844C1AD1AB5F00C55FFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			containerPortal = CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB60ECC1177F8C83005A041A;
 			remoteInfo = "Test Host";
 		};
-		CAD0DAB61A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+		CA56844E1AD1AB5F00C55FFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			containerPortal = CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EABD46CD1857A0F300A5F081;
 			remoteInfo = "KIF Tests";
 		};
-		CAD0DAB81A580C7F00EA2734 /* PBXContainerItemProxy */ = {
+		CA5684501AD1AB5F00C55FFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			containerPortal = CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
 			remoteInfo = "KIF Tests-OCUnit";
 		};
-		CAD0DABF1A582CBB00EA2734 /* PBXContainerItemProxy */ = {
+		CA5684531AD1AB6A00C55FFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+			containerPortal = CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = EABD46791857A0C700A5F081;
 			remoteInfo = KIF;
@@ -80,8 +90,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CA52EE371AC42C760032E877 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				CA52EE331AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		CA153F5418279AC000428F05 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
+		CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "RMDateSelectionViewController-DemoExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA52EE2B1AC42C760032E877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CA52EE2F1AC42C760032E877 /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		CA56843D1AD1AB5000C55FFF /* RMPresentationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPresentationTests.m; sourceTree = "<group>"; };
+		CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KIF.xcodeproj; path = External/KIF/KIF.xcodeproj; sourceTree = "<group>"; };
 		CAA60A39181C1A0200198490 /* RMDateSelectionViewController-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RMDateSelectionViewController-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA60A3C181C1A0200198490 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CAA60A3E181C1A0200198490 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,17 +127,20 @@
 		CAA60A72181C1A8700198490 /* RMDateSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMDateSelectionViewController.h; path = RMDateSelectionViewController/RMDateSelectionViewController.h; sourceTree = SOURCE_ROOT; };
 		CAA60A73181C1A8700198490 /* RMDateSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMDateSelectionViewController.m; path = RMDateSelectionViewController/RMDateSelectionViewController.m; sourceTree = SOURCE_ROOT; };
 		CAA60A77181C1ACF00198490 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KIF.xcodeproj; path = External/KIF/KIF.xcodeproj; sourceTree = "<group>"; };
-		CAD0DABD1A580EC900EA2734 /* RMPresentationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RMPresentationTests.m; sourceTree = "<group>"; };
 		CAE29065182E287500272C55 /* RMDateSelectionViewController-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RMDateSelectionViewController-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAE2906B182E287500272C55 /* RMDateSelectionViewController-Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RMDateSelectionViewController-Tests-Info.plist"; sourceTree = "<group>"; };
-		CAE2906D182E287500272C55 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CAE29071182E287500272C55 /* RMDateSelectionViewController-Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RMDateSelectionViewController-Tests-Prefix.pch"; sourceTree = "<group>"; };
 		CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Rounding-Tests.m"; sourceTree = "<group>"; };
-		CAFFF2BF19A732C400432B37 /* Main_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main_iPad.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CA52EE251AC42C760032E877 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAA60A36181C1A0200198490 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -123,8 +156,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAD0DABB1A580CDD00EA2734 /* CoreGraphics.framework in Frameworks */,
-				CAD0DABA1A580CD300EA2734 /* libKIF.a in Frameworks */,
+				CA5684521AD1AB6300C55FFF /* libKIF.a in Frameworks */,
+				CA56843C1AD1AB3800C55FFF /* CoreGraphics.framework in Frameworks */,
 				CAE29068182E287500272C55 /* UIKit.framework in Frameworks */,
 				CAE29067182E287500272C55 /* Foundation.framework in Frameworks */,
 			);
@@ -133,11 +166,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA52EE291AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */ = {
+			isa = PBXGroup;
+			children = (
+				CA52EE2F1AC42C760032E877 /* MainInterface.storyboard */,
+				CA52EE2A1AC42C760032E877 /* Supporting Files */,
+			);
+			path = "RMDateSelectionViewController-DemoExtension";
+			sourceTree = "<group>";
+		};
+		CA52EE2A1AC42C760032E877 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CA52EE2B1AC42C760032E877 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CA5684401AD1AB5F00C55FFF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CA5684491AD1AB5F00C55FFF /* libKIF.a */,
+				CA56844B1AD1AB5F00C55FFF /* libKIF-OCUnit.a */,
+				CA56844D1AD1AB5F00C55FFF /* Test Host.app */,
+				CA56844F1AD1AB5F00C55FFF /* KIF Tests - XCTest.xctest */,
+				CA5684511AD1AB5F00C55FFF /* KIF Tests-OCUnit.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CAA60A30181C1A0200198490 = {
 			isa = PBXGroup;
 			children = (
 				CAA60A71181C1A7600198490 /* RMDateSelectionViewController */,
 				CAA60A42181C1A0200198490 /* RMDateSelectionViewController-Demo */,
+				CA52EE291AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */,
 				CAE29069182E287500272C55 /* RMDateSelectionViewController-Tests */,
 				CAA60A3B181C1A0200198490 /* Frameworks */,
 				CAA60A3A181C1A0200198490 /* Products */,
@@ -149,6 +212,7 @@
 			children = (
 				CAA60A39181C1A0200198490 /* RMDateSelectionViewController-Demo.app */,
 				CAE29065182E287500272C55 /* RMDateSelectionViewController-Tests.xctest */,
+				CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,7 +220,7 @@
 		CAA60A3B181C1A0200198490 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */,
+				CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */,
 				CA153F5418279AC000428F05 /* QuartzCore.framework */,
 				CAA60A3C181C1A0200198490 /* Foundation.framework */,
 				CAA60A3E181C1A0200198490 /* CoreGraphics.framework */,
@@ -168,10 +232,10 @@
 		CAA60A42181C1A0200198490 /* RMDateSelectionViewController-Demo */ = {
 			isa = PBXGroup;
 			children = (
+				CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */,
 				CAA60A4B181C1A0200198490 /* RMAppDelegate.h */,
 				CAA60A4C181C1A0200198490 /* RMAppDelegate.m */,
 				CAA60A77181C1ACF00198490 /* Main.storyboard */,
-				CAFFF2BF19A732C400432B37 /* Main_iPad.storyboard */,
 				CAA60A51181C1A0200198490 /* RMViewController.h */,
 				CAA60A52181C1A0200198490 /* RMViewController.m */,
 				CAA60A54181C1A0200198490 /* Images.xcassets */,
@@ -200,22 +264,10 @@
 			path = "RMDateSelectionViewController-Demo";
 			sourceTree = "<group>";
 		};
-		CAD0DAA81A580C7F00EA2734 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				CAD0DAB11A580C7F00EA2734 /* libKIF.a */,
-				CAD0DAB31A580C7F00EA2734 /* libKIF-OCUnit.a */,
-				CAD0DAB51A580C7F00EA2734 /* Test Host.app */,
-				CAD0DAB71A580C7F00EA2734 /* KIF Tests - XCTest.xctest */,
-				CAD0DAB91A580C7F00EA2734 /* KIF Tests-OCUnit.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		CAE29069182E287500272C55 /* RMDateSelectionViewController-Tests */ = {
 			isa = PBXGroup;
 			children = (
-				CAD0DABD1A580EC900EA2734 /* RMPresentationTests.m */,
+				CA56843D1AD1AB5000C55FFF /* RMPresentationTests.m */,
 				CAE29077182E2A2F00272C55 /* NSDate+Rounding-Tests.m */,
 				CAE2906A182E287500272C55 /* Supporting Files */,
 			);
@@ -226,7 +278,6 @@
 			isa = PBXGroup;
 			children = (
 				CAE2906B182E287500272C55 /* RMDateSelectionViewController-Tests-Info.plist */,
-				CAE2906C182E287500272C55 /* InfoPlist.strings */,
 				CAE29071182E287500272C55 /* RMDateSelectionViewController-Tests-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -235,6 +286,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CA52EE271AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA52EE361AC42C760032E877 /* Build configuration list for PBXNativeTarget "RMDateSelectionViewController-DemoExtension" */;
+			buildPhases = (
+				CA52EE241AC42C760032E877 /* Sources */,
+				CA52EE251AC42C760032E877 /* Frameworks */,
+				CA52EE261AC42C760032E877 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "RMDateSelectionViewController-DemoExtension";
+			productName = "RMDateSelectionViewController-DemoExtension";
+			productReference = CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		CAA60A38181C1A0200198490 /* RMDateSelectionViewController-Demo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CAA60A6B181C1A0200198490 /* Build configuration list for PBXNativeTarget "RMDateSelectionViewController-Demo" */;
@@ -242,10 +310,12 @@
 				CAA60A35181C1A0200198490 /* Sources */,
 				CAA60A36181C1A0200198490 /* Frameworks */,
 				CAA60A37181C1A0200198490 /* Resources */,
+				CA52EE371AC42C760032E877 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CA52EE321AC42C760032E877 /* PBXTargetDependency */,
 			);
 			name = "RMDateSelectionViewController-Demo";
 			productName = "RMDateSelectionViewController-Demo";
@@ -263,7 +333,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				CAD0DAC01A582CBB00EA2734 /* PBXTargetDependency */,
+				CA5684541AD1AB6A00C55FFF /* PBXTargetDependency */,
 				CAE29073182E287500272C55 /* PBXTargetDependency */,
 			);
 			name = "RMDateSelectionViewController-Tests";
@@ -281,6 +351,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Roland Moers";
 				TargetAttributes = {
+					CA52EE271AC42C760032E877 = {
+						CreatedOnToolsVersion = 6.2;
+					};
 					CAE29064182E287500272C55 = {
 						TestTargetID = CAA60A38181C1A0200198490;
 					};
@@ -293,75 +366,77 @@
 			knownRegions = (
 				en,
 				Base,
-				de,
-				"zh-Hans",
-				"zh-Hant",
-				es,
-				nl,
-				ru,
-				vi,
 			);
 			mainGroup = CAA60A30181C1A0200198490;
 			productRefGroup = CAA60A3A181C1A0200198490 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = CAD0DAA81A580C7F00EA2734 /* Products */;
-					ProjectRef = CAD0DAA71A580C7F00EA2734 /* KIF.xcodeproj */;
+					ProductGroup = CA5684401AD1AB5F00C55FFF /* Products */;
+					ProjectRef = CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				CAA60A38181C1A0200198490 /* RMDateSelectionViewController-Demo */,
 				CAE29064182E287500272C55 /* RMDateSelectionViewController-Tests */,
+				CA52EE271AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		CAD0DAB11A580C7F00EA2734 /* libKIF.a */ = {
+		CA5684491AD1AB5F00C55FFF /* libKIF.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libKIF.a;
-			remoteRef = CAD0DAB01A580C7F00EA2734 /* PBXContainerItemProxy */;
+			remoteRef = CA5684481AD1AB5F00C55FFF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CAD0DAB31A580C7F00EA2734 /* libKIF-OCUnit.a */ = {
+		CA56844B1AD1AB5F00C55FFF /* libKIF-OCUnit.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = "libKIF-OCUnit.a";
-			remoteRef = CAD0DAB21A580C7F00EA2734 /* PBXContainerItemProxy */;
+			remoteRef = CA56844A1AD1AB5F00C55FFF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CAD0DAB51A580C7F00EA2734 /* Test Host.app */ = {
+		CA56844D1AD1AB5F00C55FFF /* Test Host.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = "Test Host.app";
-			remoteRef = CAD0DAB41A580C7F00EA2734 /* PBXContainerItemProxy */;
+			remoteRef = CA56844C1AD1AB5F00C55FFF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CAD0DAB71A580C7F00EA2734 /* KIF Tests - XCTest.xctest */ = {
+		CA56844F1AD1AB5F00C55FFF /* KIF Tests - XCTest.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KIF Tests - XCTest.xctest";
-			remoteRef = CAD0DAB61A580C7F00EA2734 /* PBXContainerItemProxy */;
+			remoteRef = CA56844E1AD1AB5F00C55FFF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		CAD0DAB91A580C7F00EA2734 /* KIF Tests-OCUnit.octest */ = {
+		CA5684511AD1AB5F00C55FFF /* KIF Tests-OCUnit.octest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "KIF Tests-OCUnit.octest";
-			remoteRef = CAD0DAB81A580C7F00EA2734 /* PBXContainerItemProxy */;
+			remoteRef = CA5684501AD1AB5F00C55FFF /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CA52EE261AC42C760032E877 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA52EE301AC42C760032E877 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAA60A37181C1A0200198490 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAFFF2C019A732C400432B37 /* Main_iPad.storyboard in Resources */,
+				CA1E62491A24D3C10025A6A6 /* Launch Screen.xib in Resources */,
 				CAA60A55181C1A0200198490 /* Images.xcassets in Resources */,
 				CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */,
 			);
@@ -371,13 +446,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAE2906E182E287500272C55 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CA52EE241AC42C760032E877 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CACF16BE1AC42CE6005CDB0F /* RMDateSelectionViewController.m in Sources */,
+				CACF16BD1AC42CE4005CDB0F /* RMViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CAA60A35181C1A0200198490 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -393,7 +476,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAD0DABE1A580EC900EA2734 /* RMPresentationTests.m in Sources */,
+				CA56843E1AD1AB5000C55FFF /* RMPresentationTests.m in Sources */,
 				CAE29079182E2BD500272C55 /* RMDateSelectionViewController.m in Sources */,
 				CAE29078182E2A2F00272C55 /* NSDate+Rounding-Tests.m in Sources */,
 			);
@@ -402,10 +485,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CAD0DAC01A582CBB00EA2734 /* PBXTargetDependency */ = {
+		CA52EE321AC42C760032E877 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA52EE271AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */;
+			targetProxy = CA52EE311AC42C760032E877 /* PBXContainerItemProxy */;
+		};
+		CA5684541AD1AB6A00C55FFF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KIF;
-			targetProxy = CAD0DABF1A582CBB00EA2734 /* PBXContainerItemProxy */;
+			targetProxy = CA5684531AD1AB6A00C55FFF /* PBXContainerItemProxy */;
 		};
 		CAE29073182E287500272C55 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -414,18 +502,40 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		CAE2906C182E287500272C55 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CAE2906D182E287500272C55 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
+		CA52EE341AC42C760032E877 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "RMDateSelectionViewController-DemoExtension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CA52EE351AC42C760032E877 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = "RMDateSelectionViewController-DemoExtension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		CAA60A69181C1A0200198490 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -458,7 +568,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -490,7 +600,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -542,6 +652,10 @@
 				INFOPLIST_FILE = "RMDateSelectionViewController-Tests/RMDateSelectionViewController-Tests-Info.plist";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-framework",
+					IOKit,
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -564,6 +678,10 @@
 				INFOPLIST_FILE = "RMDateSelectionViewController-Tests/RMDateSelectionViewController-Tests-Info.plist";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-framework",
+					IOKit,
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -575,6 +693,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CA52EE361AC42C760032E877 /* Build configuration list for PBXNativeTarget "RMDateSelectionViewController-DemoExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA52EE341AC42C760032E877 /* Debug */,
+				CA52EE351AC42C760032E877 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CAA60A34181C1A0200198490 /* Build configuration list for PBXProject "RMDateSelectionViewController-Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

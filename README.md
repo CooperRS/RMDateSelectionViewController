@@ -16,8 +16,8 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ##Installation
 ###CocoaPods
 ```ruby
-platform :ios, '7.0'
-pod "RMDateSelectionViewController", "~> 1.4.3"
+platform :ios, '8.0'
+pod "RMDateSelectionViewController", "~> 1.5.0"
 ```
 
 ###Manual
@@ -31,39 +31,54 @@ pod "RMDateSelectionViewController", "~> 1.4.3"
 	```objc
 	#import "RMDateSelectionViewController.h"
 	```
-2. Implement the `RMDateSelectionViewControllerDelegate` protocol
-	
-	```objc
-	@interface YourViewController () <RMDateSelectionViewControllerDelegate>
-	@end
-	```
-	
-	```objc
-	#pragma mark - RMDateSelectionViewController Delegates
-	- (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate {
-		//Do something
-	}
-
-	- (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc {
-		//Do something else
-	}
-	```
-	
-3. Open date selection view controller
+2. Create a date selection view controller, set select and cancel block and present the view controller
 	
 	```objc
 	- (IBAction)openDateSelectionController:(id)sender {
-    	RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
-    	dateSelectionVC.delegate = self;
-    	
-   		[dateSelectionVC show];
+		RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
+
+		//Set select and (optional) cancel blocks
+		[dateSelectionVC setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
+			NSLog(@"Successfully selected date: %@", date);
+		}];
+
+		[dateSelectionVC setCancelButtonAction:^(RMDateSelectionViewController *controller) {
+			NSLog(@"Date selection was canceled");
+		}];
+
+		//Now just present the date selection controller using the standard iOS presentation method
+		[self presentViewController:dateSelectionVC animated:YES completion:nil];
 	}
 	```
 
 ###Advanced
-Every RMDateSelectionViewController has a property datePicker. It is available after `show` has been called. With this property you have total control over the UIDatePicker that is shown in the screen.
+Every RMDateSelectionViewController has a property `datePicker`. With this property you have total control over the UIDatePicker that is shown in the screen.
 
-Additionally, there is a method called `showFromViewController:`. With this method you can control where the your date picker is shown. For example on an iPad this method can be used to show the date picker in a popover.
+Additionally, you can use the property `modalPresentationStyle` to control how the date selection controller is shown. By default, it is set to `UIModalPresentationOverCurrentContext`. But on the iPad you could use `UIModalPresentationPopover` to present the date selection controller within a popover. See the following example on how this works:
+
+```objc
+- (IBAction)openDateSelectionController:(id)sender {
+	RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
+
+	//Set select and (optional) cancel blocks
+	...
+
+	//On the iPad we want to show the date selection view controller within a popover.
+    if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        //First we set the modal presentation style to the popover style
+        dateSelectionVC.modalPresentationStyle = UIModalPresentationPopover;
+        
+        //Then we tell the popover presentation controller, where the popover should appear
+        dateSelectionVC.popoverPresentationController.sourceView = self.view;
+        dateSelectionVC.popoverPresentationController.sourceRect = CGRectMake(...);
+    }
+
+	//Now just present the date selection controller using the standard iOS presentation method
+	[self presentViewController:dateSelectionVC animated:YES completion:nil];
+}
+```
+
+Finially, RMDateSelectionViewController can be used in both your main application and an action extension showing UI.
 
 ###How to localize the buttons? 
 [Localization](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Localization)
@@ -72,15 +87,16 @@ Additionally, there is a method called `showFromViewController:`. With this meth
 There is an additional documentation available provided by the CocoaPods team. Take a look at [cocoadocs.org](http://cocoadocs.org/docsets/RMDateSelectionViewController/).
 
 ## Requirements
-Works with:
 
-* Xcode 6
-* iOS 8 SDK
-* ARC (You can turn it on and off on a per file basis)
+| Compile Time  | Runtime       |
+| :------------ | :------------ |
+| Xcode 6       | iOS 8         |
+| iOS 8 SDK     |               |
+| ARC           |               |
 
-iOS 8 SDK is only needed for compiling (as it uses the blur features provided by iOS 8 SDK). At runtime the control only needs iOS 7 or later.
+Note: ARC can be turned on and off on a per file basis.
 
-If you absolutely need to use iOS 7 SDK you can take a look at the iOS 7 branch called [1.3.x](https://github.com/CooperRS/RMDateSelectionViewController/tree/1.3.x)
+Version 1.5.0 and above of RMDateSelectionViewController use custom transitions for presenting the date selection controller. Custom transitions are a new feature introduced by Apple in iOS 7. Unfortunately, custom transitions are totally broken in landscape mode on iOS 7. This issue has been fixed with iOS 8. So if your application supports landscape mode (even on iPad), version 1.5.0 and above of this control require iOS 8. Otherwise, iOS 7 should be fine. In particular, iOS 7 is fine for version 1.4.3 and below.
 
 ## Apps using this control
 Using this control in your app or know anyone who does?
@@ -88,30 +104,37 @@ Using this control in your app or know anyone who does?
 Feel free to add the app to this list: [Apps using RMDateSelectionViewController](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Apps-using-RMDateSelectionViewController)
 
 ##Credits
-Localizations:
-* Robin Franssen (Dutch)
-* Anton Rusanov (Russian)
-* Pedro Ventura (Spanish)
-* Vincent Xue (Chinese)
-* Vinh Nguyen (Vietnamese)
-
 Code contributions:
+* AnthonyMDev
+    * Cancel delegate method should be optional
+* Digeon Benjamin 
+    * Delegate method when now button is pressed
+    * Cancel delegate method is called when background view is tapped
+* Denis Andrasec
+    * Bugfixes
 * Robin Franssen
 	* Block support
-* Digeon Benjamin 
-	* Delegate method when now button is pressed
-	* Cancel delegate method is called when background view is tapped
-* Denis Andrasec
-	* Bugfixes
-* AnthonyMDev
-	* Cancel delegate method should be optional
+* Scott Chou
+    * Images for cancel and select button
 * steveoleary
 	* Bugfixes
+
+Localizations:
+* Vincent Xue (Chinese)
+* Alex Studnička (Czech)
+* Robin Franssen (Dutch)
+* tobiasgr (Danish)
+* Thomas Besnehard (French)
+* Heberti Almeida (Portuguese)
+* Anton Rusanov (Russian)
+* Pedro Ventura (Spanish)
+* Aron Manucheri (Swedish)
+* Vinh Nguyen (Vietnamese)
 
 I want to thank everyone who has contributed code and/or time to this project!
 
 ## License (MIT License)
-Copyright (c) 2013 Roland Moers
+Copyright (c) 2013-2015 Roland Moers
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

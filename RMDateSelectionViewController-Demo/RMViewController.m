@@ -26,9 +26,7 @@
 
 #import "RMViewController.h"
 
-@interface RMViewController () <RMDateSelectionViewControllerDelegate>
-
-@property (nonatomic, weak) IBOutlet UILabel *selectedDateLabel;
+@interface RMViewController ()
 
 @property (nonatomic, weak) IBOutlet UISwitch *blackSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch *blurSwitch;
@@ -39,27 +37,21 @@
 
 @implementation RMViewController
 
-#pragma mark - Init and Dealloc
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self updateSelectedDateLabelWithDate:[NSDate dateWithTimeIntervalSinceReferenceDate:0]];
-}
-
-#pragma mark - Helper
-- (void)updateSelectedDateLabelWithDate:(NSDate *)aDate {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateStyle = NSDateFormatterShortStyle;
-    formatter.timeStyle = NSDateFormatterShortStyle;
-    
-    self.selectedDateLabel.text = [formatter stringFromDate:aDate];
-}
-
 #pragma mark - Actions
 - (IBAction)openDateSelectionController:(id)sender {
     RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
-    dateSelectionVC.delegate = self;
+    
+    //Set a title for the date selection
     dateSelectionVC.titleLabel.text = @"This is an example title.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
+    
+    //Set select and (optional) cancel blocks
+    [dateSelectionVC setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
+        NSLog(@"Successfully selected date: %@", date);
+    }];
+    
+    [dateSelectionVC setCancelButtonAction:^(RMDateSelectionViewController *controller) {
+        NSLog(@"Date selection was canceled");
+    }];
     
     //You can enable or disable blur, bouncing and motion effects
     dateSelectionVC.disableBouncingWhenShowing = !self.bouncingSwitch.on;
@@ -80,73 +72,28 @@
     dateSelectionVC.datePicker.minuteInterval = 5;
     dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     
-    //The example project is universal. So we first need to check whether we run on an iPhone or an iPad.
-    if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        //OK, running on an iPhone. The following lines demonstrate the two ways to show the date selection view controller on iPhones:
-        //(Note: These two methods also work an iPads.)
+    //On the iPad we want to show the date selection view controller within a popover. Fortunately, we can use iOS 8 API for this! :)
+    //(Of course only if we are running on iOS 8 or later)
+    if([dateSelectionVC respondsToSelector:@selector(popoverPresentationController)] && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+        //First we set the modal presentation style to the popover style
+        dateSelectionVC.modalPresentationStyle = UIModalPresentationPopover;
         
-        // 1. Just show the date selection view controller (make sure the delegate property is assigned)
-        [dateSelectionVC show];
-        
-        // 2. Instead of using a delegate you can also pass blocks when showing the date selection view controller
-        //[dateSelectionVC showWithSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
-        //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
-        //
-        //    [self updateSelectedDateLabelWithDate:aDate];
-        //} andCancelHandler:^(RMDateSelectionViewController *vc) {
-        //    NSLog(@"Date selection was canceled (with block)");
-        //}];
-    } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-        //OK, running on an iPad. The following lines demonstrate the four special ways of showing the date selection view controller on iPads:
-        
-        // 1. Show the date selection view controller from a particular view controller (make sure the delegate property is assigned).
-        //    This method can be used to show the date selection view controller within popovers.
-        //    (Note: We do not use self as the view controller, as showing a date selection view controller from a table view controller
-        //           is not supported due to UIKit limitations.)
-        //[dateSelectionVC showFromViewController:self.navigationController];
-        
-        // 2. As with the two ways of showing the date selection view controller on iPhones, we can also use a block based API.
-        //[dateSelectionVC showFromViewController:self.navigationController withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
-        //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
-        //
-        //    [self updateSelectedDateLabelWithDate:aDate];
-        //} andCancelHandler:^(RMDateSelectionViewController *vc) {
-        //    NSLog(@"Date selection was canceled (with block)");
-        //}];
-        
-        // 3. Show the date selection view controller using a UIPopoverController. The rect and the view are used to tell the
-        //    UIPopoverController where to show up.
-        [dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] inView:self.view];
-        
-        // 4. The date selectionview controller can also be shown within a popover while also using block based API.
-        //[dateSelectionVC showFromRect:[self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]] inView:self.view withSelectionHandler:^(RMDateSelectionViewController *vc, NSDate *aDate) {
-        //    NSLog(@"Successfully selected date: %@ (With block)", aDate);
-        //
-        //    [self updateSelectedDateLabelWithDate:aDate];
-        //} andCancelHandler:^(RMDateSelectionViewController *vc) {
-        //    NSLog(@"Date selection was canceled (with block)");
-        //}];
+        //Then we tell the popover presentation controller, where the popover should appear
+        dateSelectionVC.popoverPresentationController.sourceView = self.tableView;
+        dateSelectionVC.popoverPresentationController.sourceRect = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     }
+    
+    //Now just present the date selection controller using the standard iOS presentation method
+    [self presentViewController:dateSelectionVC animated:YES completion:nil];
 }
 
 #pragma mark - UITableView Delegates
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.section == 0 && indexPath.row == 1) {
+    if(indexPath.section == 0 && indexPath.row == 0) {
         [self openDateSelectionController:self];
     }
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark - RMDAteSelectionViewController Delegates
-- (void)dateSelectionViewController:(RMDateSelectionViewController *)vc didSelectDate:(NSDate *)aDate {
-    NSLog(@"Successfully selected date: %@", aDate);
-    
-    [self updateSelectedDateLabelWithDate:aDate];
-}
-
-- (void)dateSelectionViewControllerDidCancel:(RMDateSelectionViewController *)vc {
-    NSLog(@"Date selection was canceled");
 }
 
 @end

@@ -28,7 +28,7 @@
 
 #import "RMDateSelectionViewController.h"
 
-@interface RMViewController : UITableViewController <RMDateSelectionViewControllerDelegate>
+@interface RMViewController : UITableViewController
 
 - (IBAction)openDateSelectionController:(id)sender;
 

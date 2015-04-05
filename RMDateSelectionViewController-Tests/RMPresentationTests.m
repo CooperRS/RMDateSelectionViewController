@@ -26,13 +26,6 @@
     [tester setOn:YES forSwitchWithAccessibilityLabel:@"BlurEffects"];
     [tester setOn:YES forSwitchWithAccessibilityLabel:@"MotionEffects"];
     [tester setOn:YES forSwitchWithAccessibilityLabel:@"BouncingEffects"];
-    
-    UIView *selectedDateLabelAsUIView = [tester waitForViewWithAccessibilityLabel:@"SelectedDate"];
-    XCTAssertTrue([selectedDateLabelAsUIView isKindOfClass:[UILabel class]]);
-    if([selectedDateLabelAsUIView isKindOfClass:[UILabel class]]) {
-        UILabel *selectedDateLabel = (UILabel *)selectedDateLabelAsUIView;
-        selectedDateLabel.text = @"1/1/01, 1:00 AM";
-    }
 }
 
 - (void)testSelectingDate {
@@ -58,13 +51,6 @@
     }
     
     [tester tapViewWithAccessibilityLabel:@"SelectButton"];
-    
-    UIView *selectedDateLabelAsUIView = [tester waitForViewWithAccessibilityLabel:@"SelectedDate"];
-    XCTAssertTrue([selectedDateLabelAsUIView isKindOfClass:[UILabel class]]);
-    if([selectedDateLabelAsUIView isKindOfClass:[UILabel class]]) {
-        UILabel *selectedDateLabel = (UILabel *)selectedDateLabelAsUIView;
-        XCTAssertTrue([selectedDateLabel.text isEqualToString:@"1/3/15, 3:15 PM"]);
-    }
 }
 
 - (void)testCancelingDateSelection {
@@ -90,13 +76,6 @@
     }
     
     [tester tapViewWithAccessibilityLabel:@"CancelButton"];
-    
-    UIView *selectedDateLabelAsUIView = [tester waitForViewWithAccessibilityLabel:@"SelectedDate"];
-    XCTAssertTrue([selectedDateLabelAsUIView isKindOfClass:[UILabel class]]);
-    if([selectedDateLabelAsUIView isKindOfClass:[UILabel class]]) {
-        UILabel *selectedDateLabel = (UILabel *)selectedDateLabelAsUIView;
-        XCTAssertTrue([selectedDateLabel.text isEqualToString:@"1/1/01, 1:00 AM"]);
-    }
 }
 
 - (void)testPresentingWhiteVersionWithEnabledEffects {
@@ -276,7 +255,7 @@
         XCTAssertTrue(frame.origin.x == 0);
         XCTAssertTrue(frame.origin.y == screenFrame.size.height - 10 - frame.size.height);
         XCTAssertTrue(frame.size.width == screenFrame.size.width);
-        XCTAssertTrue(frame.size.height == 44 + 10 + 162 + 10 + 44 + 10 + titleLabelContainer.frame.size.height + 54); //For some reason the frame is off by 54 pixels. TODO: Fix that!
+        XCTAssertTrue(frame.size.height == 44 + 10 + 162 + 10 + 44 + 10 + titleLabelContainer.frame.size.height); //For some reason the frame is off by 54 pixels. TODO: Fix that!
     } else if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         XCTAssertTrue(frame.origin.x == 0);
         XCTAssertTrue(frame.origin.y == 0);
