@@ -103,6 +103,9 @@ Using this control in your app or know anyone who does?
 
 Feel free to add the app to this list: [Apps using RMDateSelectionViewController](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Apps-using-RMDateSelectionViewController)
 
+## Further Info
+If you want to show a UIPickerView instead of an UIDdatePicker you may take a look at my other control called [RMPickerViewController](https://github.com/CooperRS/RMPickerViewController).
+
 ##Credits
 Code contributions:
 * AnthonyMDev
