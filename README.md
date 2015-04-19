@@ -17,7 +17,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ###CocoaPods
 ```ruby
 platform :ios, '8.0'
-pod "RMDateSelectionViewController", "~> 1.5.0"
+pod "RMDateSelectionViewController", "~> 1.5.1"
 ```
 
 ###Manual
@@ -102,6 +102,9 @@ Version 1.5.0 and above of RMDateSelectionViewController use custom transitions 
 Using this control in your app or know anyone who does?
 
 Feel free to add the app to this list: [Apps using RMDateSelectionViewController](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Apps-using-RMDateSelectionViewController)
+
+## Further Info
+If you want to show an UIPickerView instead of an UIDDatePicker, you may take a look at my other control called [RMPickerViewController](https://github.com/CooperRS/RMPickerViewController).
 
 ##Credits
 Code contributions:
