@@ -23,6 +23,7 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
 //
+#import "RMDateSelectionViewController.h"
 
 #import "RMDateSelectionViewController.h"
 #import <QuartzCore/QuartzCore.h>
@@ -217,6 +218,9 @@ typedef NS_ENUM(NSInteger, RMDateSelectionViewControllerAnimationStyle) {
 + (instancetype)dateSelectionController {
     return [[RMDateSelectionViewController alloc] init];
 }
++ (instancetype)dateSelectionControllerWithPicker:(id)picker {
+    return [[RMDateSelectionViewController alloc] initWithPicker:picker];
+}
 
 static NSString *_localizedNowTitle = @"Now";
 static NSString *_localizedCancelTitle = @"Cancel";
@@ -282,12 +286,23 @@ static UIImage *_cancelImage;
     }
     return self;
 }
+- (id)initWithPicker:(id)picker {
+    self = [super init];
+    if(self) {
+        self.blurEffectStyle = UIBlurEffectStyleExtraLight;
+        self.datePicker = picker;
+        [self setupUIElements];
+    }
+    return self;
+}
 
 - (void)setupUIElements {
     //Instantiate elements
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     self.nowButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+    if(!self.datePicker){
+        self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+    }
     
     self.cancelAndSelectSeperator = [[UIView alloc] initWithFrame:CGRectZero];
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
