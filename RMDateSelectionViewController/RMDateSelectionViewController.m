@@ -26,11 +26,25 @@
 
 #import "RMDateSelectionViewController.h"
 
+#pragma mark - Defines
+
+#define RM_DATE_PICKER_HEIGHT_PORTRAIT 216
+#define RM_DATE_PICKER_HEIGHT_LANDSCAPE 162
+
+#if !__has_feature(attribute_availability_app_extension)
+//Normal App
+#define RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE UIInterfaceOrientationIsLandscape([UIApplication sharedApplication].statusBarOrientation)
+#else
+//App Extension
+#define RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE [UIScreen mainScreen].bounds.size.height < [UIScreen mainScreen].bounds.size.width
+#endif
+
 #pragma mark - Interfaces
 
 @interface RMDateSelectionViewController ()
 
 @property (nonatomic, readwrite) UIDatePicker *datePicker;
+@property (nonatomic, weak) NSLayoutConstraint *datePickerHeightConstraint;
 
 @end
 
@@ -45,7 +59,55 @@
     controller.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     controller.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
     
+    controller.datePickerHeightConstraint = [NSLayoutConstraint constraintWithItem:controller.datePicker attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:0];
+    
+    if(RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE) {
+        controller.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
+    } else {
+        controller.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
+    }
+    
+    [controller.datePicker addConstraint:controller.datePickerHeightConstraint];
+    
     return controller;
+}
+
+#pragma mark - Init and Dealloc
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate) name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidChangeStatusBarOrientationNotification object:nil];
+    
+    [super viewDidDisappear:animated];
+}
+
+#pragma mark - Orientation
+- (void)didRotate {
+    NSTimeInterval duration = 0.4;
+    
+    if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        duration = 0.3;
+        
+        if(RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE) {
+            self.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
+        } else {
+            self.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
+        }
+        
+        [self.datePicker setNeedsUpdateConstraints];
+        [self.datePicker layoutIfNeeded];
+    }
+    
+    [self.view.superview setNeedsUpdateConstraints];
+    __weak RMDateSelectionViewController *blockself = self;
+    [UIView animateWithDuration:duration delay:0 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
+        [blockself.view.superview layoutIfNeeded];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 #pragma mark - Properties
