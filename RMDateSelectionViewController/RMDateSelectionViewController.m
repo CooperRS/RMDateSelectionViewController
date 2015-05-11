@@ -30,8 +30,6 @@
 
 @interface RMDateSelectionViewController ()
 
-@property (nonatomic, strong) UIView *backgroundView;
-
 @property (nonatomic, readwrite) UIDatePicker *datePicker;
 
 @end
