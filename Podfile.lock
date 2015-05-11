@@ -1,0 +1,19 @@
+PODS:
+  - RMActionController (1.0.0)
+
+DEPENDENCIES:
+  - RMActionController (from `https://github.com/CooperRS/RMActionController.git`)
+
+EXTERNAL SOURCES:
+  RMActionController:
+    :git: https://github.com/CooperRS/RMActionController.git
+
+CHECKOUT OPTIONS:
+  RMActionController:
+    :commit: fe1ccd21d98b1ea1cdda38d003180f1fcdc7daed
+    :git: https://github.com/CooperRS/RMActionController.git
+
+SPEC CHECKSUMS:
+  RMActionController: ee1d72d12eeb72f678631c9103fd8e310a103355
+
+COCOAPODS: 0.37.1

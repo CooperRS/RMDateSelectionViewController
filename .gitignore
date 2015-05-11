@@ -1,5 +1,4 @@
 .DS_Store
-
 xcuserdata
-
-/RMDateSelectionViewController-Demo.xcodeproj/project.xcworkspace/xcshareddata/
+Pods
+xcshareddata

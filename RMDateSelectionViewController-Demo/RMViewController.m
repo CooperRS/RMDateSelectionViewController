@@ -39,52 +39,85 @@
 
 #pragma mark - Actions
 - (IBAction)openDateSelectionController:(id)sender {
-    RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
+    RMActionControllerStyle style = RMActionControllerStyleWhite;
+    if(self.blackSwitch.on) {
+        style = RMActionControllerStyleBlack;
+    }
     
-    //Set a title for the date selection
-    dateSelectionVC.titleLabel.text = @"This is an example title.\n\nPlease choose a date and press 'Select' or 'Cancel'.";
-    
-    //Set select and (optional) cancel blocks
-    [dateSelectionVC setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
-        NSLog(@"Successfully selected date: %@", date);
+    RMAction *selectAction = [RMAction actionWithTitle:@"Select" style:RMActionStyleDone andHandler:^(RMActionController *controller) {
+        NSLog(@"Successfully selected date: %@", ((UIDatePicker *)controller.contentView).date);
     }];
     
-    [dateSelectionVC setCancelButtonAction:^(RMDateSelectionViewController *controller) {
+    RMAction *cancelAction = [RMAction actionWithTitle:@"Cancel" style:RMActionStyleCancel andHandler:^(RMActionController *controller) {
         NSLog(@"Date selection was canceled");
     }];
     
+    RMDateSelectionViewController *dateSelectionController = [RMDateSelectionViewController actionControllerWithStyle:style];
+    dateSelectionController.title = @"Test";
+    dateSelectionController.message = @"This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'.";
+    
+    [dateSelectionController addAction:selectAction];
+    [dateSelectionController addAction:cancelAction];
+    
+    RMAction *in15MinAction = [RMAction actionWithTitle:@"15 Min" style:RMActionStyleAdditional andHandler:^(RMActionController *controller) {
+        ((UIDatePicker *)controller.contentView).date = [NSDate dateWithTimeIntervalSinceNow:15*60];
+        NSLog(@"15 Min button tapped");
+    }];
+    in15MinAction.dismissesActionController = NO;
+    
+    RMAction *in30MinAction = [RMAction actionWithTitle:@"30 Min" style:RMActionStyleAdditional andHandler:^(RMActionController *controller) {
+        ((UIDatePicker *)controller.contentView).date = [NSDate dateWithTimeIntervalSinceNow:30*60];
+        NSLog(@"30 Min button tapped");
+    }];
+    in30MinAction.dismissesActionController = NO;
+    
+    RMAction *in45MinAction = [RMAction actionWithTitle:@"45 Min" style:RMActionStyleAdditional andHandler:^(RMActionController *controller) {
+        ((UIDatePicker *)controller.contentView).date = [NSDate dateWithTimeIntervalSinceNow:45*60];
+        NSLog(@"45 Min button tapped");
+    }];
+    in45MinAction.dismissesActionController = NO;
+    
+    RMAction *in60MinAction = [RMAction actionWithTitle:@"60 Min" style:RMActionStyleAdditional andHandler:^(RMActionController *controller) {
+        ((UIDatePicker *)controller.contentView).date = [NSDate dateWithTimeIntervalSinceNow:60*60];
+        NSLog(@"60 Min button tapped");
+    }];
+    in60MinAction.dismissesActionController = NO;
+    
+    RMGroupedAction *groupedAction = [RMGroupedAction actionWithStyle:RMActionStyleAdditional andActions:@[in15MinAction, in30MinAction, in45MinAction, in60MinAction]];
+    
+    [dateSelectionController addAction:groupedAction];
+    
+    RMAction *nowAction = [RMAction actionWithTitle:@"Now" style:RMActionStyleAdditional andHandler:^(RMActionController *controller) {
+        ((UIDatePicker *)controller.contentView).date = [NSDate date];
+        NSLog(@"Now button tapped");
+    }];
+    nowAction.dismissesActionController = NO;
+    
+    [dateSelectionController addAction:nowAction];
+    
     //You can enable or disable blur, bouncing and motion effects
-    dateSelectionVC.disableBouncingWhenShowing = !self.bouncingSwitch.on;
-    dateSelectionVC.disableMotionEffects = !self.motionSwitch.on;
-    dateSelectionVC.disableBlurEffects = !self.blurSwitch.on;
-    
-    //You can also adjust colors (enabling the following line will result in a black version of RMDateSelectionViewController)
-    if(self.blackSwitch.on)
-        dateSelectionVC.blurEffectStyle = UIBlurEffectStyleDark;
-    
-    //Enable the following lines if you want a black version of RMDateSelectionViewController but also disabled blur effects (or run on iOS 7)
-    //dateSelectionVC.tintColor = [UIColor whiteColor];
-    //dateSelectionVC.backgroundColor = [UIColor colorWithWhite:0.25 alpha:1];
-    //dateSelectionVC.selectedBackgroundColor = [UIColor colorWithWhite:0.4 alpha:1];
+    dateSelectionController.disableBouncingEffects = !self.bouncingSwitch.on;
+    dateSelectionController.disableMotionEffects = !self.motionSwitch.on;
+    dateSelectionController.disableBlurEffects = !self.blurSwitch.on;
     
     //You can access the actual UIDatePicker via the datePicker property
-    dateSelectionVC.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    dateSelectionVC.datePicker.minuteInterval = 5;
-    dateSelectionVC.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+    dateSelectionController.datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+    dateSelectionController.datePicker.minuteInterval = 5;
+    dateSelectionController.datePicker.date = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
     
     //On the iPad we want to show the date selection view controller within a popover. Fortunately, we can use iOS 8 API for this! :)
     //(Of course only if we are running on iOS 8 or later)
-    if([dateSelectionVC respondsToSelector:@selector(popoverPresentationController)] && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+    if([dateSelectionController respondsToSelector:@selector(popoverPresentationController)] && [UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         //First we set the modal presentation style to the popover style
-        dateSelectionVC.modalPresentationStyle = UIModalPresentationPopover;
+        dateSelectionController.modalPresentationStyle = UIModalPresentationPopover;
         
         //Then we tell the popover presentation controller, where the popover should appear
-        dateSelectionVC.popoverPresentationController.sourceView = self.tableView;
-        dateSelectionVC.popoverPresentationController.sourceRect = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        dateSelectionController.popoverPresentationController.sourceView = self.tableView;
+        dateSelectionController.popoverPresentationController.sourceRect = [self.tableView rectForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     }
     
     //Now just present the date selection controller using the standard iOS presentation method
-    [self presentViewController:dateSelectionVC animated:YES completion:nil];
+    [self presentViewController:dateSelectionController animated:YES completion:nil];
 }
 
 #pragma mark - UITableView Delegates
