@@ -219,7 +219,6 @@
 				CAA60A42181C1A0200198490 /* RMDateSelectionViewController-Demo */,
 				CA52EE291AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */,
 				CAE29069182E287500272C55 /* RMDateSelectionViewController-Tests */,
-				CAA60A3B181C1A0200198490 /* Frameworks */,
 				CAA60A3A181C1A0200198490 /* Products */,
 				98BA88FA69CF4B444746513C /* Pods */,
 			);
@@ -233,20 +232,6 @@
 				CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		CAA60A3B181C1A0200198490 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CA56843F1AD1AB5F00C55FFF /* KIF.xcodeproj */,
-				CA153F5418279AC000428F05 /* QuartzCore.framework */,
-				CAA60A3C181C1A0200198490 /* Foundation.framework */,
-				CAA60A3E181C1A0200198490 /* CoreGraphics.framework */,
-				CAA60A40181C1A0200198490 /* UIKit.framework */,
-				CAA60A5B181C1A0200198490 /* XCTest.framework */,
-				27D5C6A626788120C4234A37 /* libPods.a */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		CAA60A42181C1A0200198490 /* RMDateSelectionViewController-Demo */ = {
