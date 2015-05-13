@@ -10,5 +10,5 @@ env:
    - NAME='iPad Retina' OS=8.1
    - NAME='iPad Air' OS=8.1
 script:
-  - xcodebuild -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator8.1 ONLY_ACTIVE_ARCH=NO
-  - xcodebuild test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -destination "platform=iOS Simulator,name=$NAME,OS=$OS"
+  - xcodebuild -workspace RMDateSelectionViewController-Demo.xcworkspace -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator8.1 ONLY_ACTIVE_ARCH=NO
+  - xcodebuild test -workspace RMDateSelectionViewController-Demo.xcworkspace -scheme RMDateSelectionViewController-Demo -destination "platform=iOS Simulator,name=$NAME,OS=$OS"

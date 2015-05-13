@@ -1,0 +1,10 @@
+PODS:
+  - RMActionController (1.0.0)
+
+DEPENDENCIES:
+  - RMActionController (~> 1.0.0)
+
+SPEC CHECKSUMS:
+  RMActionController: cbaf3b20536c1c1be6547438b17472e488318888
+
+COCOAPODS: 0.37.1
