@@ -28,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CAE29064182E287500272C55"
-               BuildableName = "RMDateSelectionViewController-Tests.xctest"
-               BlueprintName = "RMDateSelectionViewController-Tests"
-               ReferencedContainer = "container:RMDateSelectionViewController-Demo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
