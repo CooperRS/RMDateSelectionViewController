@@ -1,14 +1,4 @@
 language: objective-c
-env:
-  matrix:
-   - NAME='iPhone 4S' OS=8.1
-   - NAME='iPhone 5' OS=8.1
-   - NAME='iPhone 5s' OS=8.1
-   - NAME='iPhone 6' OS=8.1
-   - NAME='iPhone 6 Plus' OS=8.1
-   - NAME='iPad 2' OS=8.1
-   - NAME='iPad Retina' OS=8.1
-   - NAME='iPad Air' OS=8.1
-script:
-  - xcodebuild -workspace RMDateSelectionViewController-Demo.xcworkspace -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator8.1 ONLY_ACTIVE_ARCH=NO
-  - xcodebuild test -workspace RMDateSelectionViewController-Demo.xcworkspace -scheme RMDateSelectionViewController-Demo -destination "platform=iOS Simulator,name=$NAME,OS=$OS"
+xcode_sdk: iphonesimulator
+xcode_workspace: RMDateSelectionViewController-Demo.xcworkspace
+xcode_scheme: RMDateSelectionViewController-Demo
