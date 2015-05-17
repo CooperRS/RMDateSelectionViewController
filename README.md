@@ -17,7 +17,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ###CocoaPods
 ```ruby
 platform :ios, '8.0'
-pod "RMDateSelectionViewController", "~> 1.5.1"
+pod "RMDateSelectionViewController", "~> 2.0.0"
 ```
 
 ###Manual
@@ -35,33 +35,46 @@ pod "RMDateSelectionViewController", "~> 1.5.1"
 	
 	```objc
 	- (IBAction)openDateSelectionController:(id)sender {
-		RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
-
-		//Set select and (optional) cancel blocks
-		[dateSelectionVC setSelectButtonAction:^(RMDateSelectionViewController *controller, NSDate *date) {
-			NSLog(@"Successfully selected date: %@", date);
-		}];
-
-		[dateSelectionVC setCancelButtonAction:^(RMDateSelectionViewController *controller) {
-			NSLog(@"Date selection was canceled");
-		}];
-
-		//Now just present the date selection controller using the standard iOS presentation method
-		[self presentViewController:dateSelectionVC animated:YES completion:nil];
+		//Create select action
+	    RMAction *selectAction = [RMAction actionWithTitle:@"Select" style:RMActionStyleDone andHandler:^(RMActionController *controller) {
+	        NSLog(@"Successfully selected date: %@", ((UIDatePicker *)controller.contentView).date);
+	    }];
+	    
+	    //Create cancel action
+	    RMAction *cancelAction = [RMAction actionWithTitle:@"Cancel" style:RMActionStyleCancel andHandler:^(RMActionController *controller) {
+	        NSLog(@"Date selection was canceled");
+	    }];
+	    
+	    //Create date selection view controller
+	    RMDateSelectionViewController *dateSelectionController = [RMDateSelectionViewController actionControllerWithStyle:style selectAction:selectAction andCancelAction:cancelAction];
+	    dateSelectionController.title = @"Test";
+	    dateSelectionController.message = @"This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'.";
+	    
+	    //Create now action and add it to date selection view controller
+	    RMAction *nowAction = [RMAction actionWithTitle:@"Now" style:RMActionStyleAdditional andHandler:^(RMActionController *controller) {
+	        ((UIDatePicker *)controller.contentView).date = [NSDate date];
+	        NSLog(@"Now button tapped");
+	    }];
+	    nowAction.dismissesActionController = NO;
+	    
+	    [dateSelectionController addAction:nowAction];
+	    
+	    //Now just present the date selection controller using the standard iOS presentation method
+	    [self presentViewController:dateSelectionController animated:YES completion:nil];
 	}
 	```
 
 ###Advanced
-Every RMDateSelectionViewController has a property `datePicker`. With this property you have total control over the UIDatePicker that is shown in the screen.
+Every RMDateSelectionViewController has a property `datePicker`. With this property you have total control over the UIDatePicker that is shown on the screen.
 
 Additionally, you can use the property `modalPresentationStyle` to control how the date selection controller is shown. By default, it is set to `UIModalPresentationOverCurrentContext`. But on the iPad you could use `UIModalPresentationPopover` to present the date selection controller within a popover. See the following example on how this works:
 
 ```objc
 - (IBAction)openDateSelectionController:(id)sender {
-	RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController dateSelectionController];
-
-	//Set select and (optional) cancel blocks
+	//Create select and cancel action
 	...
+
+	RMDateSelectionViewController *dateSelectionVC = [RMDateSelectionViewController actionControllerWithStyle:style selectAction:selectAction andCancelAction:cancelAction];
 
 	//On the iPad we want to show the date selection view controller within a popover.
     if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
