@@ -23,6 +23,7 @@ pod "RMDateSelectionViewController", "~> 1.5.1"
 ###Manual
 1. Check out the project
 2. Add all files in `RMDateSelectionViewController` folder to Xcode
+3. Check out [RMActionController](https://github.com/CooperRS/RMActionController) and follow the installation instructions.
 
 ##Usage
 ###Basic
