@@ -37,7 +37,7 @@
  */
 @interface RMDateSelectionViewController : RMActionController
 
-/*
+/**
  *  The UIDatePicker instance used by RMDateSelectionViewController.
  *
  *  Use this property to access the date picker and to set options like minuteInterval and others.
