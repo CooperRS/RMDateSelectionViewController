@@ -140,6 +140,8 @@ Feel free to add the app to this list: [Apps using RMDateSelectionViewController
 ## Further Info
 If you want to show an UIPickerView instead of an UIDDatePicker, you may take a look at my other control called [RMPickerViewController](https://github.com/CooperRS/RMPickerViewController).
 
+If you want to show any other control you may want to take a look at [RMActionController](https://github.com/CooperRS/RMActionController).
+
 ##Credits
 Code contributions:
 * AnthonyMDev
