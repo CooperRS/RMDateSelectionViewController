@@ -13,7 +13,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ### Black version
 ![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait-Black.png)
 
-### Demo Project
+## Demo Project
 If you want to run the demo project you first need to run `pod install` to install the dependencies of RMDateSelectionViewController.
 
 ## Installation
