@@ -59,7 +59,7 @@
     controller.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
     controller.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
     
-    controller.datePickerHeightConstraint = [NSLayoutConstraint constraintWithItem:controller.datePicker attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:0 constant:0];
+    controller.datePickerHeightConstraint = [NSLayoutConstraint constraintWithItem:controller.datePicker attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
     
     if(RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE) {
         controller.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
