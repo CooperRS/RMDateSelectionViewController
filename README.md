@@ -13,20 +13,23 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ### Black version
 ![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait-Black.png)
 
-##Installation
-###CocoaPods
+### Demo Project
+If you want to run the demo project you first need to run `pod install` to install the dependencies of RMDateSelectionViewController.
+
+## Installation
+### CocoaPods
 ```ruby
 platform :ios, '8.0'
-pod "RMDateSelectionViewController", "~> 1.5.1"
+pod "RMDateSelectionViewController", "~> 2.0.0"
 ```
 
-###Manual
+### Manual
 1. Check out the project
 2. Add all files in `RMDateSelectionViewController` folder to Xcode
 3. Check out [RMActionController](https://github.com/CooperRS/RMActionController) and follow the installation instructions.
 
-##Usage
-###Basic
+## Usage
+### Basic
 1. Import `RMDateSelectionViewController.h` in your view controller
 	
 	```objc
@@ -51,23 +54,17 @@ pod "RMDateSelectionViewController", "~> 1.5.1"
 	    dateSelectionController.title = @"Test";
 	    dateSelectionController.message = @"This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'.";
 	    
-	    //Create now action and add it to date selection view controller
-	    RMAction *nowAction = [RMAction actionWithTitle:@"Now" style:RMActionStyleAdditional andHandler:^(RMActionController *controller) {
-	        ((UIDatePicker *)controller.contentView).date = [NSDate date];
-	        NSLog(@"Now button tapped");
-	    }];
-	    nowAction.dismissesActionController = NO;
-	    
-	    [dateSelectionController addAction:nowAction];
-	    
 	    //Now just present the date selection controller using the standard iOS presentation method
 	    [self presentViewController:dateSelectionController animated:YES completion:nil];
 	}
 	```
 
-###Advanced
+### Advanced
+
+#### Accessing the Date Picker
 Every RMDateSelectionViewController has a property `datePicker`. With this property you have total control over the UIDatePicker that is shown on the screen.
 
+#### Presentation Style
 Additionally, you can use the property `modalPresentationStyle` to control how the date selection controller is shown. By default, it is set to `UIModalPresentationOverCurrentContext`. But on the iPad you could use `UIModalPresentationPopover` to present the date selection controller within a popover. See the following example on how this works:
 
 ```objc
@@ -92,10 +89,33 @@ Additionally, you can use the property `modalPresentationStyle` to control how t
 }
 ```
 
-Finially, RMDateSelectionViewController can be used in both your main application and an action extension showing UI.
+#### Adding Additional Buttons
+You can add an arbitrary number of custom buttons to a RMDateSelectionViewController. Each button has it's own block that is executed when tapping the button. See the following example on how to add buttons.
 
-###How to localize the buttons? 
-[Localization](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Localization)
+```objc
+- (IBAction)openDateSelectionController:(id)sender {
+	//Create select action
+    ...
+    
+    //Create date selection view controller
+    RMDateSelectionViewController *dateSelectionController = [RMDateSelectionViewController actionControllerWithStyle:style selectAction:selectAction andCancelAction:cancelAction];
+    
+    //Create now action and add it to date selection view controller
+    RMAction *nowAction = [RMAction actionWithTitle:@"Now" style:RMActionStyleAdditional andHandler:^(RMActionController *controller) {
+        ((UIDatePicker *)controller.contentView).date = [NSDate date];
+        NSLog(@"Now button tapped");
+    }];
+    nowAction.dismissesActionController = NO;
+    
+    [dateSelectionController addAction:nowAction];
+    
+    //Now just present the date selection controller using the standard iOS presentation method
+    [self presentViewController:dateSelectionController animated:YES completion:nil];
+}
+```
+
+#### Others
+RMDateSelectionViewController does not use APIs that are only available for applications. Therefore, it can be used in both your main application and an action extension showing UI.
 
 ## Documentation
 There is an additional documentation available provided by the CocoaPods team. Take a look at [cocoadocs.org](http://cocoadocs.org/docsets/RMDateSelectionViewController/).
