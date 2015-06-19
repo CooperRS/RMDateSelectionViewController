@@ -24,7 +24,7 @@
 //  THE SOFTWARE.
 //
 
-#import <RMActionController.h>
+#import <RMActionController/RMActionController.h>
 
 /**
  *  RMDateSelectionViewController is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashon. When a RMDateSelectionViewController is shown the user gets the opportunity to select a date using a UIDatePicker.
