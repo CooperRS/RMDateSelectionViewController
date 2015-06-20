@@ -1,4 +1,4 @@
-RMDateSelectionViewController
+RMDateSelectionViewController ![Build Status](https://travis-ci.org/CooperRS/RMDateSelectionViewController.svg?branch=master)
 =============================
 
 This is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashion
