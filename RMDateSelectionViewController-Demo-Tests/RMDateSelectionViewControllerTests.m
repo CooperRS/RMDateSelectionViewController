@@ -65,7 +65,7 @@
 }
 
 #pragma mark - Tests
-- (void)testPresentingMapActionController {
+- (void)testPresentingDateSelectionViewController {
     RMDateSelectionViewController *controller = [self createDateSelectionViewControllerWithStyle:RMActionControllerStyleWhite];
     
     XCTAssertNotNil(controller.contentView);
