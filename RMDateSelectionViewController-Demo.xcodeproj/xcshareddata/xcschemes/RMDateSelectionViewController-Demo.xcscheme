@@ -20,6 +20,20 @@
                ReferencedContainer = "container:RMDateSelectionViewController-Demo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CACBDBCB1B371D9500301977"
+               BuildableName = "RMDateSelectionViewController-Demo-Tests.xctest"
+               BlueprintName = "RMDateSelectionViewController-Demo-Tests"
+               ReferencedContainer = "container:RMDateSelectionViewController-Demo.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,6 +42,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CACBDBCB1B371D9500301977"
+               BuildableName = "RMDateSelectionViewController-Demo-Tests.xctest"
+               BlueprintName = "RMDateSelectionViewController-Demo-Tests"
+               ReferencedContainer = "container:RMDateSelectionViewController-Demo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
