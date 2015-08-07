@@ -23,7 +23,8 @@ pod "RMDateSelectionViewController", "~> 2.0.1"
 ```
 
 ## Usage
-### Basic
+
+### Basic (Objective-C)
 1. Import `RMDateSelectionViewController.h` in your view controller
 	
 	```objc
@@ -50,6 +51,39 @@ pod "RMDateSelectionViewController", "~> 2.0.1"
 	    
 	    //Now just present the date selection controller using the standard iOS presentation method
 	    [self presentViewController:dateSelectionController animated:YES completion:nil];
+	}
+	```
+	
+----
+
+### Basic (Swift)
+1. Import `RMDateSelectionViewController` in your view controller (using `use_frameworks!` on Podfile)
+	
+	```swift
+	import RMDateSelectionViewController
+	```
+2. Create a date selection view controller, set select and cancel block and present the view controller
+	
+	```swift
+	@IBAction openDateSelectionController(sender: AnyObject) {
+        // Create select action
+        let selectAction = RMAction(title: "Select", style: RMActionStyle.Done) { controller in
+            if let datePickerView = controller.contentView as? UIDatePicker {
+                println("Successfully selected date \(datePickerView.date)")
+            }
+        }
+        
+        // Create cancel action
+        let cancelAction = RMAction(title: "Cancel", style: RMActionStyle.Cancel) { _ in
+            println("Date selection was canceled")
+        }
+        
+        // Create date selection view controller
+        let dateSelectionController = RMDateSelectionViewController(style: .Black, selectAction: selectAction, andCancelAction: cancelAction)
+        dateSelectionController.title = "Test"
+        dateSelectionController.message = "This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'."
+        
+        presentViewController(dateSelectionController, animated: true, completion: nil)
 	}
 	```
 
