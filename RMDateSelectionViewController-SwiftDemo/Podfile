@@ -1,0 +1,7 @@
+platform :ios, '8.0'
+link_with 'RMDateSelectionViewController-SwiftDemo'
+
+use_frameworks!
+
+pod 'RMActionController', '~> 1.0.0'
+pod 'RMDateSelectionViewController', :path => '../'
