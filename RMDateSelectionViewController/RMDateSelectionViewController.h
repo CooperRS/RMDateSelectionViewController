@@ -35,7 +35,7 @@
  *
  *  @warning RMDateSelectionViewController is not designed to be reused. Each time you want to display a RMDateSelectionViewController a new instance should be created. If you want to set a specific date before displaying, you can do so by using the datePicker property.
  */
-@interface RMDateSelectionViewController : RMActionController
+@interface RMDateSelectionViewController : RMActionController <UIDatePicker *>
 
 /**
  *  The UIDatePicker instance used by RMDateSelectionViewController.
