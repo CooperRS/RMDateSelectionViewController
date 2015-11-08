@@ -2,3 +2,6 @@ language: objective-c
 xcode_sdk: iphonesimulator
 xcode_workspace: RMDateSelectionViewController-Demo.xcworkspace
 xcode_scheme: RMDateSelectionViewController-Demo
+
+before_install:
+    - gem update cocoapods
