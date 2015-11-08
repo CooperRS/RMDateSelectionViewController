@@ -118,8 +118,8 @@ There is an additional documentation available provided by the CocoaPods team. T
 
 | Compile Time  | Runtime       |
 | :------------ | :------------ |
-| Xcode 6       | iOS 8         |
-| iOS 8 SDK     |               |
+| Xcode 7       | iOS 8         |
+| iOS 9 SDK     |               |
 | ARC           |               |
 
 Note: ARC can be turned on and off on a per file basis.
