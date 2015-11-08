@@ -19,7 +19,7 @@ If you want to run the demo project you first need to run `pod install` to insta
 ## Installation (CocoaPods)
 ```ruby
 platform :ios, '8.0'
-pod "RMDateSelectionViewController", "~> 2.0.1"
+pod "RMDateSelectionViewController", "~> 2.0.2"
 ```
 
 ## Usage
