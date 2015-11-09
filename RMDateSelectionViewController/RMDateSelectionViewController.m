@@ -52,27 +52,26 @@
 
 @implementation RMDateSelectionViewController
 
-#pragma mark - Class
-+ (instancetype)actionControllerWithStyle:(RMActionControllerStyle)style title:(NSString *)aTitle message:(NSString *)aMessage selectAction:(RMAction *)selectAction andCancelAction:(RMAction *)cancelAction {
-    RMDateSelectionViewController *controller = [super actionControllerWithStyle:style title:aTitle message:aMessage selectAction:selectAction andCancelAction:cancelAction];
-    
-    controller.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-    controller.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    controller.datePickerHeightConstraint = [NSLayoutConstraint constraintWithItem:controller.datePicker attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
-    
-    if(RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE) {
-        controller.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
-    } else {
-        controller.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
+#pragma mark - Init and Dealloc
+- (instancetype)initWithStyle:(RMActionControllerStyle)aStyle title:(NSString *)aTitle message:(NSString *)aMessage selectAction:(RMAction *)selectAction andCancelAction:(RMAction *)cancelAction {
+    self = [super initWithStyle:aStyle title:aTitle message:aMessage selectAction:selectAction andCancelAction:cancelAction];
+    if(self) {
+        self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+        self.datePicker.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        self.datePickerHeightConstraint = [NSLayoutConstraint constraintWithItem:self.datePicker attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
+        
+        if(RM_CURRENT_ORIENTATION_IS_LANDSCAPE_PREDICATE) {
+            self.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_LANDSCAPE;
+        } else {
+            self.datePickerHeightConstraint.constant = RM_DATE_PICKER_HEIGHT_PORTRAIT;
+        }
+        
+        [self.datePicker addConstraint:self.datePickerHeightConstraint];
     }
-    
-    [controller.datePicker addConstraint:controller.datePickerHeightConstraint];
-    
-    return controller;
+    return self;
 }
 
-#pragma mark - Init and Dealloc
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
