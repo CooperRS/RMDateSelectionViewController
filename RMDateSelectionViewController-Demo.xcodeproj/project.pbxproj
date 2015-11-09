@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		19B79EF3FB860B177CB868C4 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1E92A93417C5DD247546CF8 /* libPods.a */; };
 		2207A1B11FAA202CB82DF8DC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2977B11CE075228E04E7C677 /* Pods.framework */; };
 		B0E00DC94D5D0FB6C93BF842 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2977B11CE075228E04E7C677 /* Pods.framework */; };
-		C6AE6610EE897760E6426643 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CA153F5518279AC000428F05 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA153F5418279AC000428F05 /* QuartzCore.framework */; };
 		CA1E62491A24D3C10025A6A6 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */; };
 		CA3009FD1BF0E6A200EAD920 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3009FC1BF0E6A200EAD920 /* AppDelegate.swift */; };
@@ -131,7 +129,6 @@
 		CACBDBCC1B371D9500301977 /* RMDateSelectionViewController-Demo-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RMDateSelectionViewController-Demo-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CACBDBCF1B371D9500301977 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CACBDBD01B371D9500301977 /* RMDateSelectionViewControllerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RMDateSelectionViewControllerTests.m; sourceTree = "<group>"; };
-		E1E92A93417C5DD247546CF8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F345C15526094F92A3D0BCB2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,7 +145,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6AE6610EE897760E6426643 /* (null) in Frameworks */,
 				FF0E79A7ABBF5C4AD71B6095 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,7 +165,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19B79EF3FB860B177CB868C4 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,10 +808,6 @@
 			buildSettings = {
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "RMDateSelectionViewController-DemoExtension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
@@ -956,10 +947,6 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				INFOPLIST_FILE = "RMDateSelectionViewController-Demo-Tests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
