@@ -1,0 +1,3 @@
+[submodule "Extern/RMActionController"]
+	path = Extern/RMActionController
+	url = git@github.com:CooperRS/RMActionController.git
