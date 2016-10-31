@@ -1,10 +1,14 @@
-os: osx
-osx_image: xcode7
-
 language: objective-c
-xcode_sdk: iphonesimulator
-xcode_workspace: RMDateSelectionViewController-Demo.xcworkspace
-xcode_scheme: RMDateSelectionViewController-Demo
 
-before_install:
-    - gem update cocoapods
+os: osx
+osx_image: xcode8
+
+env:
+  matrix:
+# Ufortunately, the iOS 8.x simulators are not starting on travis right now
+#    - NAME='iPhone 6' OS=8.4
+    - NAME='iPhone 6' OS=9.3
+    - NAME='iPhone 6' OS=10.0
+
+script:
+    - xcodebuild test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator -destination "platform=iOS Simulator,name=$NAME,OS=$OS"
