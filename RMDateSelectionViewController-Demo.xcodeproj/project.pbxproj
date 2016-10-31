@@ -26,6 +26,8 @@
 		CA300A091BF0E6A200EAD920 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA300A071BF0E6A200EAD920 /* LaunchScreen.storyboard */; };
 		CA300A0F1BF0E73800EAD920 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA300A0E1BF0E73800EAD920 /* ViewController.swift */; };
 		CA52EE301AC42C760032E877 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CA52EE2F1AC42C760032E877 /* MainInterface.storyboard */; };
+		CA6097531DC77017008B59FD /* RMActionController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2C5C251DA26AAB00670F0F /* RMActionController.framework */; };
+		CA6097541DC77017008B59FD /* RMDateSelectionViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2C5C101DA2699300670F0F /* RMDateSelectionViewController.framework */; };
 		CAA411471B01602400C24134 /* RMDateSelectionViewController-DemoExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = CA52EE281AC42C760032E877 /* RMDateSelectionViewController-DemoExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		CAA60A49181C1A0200198490 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A48181C1A0200198490 /* main.m */; };
 		CAA60A4D181C1A0200198490 /* RMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A4C181C1A0200198490 /* RMAppDelegate.m */; };
@@ -99,6 +101,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = EB60ECEB177F8DB3005A041A;
 			remoteInfo = "KIF Tests-OCUnit";
+		};
+		CA60974F1DC77012008B59FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAA60A31181C1A0200198490 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA2C5C241DA26AAB00670F0F;
+			remoteInfo = RMActionController;
+		};
+		CA6097511DC77013008B59FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAA60A31181C1A0200198490 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA2C5C0F1DA2699300670F0F;
+			remoteInfo = RMDateSelectionViewController;
 		};
 		CAA411451B01601D00C24134 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -206,6 +222,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA6097531DC77017008B59FD /* RMActionController.framework in Frameworks */,
+				CA6097541DC77017008B59FD /* RMDateSelectionViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +480,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				CA6097501DC77012008B59FD /* PBXTargetDependency */,
+				CA6097521DC77013008B59FD /* PBXTargetDependency */,
 			);
 			name = "RMDateSelectionViewController-DemoExtension";
 			productName = "RMDateSelectionViewController-DemoExtension";
@@ -743,6 +763,16 @@
 			target = CA2C5C241DA26AAB00670F0F /* RMActionController */;
 			targetProxy = CA2C5C311DA26AB900670F0F /* PBXContainerItemProxy */;
 		};
+		CA6097501DC77012008B59FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA2C5C241DA26AAB00670F0F /* RMActionController */;
+			targetProxy = CA60974F1DC77012008B59FD /* PBXContainerItemProxy */;
+		};
+		CA6097521DC77013008B59FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA2C5C0F1DA2699300670F0F /* RMDateSelectionViewController */;
+			targetProxy = CA6097511DC77013008B59FD /* PBXContainerItemProxy */;
+		};
 		CAA411461B01601D00C24134 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CA52EE271AC42C760032E877 /* RMDateSelectionViewController-DemoExtension */;
@@ -778,6 +808,7 @@
 		CA2C5C1A1DA2699400670F0F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -807,6 +838,7 @@
 		CA2C5C1B1DA2699400670F0F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -837,6 +869,7 @@
 		CA2C5C2F1DA26AAB00670F0F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -865,6 +898,7 @@
 		CA2C5C301DA26AAB00670F0F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
@@ -1125,6 +1159,7 @@
 				CA2C5C1B1DA2699400670F0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CA2C5C2E1DA26AAB00670F0F /* Build configuration list for PBXNativeTarget "RMActionController" */ = {
 			isa = XCConfigurationList;
@@ -1133,6 +1168,7 @@
 				CA2C5C301DA26AAB00670F0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CA300A0B1BF0E6A200EAD920 /* Build configuration list for PBXNativeTarget "RMDateSelectionViewController-SwiftDemo" */ = {
 			isa = XCConfigurationList;

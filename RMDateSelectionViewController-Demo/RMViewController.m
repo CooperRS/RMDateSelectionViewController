@@ -44,11 +44,11 @@
         style = RMActionControllerStyleBlack;
     }
     
-    RMAction<RMActionController<UIDatePicker *> *> *selectAction = [RMAction<RMActionController<UIDatePicker *> *> actionWithTitle:@"Select" style:RMActionStyleDone andHandler:^(RMActionController<UIDatePicker *> *controller) {
+    RMAction<UIDatePicker *> *selectAction = [RMAction<UIDatePicker *> actionWithTitle:@"Select" style:RMActionStyleDone andHandler:^(RMActionController<UIDatePicker *> *controller) {
         NSLog(@"Successfully selected date: %@", controller.contentView.date);
     }];
     
-    RMAction<RMActionController<UIDatePicker *> *> *cancelAction = [RMAction<RMActionController<UIDatePicker *> *> actionWithTitle:@"Cancel" style:RMActionStyleCancel andHandler:^(RMActionController<UIDatePicker *> *controller) {
+    RMAction<UIDatePicker *> *cancelAction = [RMAction<UIDatePicker *> actionWithTitle:@"Cancel" style:RMActionStyleCancel andHandler:^(RMActionController<UIDatePicker *> *controller) {
         NSLog(@"Date selection was canceled");
     }];
     
@@ -59,35 +59,35 @@
     [dateSelectionController addAction:selectAction];
     [dateSelectionController addAction:cancelAction];
     
-    RMAction<RMActionController<UIDatePicker *> *> *in15MinAction = [RMAction<RMActionController<UIDatePicker *> *> actionWithTitle:@"15 Min" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> *controller) {
+    RMAction<UIDatePicker *> *in15MinAction = [RMAction<UIDatePicker *> actionWithTitle:@"15 Min" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> *controller) {
         controller.contentView.date = [NSDate dateWithTimeIntervalSinceNow:15*60];
         NSLog(@"15 Min button tapped");
     }];
     in15MinAction.dismissesActionController = NO;
     
-    RMAction<RMActionController<UIDatePicker *> *> *in30MinAction = [RMAction<RMActionController<UIDatePicker *> *> actionWithTitle:@"30 Min" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> *controller) {
+    RMAction<UIDatePicker *> *in30MinAction = [RMAction<UIDatePicker *> actionWithTitle:@"30 Min" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> *controller) {
         controller.contentView.date = [NSDate dateWithTimeIntervalSinceNow:30*60];
         NSLog(@"30 Min button tapped");
     }];
     in30MinAction.dismissesActionController = NO;
     
-    RMAction<RMActionController<UIDatePicker *> *> *in45MinAction = [RMAction<RMActionController<UIDatePicker *> *> actionWithTitle:@"45 Min" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> *controller) {
+    RMAction<UIDatePicker *> *in45MinAction = [RMAction<UIDatePicker *> actionWithTitle:@"45 Min" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> *controller) {
         controller.contentView.date = [NSDate dateWithTimeIntervalSinceNow:45*60];
         NSLog(@"45 Min button tapped");
     }];
     in45MinAction.dismissesActionController = NO;
     
-    RMAction<RMActionController<UIDatePicker *> *> *in60MinAction = [RMAction<RMActionController<UIDatePicker *> *> actionWithTitle:@"60 Min" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> *controller) {
+    RMAction<UIDatePicker *> *in60MinAction = [RMAction<UIDatePicker *> actionWithTitle:@"60 Min" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> *controller) {
         controller.contentView.date = [NSDate dateWithTimeIntervalSinceNow:60*60];
         NSLog(@"60 Min button tapped");
     }];
     in60MinAction.dismissesActionController = NO;
     
-    RMGroupedAction<RMActionController<UIDatePicker *> *> *groupedAction = [RMGroupedAction<RMActionController<UIDatePicker *> *> actionWithStyle:RMActionStyleAdditional andActions:@[in15MinAction, in30MinAction, in45MinAction, in60MinAction]];
+    RMGroupedAction<UIDatePicker *> *groupedAction = [RMGroupedAction<UIDatePicker *> actionWithStyle:RMActionStyleAdditional andActions:@[in15MinAction, in30MinAction, in45MinAction, in60MinAction]];
     
     [dateSelectionController addAction:groupedAction];
     
-    RMAction<RMActionController<UIDatePicker *> *> *nowAction = [RMAction<RMActionController<UIDatePicker *> *> actionWithTitle:@"Now" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> * _Nonnull controller) {
+    RMAction<UIDatePicker *> *nowAction = [RMAction<UIDatePicker *> actionWithTitle:@"Now" style:RMActionStyleAdditional andHandler:^(RMActionController<UIDatePicker *> * _Nonnull controller) {
         controller.contentView.date = [NSDate date];
         NSLog(@"Now button tapped");
     }];
