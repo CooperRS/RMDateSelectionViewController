@@ -24,7 +24,7 @@ pod "RMDateSelectionViewController", "~> 2.0.3"
 
 ## Usage
 
-See the [Wiki Pages](https://github.com/CooperRS/RMDateSelectionViewController/wiki) on how o use RMDateSelectionViewController. Also take a look at [Migration](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Migration) on how to migrate to the latest version of RMDateSelectionViewController.
+See the [Wiki Pages](https://github.com/CooperRS/RMDateSelectionViewController/wiki) on how to use RMDateSelectionViewController. Also take a look at [Migration](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Migration) on how to migrate to the latest version of RMDateSelectionViewController.
 
 ## Documentation
 There is an additional documentation available provided by the CocoaPods team. Take a look at [cocoadocs.org](http://cocoadocs.org/docsets/RMDateSelectionViewController/).
