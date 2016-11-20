@@ -1,4 +1,4 @@
-RMDateSelectionViewController [![Build Status](https://travis-ci.org/CooperRS/RMDateSelectionViewController.svg?branch=master)](https://travis-ci.org/CooperRS/RMDateSelectionViewController/) [![Pod Version](https://img.shields.io/cocoapods/v/RMDateSelectionViewController.svg)](https://cocoapods.org/pods/RMDateSelectionViewController)
+RMDateSelectionViewController [![Build Status](https://travis-ci.org/CooperRS/RMDateSelectionViewController.svg?branch=master)](https://travis-ci.org/CooperRS/RMDateSelectionViewController/) [![Pod Version](https://img.shields.io/cocoapods/v/RMDateSelectionViewController.svg)](https://cocoapods.org/pods/RMDateSelectionViewController) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 =============================
 
 This framework allows you to select a date by presenting an action sheet. In addition, it allows you to add actions arround the presented date picker which behave like a button and can be tapped by the user. The result looks very much like an UIActionSheet or UIAlertController with a UIDatePicker and some UIActions attached.
