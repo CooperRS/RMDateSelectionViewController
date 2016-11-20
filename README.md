@@ -1,7 +1,7 @@
 RMDateSelectionViewController [![Build Status](https://travis-ci.org/CooperRS/RMDateSelectionViewController.svg?branch=master)](https://travis-ci.org/CooperRS/RMDateSelectionViewController/) [![Pod Version](https://img.shields.io/cocoapods/v/RMDateSelectionViewController.svg)](https://cocoapods.org/pods/RMDateSelectionViewController)
 =============================
 
-This is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashion
+This is an iOS control for selecting a date using UIDatePicker in a UIAlertController like fashion
 
 ## Screenshots
 
