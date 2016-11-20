@@ -4,14 +4,15 @@ RMDateSelectionViewController [![Build Status](https://travis-ci.org/CooperRS/RM
 This is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashion
 
 ## Screenshots
+
 ### Portrait
-![Portrait](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait.png)
+
+| White | Black |
+|:-----:|:-----:|
+|![Portrait](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait.png)|![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait-Black.png)|
 
 ### Landscape
 ![Landscape](http://cooperrs.github.com/RMDateSelectionViewController/Images/Blur-Screen-Landscape.png)
-
-### Black version
-![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait-Black.png)
 
 ## Demo Project
 If you want to run the demo project do not forget to initialize submodules.
@@ -24,7 +25,37 @@ pod "RMDateSelectionViewController", "~> 2.1.0"
 
 ## Usage
 
-See the [Wiki Pages](https://github.com/CooperRS/RMDateSelectionViewController/wiki) on how to use RMDateSelectionViewController. Also take a look at [Migration](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Migration) on how to migrate to the latest version of RMDateSelectionViewController.
+For a detailed description on how to use RMDateSelectionViewController take a look at the [Wiki Pages](https://github.com/CooperRS/RMDateSelectionViewController/wiki). The following four steps are a very short intro:
+
+* Import RMDateSelectionViewController:
+
+```objc
+#import <RMDateSelectionViewController/RMDateSelectionViewController.h>
+```
+
+* Create select and cancel actions:
+
+```objc
+RMAction<UIDatePicker *> *selectAction = [RMAction<UIDatePicker *> actionWithTitle:@"Select" style:RMActionStyleDone andHandler:^(RMActionController<UIDatePicker *> *controller) {
+    NSLog(@"Successfully selected date: %@", controller.contentView.date);
+}];
+
+RMAction<UIDatePicker *> *cancelAction = [RMAction<UIDatePicker *> actionWithTitle:@"Cancel" style:RMActionStyleCancel andHandler:^(RMActionController<UIDatePicker *> *controller) {
+    NSLog(@"Date selection was canceled");
+}];
+```
+
+* Create and instance of RMDateSelectionViewController and present it:
+
+```objc
+RMDateSelectionViewController *dateSelectionController = [RMDateSelectionViewController actionControllerWithStyle:RMActionControllerStyleWhite title:@"Test" message:@"This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'." selectAction:selectAction andCancelAction:cancelAction];
+
+[self presentViewController:dateSelectionController animated:YES completion:nil];
+```
+
+## Migration
+
+See [Migration](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Migration) on how to migrate to the latest version of RMDateSelectionViewController.
 
 ## Documentation
 There is an additional documentation available provided by the CocoaPods team. Take a look at [cocoadocs.org](http://cocoadocs.org/docsets/RMDateSelectionViewController/).
