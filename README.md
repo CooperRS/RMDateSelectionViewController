@@ -53,6 +53,24 @@ RMDateSelectionViewController *dateSelectionController = [RMDateSelectionViewCon
 [self presentViewController:dateSelectionController animated:YES completion:nil];
 ```
 
+* The following code block shows you a complete method:
+
+```objc
+- (IBAction)openDateSelectionController:(id)sender {
+    RMAction<UIDatePicker *> *selectAction = [RMAction<UIDatePicker *> actionWithTitle:@"Select" style:RMActionStyleDone andHandler:^(RMActionController<UIDatePicker *> *controller) {
+        NSLog(@"Successfully selected date: %@", controller.contentView.date);
+    }];
+    
+    RMAction<UIDatePicker *> *cancelAction = [RMAction<UIDatePicker *> actionWithTitle:@"Cancel" style:RMActionStyleCancel andHandler:^(RMActionController<UIDatePicker *> *controller) {
+        NSLog(@"Date selection was canceled");
+    }];
+    
+    RMDateSelectionViewController *dateSelectionController = [RMDateSelectionViewController actionControllerWithStyle:RMActionControllerStyleWhite title:@"Test" message:@"This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'." selectAction:selectAction andCancelAction:cancelAction];
+    
+    [self presentViewController:dateSelectionController animated:YES completion:nil];
+}
+```
+
 ## Migration
 
 See [Migration](https://github.com/CooperRS/RMDateSelectionViewController/wiki/Migration) on how to migrate to the latest version of RMDateSelectionViewController.
