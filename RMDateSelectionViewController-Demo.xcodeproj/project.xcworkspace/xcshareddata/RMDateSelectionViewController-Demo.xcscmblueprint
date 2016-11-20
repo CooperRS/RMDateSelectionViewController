@@ -1,0 +1,37 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "567CB3DFEA460013DF16133CF5F5015D8E4E1826",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "567CB3DFEA460013DF16133CF5F5015D8E4E1826" : 0,
+    "A654F83E1FA6913C62FA529D3AF00D1F869A6C7E" : 9223372036854775807,
+    "10265E242415D473A6A613214DB7AC3EE3D43F93" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "EADD072A-2CC1-495D-8F4A-F45DC300E4F9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "567CB3DFEA460013DF16133CF5F5015D8E4E1826" : "RMDateSelectionViewController\/",
+    "A654F83E1FA6913C62FA529D3AF00D1F869A6C7E" : "RMDateSelectionViewController\/Extern\/RMActionController\/",
+    "10265E242415D473A6A613214DB7AC3EE3D43F93" : "RMDateSelectionViewController\/External\/KIF"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "RMDateSelectionViewController-Demo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "RMDateSelectionViewController-Demo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kif-framework\/KIF.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "10265E242415D473A6A613214DB7AC3EE3D43F93"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:CooperRS\/RMDateSelectionViewController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "567CB3DFEA460013DF16133CF5F5015D8E4E1826"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:CooperRS\/RMActionController.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A654F83E1FA6913C62FA529D3AF00D1F869A6C7E"
+    }
+  ]
+}

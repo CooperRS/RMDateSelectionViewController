@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EADD072A-2CC1-495D-8F4A-F45DC300E4F9</string>
+	<key>IDESourceControlProjectName</key>
+	<string>RMDateSelectionViewController-Demo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>10265E242415D473A6A613214DB7AC3EE3D43F93</key>
+		<string>https://github.com/kif-framework/KIF.git</string>
+		<key>567CB3DFEA460013DF16133CF5F5015D8E4E1826</key>
+		<string>github.com:CooperRS/RMDateSelectionViewController.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RMDateSelectionViewController-Demo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>10265E242415D473A6A613214DB7AC3EE3D43F93</key>
+		<string>../../External/KIF</string>
+		<key>567CB3DFEA460013DF16133CF5F5015D8E4E1826</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:CooperRS/RMDateSelectionViewController.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>567CB3DFEA460013DF16133CF5F5015D8E4E1826</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>10265E242415D473A6A613214DB7AC3EE3D43F93</string>
+			<key>IDESourceControlWCCName</key>
+			<string>KIF</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>567CB3DFEA460013DF16133CF5F5015D8E4E1826</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RMDateSelectionViewController</string>
+		</dict>
+	</array>
+</dict>
+</plist>
