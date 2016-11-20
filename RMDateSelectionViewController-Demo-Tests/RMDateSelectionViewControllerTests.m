@@ -65,12 +65,26 @@
 }
 
 #pragma mark - Tests
-- (void)testPresentingDateSelectionViewController {
+- (void)testPresentingDateSelectionViewControllerWhite {
     RMDateSelectionViewController *controller = [self createDateSelectionViewControllerWithStyle:RMActionControllerStyleWhite];
     
     XCTAssertNotNil(controller.contentView);
     XCTAssertEqual(controller.contentView, controller.datePicker);
     XCTAssertTrue([controller.contentView isKindOfClass:[UIDatePicker class]]);
+    XCTAssertEqualObjects(controller.title, @"Test");
+    XCTAssertEqualObjects(controller.message, @"This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'.");
+    
+    [self presentAndDismissController:controller];
+}
+
+- (void)testPresentingDateSelectionViewControllerBlack {
+    RMDateSelectionViewController *controller = [self createDateSelectionViewControllerWithStyle:RMActionControllerStyleBlack];
+    
+    XCTAssertNotNil(controller.contentView);
+    XCTAssertEqual(controller.contentView, controller.datePicker);
+    XCTAssertTrue([controller.contentView isKindOfClass:[UIDatePicker class]]);
+    XCTAssertEqualObjects(controller.title, @"Test");
+    XCTAssertEqualObjects(controller.message, @"This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'.");
     
     [self presentAndDismissController:controller];
 }
