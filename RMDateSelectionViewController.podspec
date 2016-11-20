@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RMDateSelectionViewController"
-  s.version      = "2.1.0"
+  s.version      = "2.2.0"
   s.platform     = :ios, "8.0"
   s.summary      = "This is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashion"
 
@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Roland Moers" => "rm@cooperrs.de" }
   
-  s.source       = { :git => "https://github.com/CooperRS/RMDateSelectionViewController.git", :tag => "2.1.0" }
+  s.source       = { :git => "https://github.com/CooperRS/RMDateSelectionViewController.git", :tag => "2.2.0" }
   s.source_files = 'RMDateSelectionViewController/*.{h, m}'
   s.requires_arc = true
 
