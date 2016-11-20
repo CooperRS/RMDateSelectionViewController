@@ -1,4 +1,4 @@
-RMDateSelectionViewController ![Build Status](https://travis-ci.org/CooperRS/RMDateSelectionViewController.svg?branch=master)
+RMDateSelectionViewController [![Build Status](https://travis-ci.org/CooperRS/RMDateSelectionViewController.svg?branch=master)](https://travis-ci.org/CooperRS/RMDateSelectionViewController/) [![Pod Version](https://img.shields.io/cocoapods/v/RMDateSelectionViewController.svg)](https://cocoapods.org/pods/RMDateSelectionViewController)
 =============================
 
 This is an iOS control for selecting a date using UIDatePicker in a UIActionSheet like fashion
@@ -14,7 +14,7 @@ This is an iOS control for selecting a date using UIDatePicker in a UIActionShee
 ![Colors](http://cooperrs.github.io/RMDateSelectionViewController/Images/Blur-Screen-Portrait-Black.png)
 
 ## Demo Project
-If you want to run the demo project you first need to run `pod install` to install the dependencies of RMDateSelectionViewController.
+If you want to run the demo project do not forget to initialize submodules.
 
 ## Installation (CocoaPods)
 ```ruby
