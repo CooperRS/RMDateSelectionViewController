@@ -3,7 +3,7 @@ RMDateSelectionViewController [![Build Status](https://travis-ci.org/CooperRS/RM
 
 This framework allows you to select a date by presenting an action sheet. In addition, it allows you to add actions arround the presented date picker which behave like a button and can be tapped by the user. The result looks very much like an UIActionSheet or UIAlertController with a UIDatePicker and some UIActions attached.
 
-Besides being a fully-usable project, RMDateSelectionViewController also is an example for an use case of [RMActionController](https://github.com/CooperRS/RMActionController). You can use it to learn how to present a dat picker other than UIDatePicker.
+Besides being a fully-usable project, RMDateSelectionViewController also is an example for an use case of [RMActionController](https://github.com/CooperRS/RMActionController). You can use it to learn how to present a date picker other than UIDatePicker.
 
 ## Screenshots
 
