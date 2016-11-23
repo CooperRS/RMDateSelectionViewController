@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "RMDateSelectionViewController"
-  s.version      = "2.2.0"
+  s.version      = "2.2.1"
   s.platform     = :ios, "8.0"
   s.summary      = "This is an iOS control for selecting a date using UIDatePicker in a UIAlertController like manner"
   s.description  = "This framework allows you to select a date by presenting an action sheet. In addition, it allows you to add actions arround the presented date picker which behave like a button and can be tapped by the user. The result looks very much like an UIActionSheet or UIAlertController with a UIDatePicker and some UIActions attached."
@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
   s.author       = { "Roland Moers" => "rm@cooperrs.de" }
   
-  s.source       = { :git => "https://github.com/CooperRS/RMDateSelectionViewController.git", :tag => "2.2.0" }
+  s.source       = { :git => "https://github.com/CooperRS/RMDateSelectionViewController.git", :tag => "2.2.1" }
   s.source_files = 'RMDateSelectionViewController/*.{h,m}'
   s.requires_arc = true
 
