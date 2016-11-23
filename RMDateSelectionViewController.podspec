@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.author       = { "Roland Moers" => "rm@cooperrs.de" }
   
   s.source       = { :git => "https://github.com/CooperRS/RMDateSelectionViewController.git", :tag => "2.2.0" }
-  s.source_files = 'RMDateSelectionViewController/*.{h, m}'
+  s.source_files = 'RMDateSelectionViewController/*.{h,m}'
   s.requires_arc = true
 
   s.dependency   'RMActionController', '~> 1.2.0'
