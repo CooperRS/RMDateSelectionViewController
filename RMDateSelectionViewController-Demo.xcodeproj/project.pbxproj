@@ -29,6 +29,7 @@
 		CAA60A55181C1A0200198490 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A54181C1A0200198490 /* Images.xcassets */; };
 		CAA60A78181C1ACF00198490 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA60A77181C1ACF00198490 /* Main.storyboard */; };
 		CACBDBD11B371D9500301977 /* RMDateSelectionViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CACBDBD01B371D9500301977 /* RMDateSelectionViewControllerTests.m */; };
+		CACD9B831E34F6A200E86C0A /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2C5C071DA2669900670F0F /* RMDateSelectionViewController.m */; };
 		CACF16BD1AC42CE4005CDB0F /* RMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA60A52181C1A0200198490 /* RMViewController.m */; };
 		CAD53E781DE1B70D00B364D1 /* RMActionController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CAD53E751DE1B6FC00B364D1 /* RMActionController.framework */; };
 		CAD53EA41DE1C20F00B364D1 /* RMActionController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CAD53E751DE1B6FC00B364D1 /* RMActionController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -735,6 +736,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CACD9B831E34F6A200E86C0A /* RMDateSelectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
