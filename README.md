@@ -102,7 +102,7 @@ If you want to show an UIPickerView instead of an UIDatePicker, you may take a l
 
 If you want to show any other control you may want to take a look at [RMActionController](https://github.com/CooperRS/RMActionController).
 
-##Credits
+## Credits
 Code contributions:
 * AnthonyMDev
     * Cancel delegate method should be optional
