@@ -5,6 +5,10 @@ RMDateSelectionViewController adheres to [Semantic Versioning](http://semver.org
 
 ---
 
+## [2.3.0](https://github.com/CooperRS/RMDateSelectionViewController/releases/tag/2.3.0)
+
+* Updated to RMActionController 1.3.0
+
 ## [2.2.1](https://github.com/CooperRS/RMDateSelectionViewController/releases/tag/2.2.1)
 
 * Fix RMDateSelectionViewController.podspec
