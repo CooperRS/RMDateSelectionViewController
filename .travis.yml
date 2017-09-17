@@ -1,14 +1,14 @@
 language: objective-c
 
 os: osx
-osx_image: xcode8
+osx_image: xcode9
 
 env:
   matrix:
-# Ufortunately, the iOS 8.x simulators are not starting on travis right now
-#    - NAME='iPhone 6' OS=8.4
+    - NAME='iPhone 6' OS=8.4
     - NAME='iPhone 6' OS=9.3
-    - NAME='iPhone 6' OS=10.0
+    - NAME='iPhone 6' OS=10.3.1
+    - NAME='iPhone 6' OS=11.0
 
 script:
     - xcodebuild test -project RMDateSelectionViewController-Demo.xcodeproj -scheme RMDateSelectionViewController-Demo -sdk iphonesimulator -destination "platform=iOS Simulator,name=$NAME,OS=$OS"
