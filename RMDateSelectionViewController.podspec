@@ -15,5 +15,5 @@ Pod::Spec.new do |s|
   s.source_files = 'RMDateSelectionViewController/*.{h,m}'
   s.requires_arc = true
 
-  s.dependency   'RMActionController', '~> 1.3.0'
+  s.dependency   'RMActionController', '~> 1.3.1'
 end
