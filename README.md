@@ -22,7 +22,7 @@ If you want to run the demo project do not forget to initialize submodules.
 ## Installation (CocoaPods)
 ```ruby
 platform :ios, '8.0'
-pod "RMDateSelectionViewController", "~> 2.3.0"
+pod "RMDateSelectionViewController", "~> 2.3.1"
 ```
 
 ## Usage
