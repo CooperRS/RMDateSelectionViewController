@@ -30,6 +30,7 @@
 
 @property (nonatomic, weak) IBOutlet UISwitch *blackSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch *blurSwitch;
+@property (nonatomic, weak) IBOutlet UISwitch *blurActionSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch *motionSwitch;
 @property (nonatomic, weak) IBOutlet UISwitch *bouncingSwitch;
 
@@ -99,6 +100,7 @@
     dateSelectionController.disableBouncingEffects = !self.bouncingSwitch.on;
     dateSelectionController.disableMotionEffects = !self.motionSwitch.on;
     dateSelectionController.disableBlurEffects = !self.blurSwitch.on;
+    dateSelectionController.disableBlurEffectsForActions = !self.blurActionSwitch.on;
     
     //You can access the actual UIDatePicker via the datePicker property
     dateSelectionController.datePicker.datePickerMode = UIDatePickerModeDateAndTime;

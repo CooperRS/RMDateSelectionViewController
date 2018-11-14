@@ -14,6 +14,7 @@ class ViewController: UITableViewController {
     //MARK: Properties
     @IBOutlet weak var blackSwitch: UISwitch!
     @IBOutlet weak var blurSwitch: UISwitch!
+    @IBOutlet weak var blurActionSwitch: UISwitch!
     @IBOutlet weak var motionSwitch: UISwitch!
     @IBOutlet weak var bouncingSwitch: UISwitch!
     
@@ -32,47 +33,48 @@ class ViewController: UITableViewController {
             print("Date selection was canceled")
         }
         
-        let actionController = RMDateSelectionViewController(style: style, title: "Test", message: "This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'.", select: selectAction, andCancel: cancelAction)!;
+        let actionController = RMDateSelectionViewController(style: style, title: "Test", message: "This is a test message.\nPlease choose a date and press 'Select' or 'Cancel'.", select: selectAction, andCancel: cancelAction);
         
         let in15MinAction = RMAction<UIDatePicker>(title: "15 Min", style: .additional) { controller -> Void in
             controller.contentView.date = Date(timeIntervalSinceNow: 15*60);
             print("15 Min button tapped");
         }
-        in15MinAction!.dismissesActionController = false;
+        in15MinAction.dismissesActionController = false;
         
         let in30MinAction = RMAction<UIDatePicker>(title: "30 Min", style: .additional) { controller -> Void in
             controller.contentView.date = Date(timeIntervalSinceNow: 30*60);
             print("30 Min button tapped");
         }
-        in30MinAction!.dismissesActionController = false;
+        in30MinAction.dismissesActionController = false;
         
         let in45MinAction = RMAction<UIDatePicker>(title: "45 Min", style: .additional) { controller -> Void in
             controller.contentView.date = Date(timeIntervalSinceNow: 45*60);
             print("45 Min button tapped");
         }
-        in45MinAction!.dismissesActionController = false;
+        in45MinAction.dismissesActionController = false;
         
         let in60MinAction = RMAction<UIDatePicker>(title: "60 Min", style: .additional) { controller -> Void in
             controller.contentView.date = Date(timeIntervalSinceNow: 60*60);
             print("60 Min button tapped");
         }
-        in60MinAction!.dismissesActionController = false;
+        in60MinAction.dismissesActionController = false;
         
-        let groupedAction = RMGroupedAction<UIDatePicker>(style: .additional, andActions: [in15MinAction!, in30MinAction!, in45MinAction!, in60MinAction!]);
+        let groupedAction = RMGroupedAction<UIDatePicker>(style: .additional, andActions: [in15MinAction, in30MinAction, in45MinAction, in60MinAction]);
         actionController.addAction(groupedAction!);
         
         let nowAction = RMAction<UIDatePicker>(title: "Now", style: .additional) { controller -> Void in
             controller.contentView.date = Date();
             print("Now button tapped");
         }
-        nowAction!.dismissesActionController = false;
+        nowAction.dismissesActionController = false;
         
-        actionController.addAction(nowAction!);
+        actionController.addAction(nowAction);
         
         //You can enable or disable blur, bouncing and motion effects
         actionController.disableBouncingEffects = !self.bouncingSwitch.isOn
         actionController.disableMotionEffects = !self.motionSwitch.isOn
         actionController.disableBlurEffects = !self.blurSwitch.isOn
+        actionController.disableBlurEffectsForActions = !self.blurActionSwitch.isOn
         
         //You can access the actual UIDatePicker via the datePicker property
         actionController.datePicker.datePickerMode = .dateAndTime;
