@@ -8,9 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CA1E62491A24D3C10025A6A6 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA1E62481A24D3C10025A6A6 /* Launch Screen.xib */; };
-		CA2C5C081DA2669900670F0F /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2C5C071DA2669900670F0F /* RMDateSelectionViewController.m */; };
-		CA2C5C091DA268E500670F0F /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2C5C071DA2669900670F0F /* RMDateSelectionViewController.m */; };
-		CA2C5C0A1DA268E500670F0F /* RMDateSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2C5C071DA2669900670F0F /* RMDateSelectionViewController.m */; };
 		CA2C5C171DA2699400670F0F /* RMDateSelectionViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2C5C101DA2699300670F0F /* RMDateSelectionViewController.framework */; };
 		CA2C5C181DA2699400670F0F /* RMDateSelectionViewController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CA2C5C101DA2699300670F0F /* RMDateSelectionViewController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CA2C5C1D1DA269C200670F0F /* RMDateSelectionViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2C5C101DA2699300670F0F /* RMDateSelectionViewController.framework */; };
@@ -744,7 +741,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA2C5C091DA268E500670F0F /* RMDateSelectionViewController.m in Sources */,
 				CA300A0F1BF0E73800EAD920 /* ViewController.swift in Sources */,
 				CA3009FD1BF0E6A200EAD920 /* AppDelegate.swift in Sources */,
 			);
@@ -754,7 +750,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA2C5C0A1DA268E500670F0F /* RMDateSelectionViewController.m in Sources */,
 				CACF16BD1AC42CE4005CDB0F /* RMViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -764,7 +759,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAA60A49181C1A0200198490 /* main.m in Sources */,
-				CA2C5C081DA2669900670F0F /* RMDateSelectionViewController.m in Sources */,
 				CAA60A4D181C1A0200198490 /* RMAppDelegate.m in Sources */,
 				CAA60A53181C1A0200198490 /* RMViewController.m in Sources */,
 			);
